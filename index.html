@@ -265,6 +265,10 @@ Error message and password prompt
 
 <li>$:/core/ui/EditorToolbar/transcludify</li>
 
+<li>$:/core/ui/SideBar/Open</li>
+
+<li>$:/core/ui/SideBar/Tools</li>
+
 <li>$:/DefaultTiddlers</li>
 
 <li>$:/isEncrypted</li>
@@ -505,6 +509,8 @@ Error message and password prompt
 
 <li>$:/state/styled-frames</li>
 
+<li>$:/state/tab--1198448541</li>
+
 <li>$:/state/tab--1498284803</li>
 
 <li>$:/state/tab--1963855381</li>
@@ -512,6 +518,8 @@ Error message and password prompt
 <li>$:/state/tab--2112689675</li>
 
 <li>$:/state/tab--219645345</li>
+
+<li>$:/state/tab--626270673</li>
 
 <li>$:/state/tab--824315756</li>
 
@@ -540,6 +548,8 @@ Error message and password prompt
 <li>$:/StoryList</li>
 
 <li>$:/tags/EditorToolbar</li>
+
+<li>$:/tags/SideBar 1</li>
 
 <li>$:/tags/SideBarSegment</li>
 
@@ -793,11 +803,11 @@ Error message and password prompt
 
 <li>Example note/20200807111508507</li>
 
-<li>Example note/20200807111752654</li>
-
 <li>Example note/20200807111933633</li>
 
 <li>Example note/20200807112009232</li>
+
+<li>Example note/20200807113105808</li>
 
 <li>no-tag</li>
 
@@ -808,6 +818,8 @@ Error message and password prompt
 <li>reference/20200807111623506</li>
 
 <li>reference/20200807111812790</li>
+
+<li>Tools</li>
 
 </ul>
 </p>
@@ -10574,8 +10586,75 @@ Error message and password prompt
 /&gt;
 </pre>
 </div>
-<div created="20200807031535295" modified="20200807035029545" title="$:/DefaultTiddlers">
-<pre></pre>
+<div caption="{{$:/language/SideBar/Open/Caption}}" created="20200807112901369" modified="20200807112901369" title="$:/core/ui/SideBar/Open">
+<pre>\whitespace trim
+\define lingo-base() $:/language/CloseAll/
+
+\define drop-actions()
+&lt;$action-listops $tiddler=&lt;&lt;tv-story-list&gt;&gt; $subfilter=&quot;+[insertbefore:currentTiddler&lt;actionTiddler&gt;]&quot;/&gt;
+\end
+
+\define placeholder()
+&lt;div class=&quot;tc-droppable-placeholder&quot;/&gt;
+\end
+
+\define droppable-item(button)
+\whitespace trim
+&lt;$droppable actions=&lt;&lt;drop-actions&gt;&gt; enable=&lt;&lt;tv-allow-drag-and-drop&gt;&gt;&gt;
+&lt;&lt;placeholder&gt;&gt;
+&lt;div&gt;
+$button$
+&lt;/div&gt;
+&lt;/$droppable&gt;
+\end
+
+&lt;div class=&quot;tc-sidebar-tab-open&quot;&gt;
+&lt;$list filter=&quot;[list&lt;tv-story-list&gt;]&quot; history=&lt;&lt;tv-history-list&gt;&gt; storyview=&quot;pop&quot;&gt;
+&lt;div class=&quot;tc-sidebar-tab-open-item&quot;&gt;
+&lt;$macrocall $name=&quot;droppable-item&quot; button=&quot;&quot;&quot;&lt;$button message=&quot;tm-close-tiddler&quot; tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=&quot;tc-btn-invisible tc-btn-mini&quot;&gt;{{$:/core/images/close-button}}&lt;/$button&gt;&amp;nbsp;&lt;$link to={{!!title}}&gt;&lt;$view field=&quot;title&quot;/&gt;&lt;/$link&gt;&quot;&quot;&quot;/&gt;
+&lt;/div&gt;
+&lt;/$list&gt;
+&lt;$tiddler tiddler=&quot;&quot;&gt;
+&lt;div&gt;
+&lt;$macrocall $name=&quot;droppable-item&quot; button=&quot;&quot;&quot;&lt;$button message=&quot;tm-close-all-tiddlers&quot; class=&quot;tc-btn-invisible tc-btn-mini&quot;&gt;&lt;&lt;lingo Button&gt;&gt;&lt;/$button&gt;&quot;&quot;&quot;/&gt;
+&lt;/div&gt;
+&lt;/$tiddler&gt;
+&lt;/div&gt;
+</pre>
+</div>
+<div caption="{{$:/language/SideBar/Tools/Caption}}" created="20200807112914399" modified="20200807112914399" title="$:/core/ui/SideBar/Tools">
+<pre>\define lingo-base() $:/language/ControlPanel/
+\define config-title()
+$:/config/PageControlButtons/Visibility/$(listItem)$
+\end
+
+&lt;&lt;lingo Basics/Version/Prompt&gt;&gt; &lt;&lt;version&gt;&gt;
+
+&lt;$set name=&quot;tv-config-toolbar-icons&quot; value=&quot;yes&quot;&gt;
+
+&lt;$set name=&quot;tv-config-toolbar-text&quot; value=&quot;yes&quot;&gt;
+
+&lt;$set name=&quot;tv-config-toolbar-class&quot; value=&quot;&quot;&gt;
+
+&lt;$list filter=&quot;[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]&quot; variable=&quot;listItem&quot;&gt;
+
+&lt;div style=&quot;position:relative;&quot; class={{{ [&lt;listItem&gt;encodeuricomponent[]addprefix[tc-btn-]] }}}&gt;
+
+&lt;$checkbox tiddler=&lt;&lt;config-title&gt;&gt; field=&quot;text&quot; checked=&quot;show&quot; unchecked=&quot;hide&quot; default=&quot;show&quot;/&gt; &lt;$transclude tiddler=&lt;&lt;listItem&gt;&gt;/&gt; &lt;i class=&quot;tc-muted&quot;&gt;&lt;$transclude tiddler=&lt;&lt;listItem&gt;&gt; field=&quot;description&quot;/&gt;&lt;/i&gt;
+
+&lt;/div&gt;
+
+&lt;/$list&gt;
+
+&lt;/$set&gt;
+
+&lt;/$set&gt;
+
+&lt;/$set&gt;
+</pre>
+</div>
+<div created="20200807031535295" modified="20200807113048258" title="$:/DefaultTiddlers">
+<pre>[[Example note]]</pre>
 </div>
 <div title="$:/isEncrypted">
 <pre>no</pre>
@@ -12276,7 +12355,7 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
 <div created="20200807060501217" modified="20200807071300519" title="$:/state/searchbar">
 <pre>hide</pre>
 </div>
-<div created="20200807050337599" modified="20200807111231653" title="$:/state/searchtab-1444756290">
+<div created="20200807050337599" modified="20200807112923876" title="$:/state/searchtab-1444756290">
 <pre>$:/core/ui/AdvancedSearch/Standard</pre>
 </div>
 <div created="20200807043844301" modified="20200807111829416" title="$:/state/ShowPaletteEditor">
@@ -12300,11 +12379,14 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
 <div created="20200807045926052" modified="20200807045926052" title="$:/state/sq/streams/current-edit-tiddler-704224038">
 <pre>Test/20200807045911534</pre>
 </div>
-<div created="20200807111614264" modified="20200807112056801" title="$:/state/sq/streams/current-edit-tiddler-906696097">
-<pre>Example note/20200807111752654</pre>
+<div created="20200807113104410" modified="20200807113233069" title="$:/state/sq/streams/current-edit-tiddler-906696097">
+<pre>Example note/20200807113105808</pre>
 </div>
 <div created="20200807045551946" modified="20200807045552986" title="$:/state/styled-frames">
 <pre>yes</pre>
+</div>
+<div created="20200807112817435" modified="20200807112817435" title="$:/state/tab--1198448541">
+<pre>$:/ak/plugins/TWCrossLinks/core/tagging</pre>
 </div>
 <div created="20200807033125784" modified="20200807033208210" title="$:/state/tab--1498284803">
 <pre>$:/core/ui/AdvancedSearch/System</pre>
@@ -12317,6 +12399,9 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
 </div>
 <div created="20200807034658469" modified="20200807034658469" title="$:/state/tab--219645345">
 <pre>$:/core/ui/ControlPanel/Plugins/Add/Themes</pre>
+</div>
+<div created="20200807113258054" modified="20200807113311109" title="$:/state/tab--626270673">
+<pre>$:/ak/plugins/TWCrossLinks/core/backlinks</pre>
 </div>
 <div created="20200807045840155" modified="20200807050108541" title="$:/state/tab--824315756">
 <pre>$:/plugins/flibbles/relink/ui/configuration/Operators</pre>
@@ -12336,10 +12421,10 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
 <div created="20200807044903774" modified="20200807104709093" title="$:/state/tab-738187504">
 <pre>$:/themes/jd/Mono/Config/PaletteSwitcher</pre>
 </div>
-<div created="20200807031906931" modified="20200807031915538" title="$:/state/tab/moresidebar-1850697562">
+<div created="20200807031906931" modified="20200807113007340" title="$:/state/tab/moresidebar-1850697562">
 <pre>$:/core/ui/MoreSideBar/All</pre>
 </div>
-<div created="20200807031546186" modified="20200807110650252" title="$:/state/tab/sidebar--595412856">
+<div created="20200807031546186" modified="20200807113009972" title="$:/state/tab/sidebar--595412856">
 <pre>Notes</pre>
 </div>
 <div created="20200807031616618" modified="20200807045400006" title="$:/state/tabs/controlpanel/toolbars-1345989671">
@@ -12354,16 +12439,19 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20200807110544820" list="[[Example note]]" modified="20200807111820464" title="$:/StoryList">
+<div created="20200807113253912" list="[[Example note]]" modified="20200807113253912" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20200807031623243" list="$:/core/ui/EditorToolbar/paint $:/core/ui/EditorToolbar/opacity $:/core/ui/EditorToolbar/line-width $:/core/ui/EditorToolbar/rotate-left $:/core/ui/EditorToolbar/clear $:/core/ui/EditorToolbar/bold $:/core/ui/EditorToolbar/italic $:/core/ui/EditorToolbar/strikethrough $:/core/ui/EditorToolbar/underline $:/core/ui/EditorToolbar/superscript $:/core/ui/EditorToolbar/subscript $:/core/ui/EditorToolbar/mono-line $:/core/ui/EditorToolbar/linkify $:/core/ui/EditorToolbar/transcludify $:/core/ui/EditorToolbar/mono-block $:/core/ui/EditorToolbar/quote $:/core/ui/EditorToolbar/list-bullet $:/core/ui/EditorToolbar/list-number $:/core/ui/EditorToolbar/heading-1 $:/core/ui/EditorToolbar/heading-2 $:/core/ui/EditorToolbar/heading-3 $:/core/ui/EditorToolbar/heading-4 $:/core/ui/EditorToolbar/heading-5 $:/core/ui/EditorToolbar/heading-6 $:/core/ui/EditorToolbar/link $:/core/ui/EditorToolbar/excise $:/core/ui/EditorToolbar/picture $:/core/ui/EditorToolbar/stamp $:/core/ui/EditorToolbar/size $:/core/ui/EditorToolbar/editor-height $:/core/ui/EditorToolbar/more $:/core/ui/EditorToolbar/preview $:/core/ui/EditorToolbar/preview-type $:/plugins/sobjornstad/TiddlyRemember/toolbar/rememberq $:/plugins/sobjornstad/TiddlyRemember/toolbar/remembercz" modified="20200807031623243" title="$:/tags/EditorToolbar">
 <pre></pre>
 </div>
+<div created="20200807112756446" modified="20200807112756446" title="$:/tags/SideBar 1">
+<pre></pre>
+</div>
 <div created="20200807045146758" list="$:/core/ui/SideBarSegments/site-title $:/core/ui/SideBarSegments/site-subtitle $:/core/ui/SideBarSegments/page-controls $:/core/ui/SideBarSegments/search $:/core/ui/SideBarSegments/tabs" modified="20200807045146758" title="$:/tags/SideBarSegment">
 <pre></pre>
 </div>
-<div created="20200807033123968" modified="20200807111239465" title="$:/temp/advancedsearch">
+<div created="20200807033123968" modified="20200807113059398" title="$:/temp/advancedsearch">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -13377,9 +13465,10 @@ This plugin also requires the JSZip plugin ([[$:/plugins/tiddlywiki/jszip]]) to 
 <div created="20200807034654013" modified="20200807034654013" tags="$:/tags/ServerConnection" title="$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.22/index.html" url="https://tiddlywiki.com/library/v5.1.22/index.html">
 <pre>loaded</pre>
 </div>
-<div created="20200807111650527" modified="20200807111650527" title="$:/temp/TWCrossLinksFoldData" type="application/json">
+<div created="20200807111650527" modified="20200807112819132" title="$:/temp/TWCrossLinksFoldData" type="application/json">
 <pre>{
-    &quot;Example note&quot;: &quot;hide&quot;
+    &quot;Example note&quot;: &quot;hide&quot;,
+    &quot;$:/tags/SideBar&quot;: &quot;show&quot;
 }</pre>
 </div>
 <div created="20190202142800922" creator="jd" modified="20190202142800922" modifier="jd" title="$:/theme">
@@ -13941,7 +14030,7 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
 <div created="20200807052314926" draft.of="New Note 1" draft.title="New Note 1" modified="20200807052314926" tags="no-tag" title="Draft of 'New Note 1'">
 <pre></pre>
 </div>
-<div created="20200807111248913" modified="20200807111753246" stream-list="[[Example note/20200807111257119]] [[Example note/20200807111508507]] [[Example note/20200807111327158]] [[Example note/20200807111752654]]" stream-type="default" tags="no-tag" title="Example note">
+<div created="20200807111248913" modified="20200807113107750" stream-list="[[Example note/20200807111257119]] [[Example note/20200807111508507]] [[Example note/20200807111327158]] [[Example note/20200807113105808]]" stream-type="default" tags="no-tag" title="Example note">
 <pre></pre>
 </div>
 <div created="20200807111257120" modified="20200807111351348" parent="Example note" stream-list="[[Example note/20200807111302294]]" stream-type="default" title="Example note/20200807111257119">
@@ -13955,7 +14044,7 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
 	&quot;This is a question&quot;
 	&quot;This is an answer&quot;&gt;&gt;</pre>
 </div>
-<div created="20200807111327159" modified="20200807112009235" parent="Example note" stream-list="[[Example note/20200807111308735]] [[Example note/20200807111933633]] [[Example note/20200807111356330]] [[Example note/20200807112009232]] [[Example note/20200807111416734]]" stream-type="default" title="Example note/20200807111327158">
+<div created="20200807111327159" modified="20200807113235388" parent="Example note" stream-list="[[Example note/20200807111933633]] [[Example note/20200807111308735]] [[Example note/20200807112009232]] [[Example note/20200807111356330]] [[Example note/20200807111416734]]" stream-type="default" title="Example note/20200807111327158">
 <pre>[[Anki|https://apps.ankiweb.net/]] integration</pre>
 </div>
 <div created="20200807111356331" modified="20200807111414399" parent="Example note/20200807111327158" stream-type="default" title="Example note/20200807111356330">
@@ -13969,19 +14058,19 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
 <div created="20200807111508508" modified="20200807111611609" parent="Example note" stream-type="default" title="Example note/20200807111508507">
 <pre>This is a [[reference]] with backlink support</pre>
 </div>
-<div created="20200807111752655" modified="20200807111753247" parent="Example note" stream-type="default" title="Example note/20200807111752654">
+<div created="20200807111933634" modified="20200807113231470" parent="Example note/20200807111327158" stream-type="default" title="Example note/20200807111933633">
+<pre>press &lt;kbd&gt;Ctrl+Comma&lt;/kbd&gt; to create a Q&amp;A card</pre>
+</div>
+<div created="20200807112009233" modified="20200807113213652" parent="Example note/20200807111327158" stream-type="default" title="Example note/20200807112009232">
+<pre>press &lt;kbd&gt;Ctrl+Period&lt;/kbd&gt; to create a cloze card </pre>
+</div>
+<div created="20200807113105809" modified="20200807113107751" parent="Example note" stream-type="default" title="Example note/20200807113105808">
 <pre></pre>
-</div>
-<div created="20200807111933634" modified="20200807112053511" parent="Example note/20200807111327158" stream-type="default" title="Example note/20200807111933633">
-<pre>press ctrl + , (comma) to create a Q&amp;A card</pre>
-</div>
-<div created="20200807112009233" modified="20200807112040461" parent="Example note/20200807111327158" stream-type="default" title="Example note/20200807112009232">
-<pre>press ctrl + . (period) to create a cloze card </pre>
 </div>
 <div created="20200805130445093" modified="20200807015914652" tags="Notes" title="no-tag">
 <pre></pre>
 </div>
-<div created="20200805130207732" list-before="$:/core/ui/SideBar/Open" modified="20200807035019785" stream-list="" stream-type="default" tags="$:/tags/SideBar" title="Notes">
+<div created="20200805130207732" list-before="$:/core/ui/SideBar/Recent" modified="20200807112941606" stream-list="" stream-type="default" tags="$:/tags/SideBar" title="Notes">
 <pre>&lt;div class=&quot;tc-table-of-contents&quot;&gt;
 &lt;&lt;toc-selective-expandable 'Notes' sort[title]&gt;&gt;
 &lt;/div&gt;</pre>
@@ -13993,6 +14082,9 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
 <pre>I'm a reference! Check my backlinks below↓</pre>
 </div>
 <div created="20200807111812790" modified="20200807111812790" parent="reference" stream-type="default" title="reference/20200807111812790">
+<pre></pre>
+</div>
+<div created="20200807112618301" modified="20200807112618301" title="Tools">
 <pre></pre>
 </div>
 
