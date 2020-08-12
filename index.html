@@ -369,6 +369,10 @@ Error message and password prompt
 
 <li>$:/config/sq/streams/new-node-title</li>
 
+<li>$:/config/TextEditor/EditorHeight/Height</li>
+
+<li>$:/config/TextEditor/EditorHeight/Mode</li>
+
 <li>$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/delete</li>
 
 <li>$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/export-tiddler</li>
@@ -685,6 +689,8 @@ Error message and password prompt
 
 <li>$:/TiddlyResearch/Stylesheet</li>
 
+<li>$:/view</li>
+
 <li>Daily Notes</li>
 
 <li>Notes</li>
@@ -752,7 +758,7 @@ Error message and password prompt
 &lt;&lt;divertTiddlerButton&gt;&gt;
 </pre>
 </div>
-<div bag="default" created="20200425131030296" current-tiddler="Notes" modified="20200812075605951" revision="0" title="$:/_sq/Stories/Story2HistoryList" type="application/json">
+<div bag="default" created="20200425131030296" current-tiddler="$:/ControlPanel" modified="20200812082038098" revision="0" title="$:/_sq/Stories/Story2HistoryList" type="application/json">
 <pre>[
     {
         &quot;title&quot;: &quot;$:/config/Tiddlers/TitleLinks&quot;,
@@ -1392,30 +1398,19 @@ Error message and password prompt
         &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
     },
     {
-        &quot;title&quot;: &quot;Notes&quot;,
+        &quot;title&quot;: &quot;$:/ControlPanel&quot;,
         &quot;fromPageRect&quot;: {
-            &quot;top&quot;: 103.015625,
-            &quot;left&quot;: 1309.75,
+            &quot;top&quot;: 102.625,
+            &quot;left&quot;: 1303.75,
             &quot;width&quot;: 29.25,
-            &quot;right&quot;: 1339,
-            &quot;bottom&quot;: 138.015625,
-            &quot;height&quot;: 35
-        }
-    },
-    {
-        &quot;title&quot;: &quot;Notes&quot;,
-        &quot;fromPageRect&quot;: {
-            &quot;top&quot;: 103.015625,
-            &quot;left&quot;: 1309.75,
-            &quot;width&quot;: 29.25,
-            &quot;right&quot;: 1339,
-            &quot;bottom&quot;: 138.015625,
+            &quot;right&quot;: 1333,
+            &quot;bottom&quot;: 137.625,
             &quot;height&quot;: 35
         }
     }
 ]</pre>
 </div>
-<div bag="default" created="20170615140314952" list="" modified="20200812075605950" revision="0" title="$:/_sq/Stories/Story2StoryList" type="text/vnd.tiddlywiki">
+<div bag="default" created="20170615140314952" list="" modified="20200812082038098" revision="0" title="$:/_sq/Stories/Story2StoryList" type="text/vnd.tiddlywiki">
 <pre></pre>
 </div>
 <div bag="default" created="20170615081040584" modified="20200811050857938" revision="0" title="$:/config/_sq/Stories/story2" type="text/vnd.tiddlywiki">
@@ -1738,6 +1733,12 @@ Error message and password prompt
 </div>
 <div created="20200529131431245" description="wikitext that is wikified to generate the title for new nodes" modified="20200810150928852" tags="" title="$:/config/sq/streams/new-node-title" type="text/vnd.tiddlywiki">
 <pre>&lt;&lt;now &quot;[UTC]YYYY0MM0DD0hh0mm0ssXXX&quot;&gt;&gt;</pre>
+</div>
+<div created="20200812082225690" modified="20200812082510216" title="$:/config/TextEditor/EditorHeight/Height">
+<pre>400px</pre>
+</div>
+<div created="20200812082153528" modified="20200812082418585" title="$:/config/TextEditor/EditorHeight/Mode">
+<pre>auto</pre>
 </div>
 <div created="20200810063446757" modified="20200810063446757" title="$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/delete">
 <pre>show</pre>
@@ -11282,10 +11283,10 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 <div created="20200811051026390" modified="20200811051026790" title="$:/language/DefaultNewTiddlerTitle">
 <pre>New Note</pre>
 </div>
-<div created="20190202142805411" creator="jd" modified="20200812074434129" modifier="jd" title="$:/palette">
+<div created="20190202142805411" creator="jd" modified="20200812082809626" modifier="jd" title="$:/palette">
 <pre>$:/palettes/TiddlyResearchDark</pre>
 </div>
-<div caption="TiddlyResearch" created="20200807104510374" creator="jd" description="Tiddly Research's default theme" modified="20200812005333057" modifier="jd" name="TiddlyResearch" revision="16-1f6eabb9816382603cfa899327890536" tags="$:/tags/Palette" title="$:/palettes/TiddlyResearch" type="application/x-tiddler-dictionary">
+<div caption="TiddlyResearch" created="20200807104510374" creator="jd" description="Tiddly Research's default theme" modified="20200812082659332" modifier="jd" name="TiddlyResearch" revision="16-1f6eabb9816382603cfa899327890536" tags="$:/tags/Palette" title="$:/palettes/TiddlyResearch" type="application/x-tiddler-dictionary">
 <pre>alert-background: &lt;&lt;colour background&gt;&gt;
 alert-border: &lt;&lt;colour very-muted-foreground&gt;&gt;
 alert-highlight: &lt;&lt;colour very-muted-foreground&gt;&gt;
@@ -11327,7 +11328,7 @@ modal-header-border: &lt;&lt;colour very-muted-foreground&gt;&gt;
 muted-foreground: &lt;&lt;colour foreground&gt;&gt;
 notification-background: &lt;&lt;colour dropdown-background&gt;&gt;
 notification-border: &lt;&lt;colour dropdown-background&gt;&gt;
-page-background: transparent
+page-background: &lt;&lt;colour background&gt;&gt;
 pre-background: &lt;&lt;colour button-background&gt;&gt;
 pre-border: &lt;&lt;colour button-background&gt;&gt;
 primary: #337ab7
@@ -11395,7 +11396,7 @@ menubar-foreground:
 select-tag-foreground: 
 select-tag-background: </pre>
 </div>
-<div caption="TiddlyResearchDark" created="20200807104728487" creator="jd" description="Tiddly Research's dark theme" modified="20200812005352012" modifier="jd" name="TiddlyResearchDark" revision="16-1f6eabb9816382603cfa899327890536" tags="$:/tags/Palette" title="$:/palettes/TiddlyResearchDark" type="application/x-tiddler-dictionary">
+<div caption="TiddlyResearchDark" created="20200807104728487" creator="jd" description="Tiddly Research's dark theme" modified="20200812082636589" modifier="jd" name="TiddlyResearchDark" revision="16-1f6eabb9816382603cfa899327890536" tags="$:/tags/Palette" title="$:/palettes/TiddlyResearchDark" type="application/x-tiddler-dictionary">
 <pre>alert-background: &lt;&lt;colour background&gt;&gt;
 alert-border: &lt;&lt;colour very-muted-foreground&gt;&gt;
 alert-highlight: &lt;&lt;colour very-muted-foreground&gt;&gt;
@@ -13855,11 +13856,11 @@ Enhances the link widget for on-hover previews
 <div created="20200810064640743" modified="20200812015821165" title="$:/state/searchbar">
 <pre>show</pre>
 </div>
-<div created="20200810070730294" modified="20200812080104104" title="$:/state/searchtab-1444756290">
-<pre>$:/core/ui/AdvancedSearch/Shadows</pre>
+<div created="20200810070730294" modified="20200812083022074" title="$:/state/searchtab-1444756290">
+<pre>$:/core/ui/AdvancedSearch/System</pre>
 </div>
-<div created="20200811043520765" modified="20200812012328519" title="$:/state/ShowPaletteEditor">
-<pre>no</pre>
+<div created="20200811043520765" modified="20200812082603609" title="$:/state/ShowPaletteEditor">
+<pre>yes</pre>
 </div>
 <div created="20200810062326364" modified="20200812074134487" title="$:/state/sidebar">
 <pre>yes</pre>
@@ -13870,8 +13871,8 @@ Enhances the link widget for on-hover previews
 <div created="20200810061037999" modified="20200812065205897" title="$:/state/tab--1498284803">
 <pre>$:/core/ui/AdvancedSearch/System</pre>
 </div>
-<div created="20200810061745617" modified="20200812074323776" title="$:/state/tab--1963855381">
-<pre>$:/themes/jd/Mono/Config</pre>
+<div created="20200810061745617" modified="20200812082805850" title="$:/state/tab--1963855381">
+<pre>$:/core/ui/ControlPanel/Theme</pre>
 </div>
 <div created="20200810061742431" modified="20200812073115685" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
@@ -13888,8 +13889,8 @@ Enhances the link widget for on-hover previews
 <div created="20200811085347646" modified="20200811085347646" title="$:/state/tab-102244450">
 <pre>$:/core/ui/ControlPanel/Appearance</pre>
 </div>
-<div created="20200810061744143" modified="20200812073938959" title="$:/state/tab-1749438307">
-<pre>$:/core/ui/ControlPanel/Appearance</pre>
+<div created="20200810061744143" modified="20200812082812018" title="$:/state/tab-1749438307">
+<pre>$:/core/ui/ControlPanel/Info</pre>
 </div>
 <div created="20200812073049733" modified="20200812073049733" title="$:/state/tab-2065006209">
 <pre>$:/core/ui/ControlPanel/Saving/General</pre>
@@ -13897,7 +13898,7 @@ Enhances the link widget for on-hover previews
 <div created="20200810062611186" modified="20200812074326120" title="$:/state/tab-738187504">
 <pre>$:/themes/jd/Mono/Config/SidebarSegments</pre>
 </div>
-<div created="20200810061145479" modified="20200812080504146" title="$:/state/tab/sidebar--595412856">
+<div created="20200810061145479" modified="20200812082815194" title="$:/state/tab/sidebar--595412856">
 <pre>Notes</pre>
 </div>
 <div created="20200810062946631" modified="20200812074240984" title="$:/state/tabs/controlpanel/toolbars-1345989671">
@@ -13906,7 +13907,7 @@ Enhances the link widget for on-hover previews
 <div created="20200812062138018" modified="20200812062138747" title="$:/state/toc/Notes-Daily Notes--36376767">
 <pre>close</pre>
 </div>
-<div created="20200812061443575" modified="20200812080415505" title="$:/state/toc/Notes-Daily Notes--817412315">
+<div created="20200812061443575" modified="20200812082817058" title="$:/state/toc/Notes-Daily Notes--817412315">
 <pre>close</pre>
 </div>
 <div created="20200810070151341" modified="20200810070217829" title="$:/state/toc/Notes-no-tag--36376767">
@@ -13915,7 +13916,7 @@ Enhances the link widget for on-hover previews
 <div created="20200810061717200" modified="20200812015946533" title="$:/state/toc/Notes-no-tag--817412315">
 <pre>close</pre>
 </div>
-<div created="20200812063524345" modified="20200812080416442" title="$:/state/toc/Notes-Untagged Notes--817412315">
+<div created="20200812063524345" modified="20200812082817794" title="$:/state/toc/Notes-Untagged Notes--817412315">
 <pre>close</pre>
 </div>
 <div created="20200811043235796" modified="20200811043235796" title="$:/state/toc/Notes/no-tag-bobo--817412315">
@@ -13933,13 +13934,13 @@ Enhances the link widget for on-hover previews
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20200812075438454" list="" modified="20200812080426026" title="$:/StoryList">
+<div created="20200812081917104" list="" modified="20200812083022939" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20200810062703422" list="$:/core/ui/SideBarSegments/site-title $:/core/ui/SideBarSegments/site-subtitle $:/core/ui/SideBarSegments/page-controls $:/core/ui/SideBarSegments/search $:/core/ui/SideBarSegments/tabs" modified="20200810062703422" title="$:/tags/SideBarSegment">
 <pre></pre>
 </div>
-<div created="20200810061035521" modified="20200812080257737" title="$:/temp/advancedsearch">
+<div created="20200810061035521" modified="20200812083052107" title="$:/temp/advancedsearch">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -15249,6 +15250,9 @@ top:-20px;
 left:55px;
 font-size: 13px;
 }</pre>
+</div>
+<div created="20200812082014785" modified="20200812082034688" title="$:/view">
+<pre>pop</pre>
 </div>
 <div created="20200812061421242" modified="20200812061431336" tags="Notes" title="Daily Notes">
 <pre></pre>
