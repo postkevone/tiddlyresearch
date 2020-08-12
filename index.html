@@ -10634,7 +10634,7 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 <div created="20200812091543948" modified="20200812091549258" title="$:/language/EditTemplate/Body/Placeholder">
 <pre>Type the text for this note</pre>
 </div>
-<div created="20190202142805411" creator="jd" modified="20200812082809626" modifier="jd" title="$:/palette">
+<div created="20190202142805411" creator="jd" modified="20200812093508315" modifier="jd" title="$:/palette">
 <pre>$:/palettes/TiddlyResearchDark</pre>
 </div>
 <div caption="TiddlyResearch" created="20200807104510374" creator="jd" description="Tiddly Research's default theme" modified="20200812082659332" modifier="jd" name="TiddlyResearch" revision="16-1f6eabb9816382603cfa899327890536" tags="$:/tags/Palette" title="$:/palettes/TiddlyResearch" type="application/x-tiddler-dictionary">
@@ -10747,7 +10747,7 @@ menubar-foreground:
 select-tag-foreground: 
 select-tag-background: </pre>
 </div>
-<div caption="TiddlyResearchDark" created="20200807104728487" creator="jd" description="Tiddly Research's dark theme" modified="20200812082636589" modifier="jd" name="TiddlyResearchDark" revision="16-1f6eabb9816382603cfa899327890536" tags="$:/tags/Palette" title="$:/palettes/TiddlyResearchDark" type="application/x-tiddler-dictionary">
+<div caption="TiddlyResearchDark" created="20200807104728487" creator="jd" description="Tiddly Research's dark theme" modified="20200812093404498" modifier="jd" name="TiddlyResearchDark" revision="16-1f6eabb9816382603cfa899327890536" tags="$:/tags/Palette" title="$:/palettes/TiddlyResearchDark" type="application/x-tiddler-dictionary">
 <pre>alert-background: &lt;&lt;colour background&gt;&gt;
 alert-border: &lt;&lt;colour very-muted-foreground&gt;&gt;
 alert-highlight: &lt;&lt;colour very-muted-foreground&gt;&gt;
@@ -10805,8 +10805,8 @@ sidebar-tab-background: transparent
 sidebar-tab-border-selected: &lt;&lt;colour table-border&gt;&gt;
 sidebar-tab-border: &lt;&lt;colour sidebar-tab-border-selected&gt;&gt;
 sidebar-tab-divider: &lt;&lt;colour table-border&gt;&gt;
-sidebar-tab-foreground-selected: &lt;&lt;colour primary&gt;&gt;
-sidebar-tab-foreground: &lt;&lt;colour foreground&gt;&gt;
+sidebar-tab-foreground-selected: &lt;&lt;colour foreground&gt;&gt;
+sidebar-tab-foreground: &lt;&lt;colour primary&gt;&gt;
 sidebar-tiddler-link-foreground-hover: 
 sidebar-tiddler-link-foreground: &lt;&lt;colour foreground&gt;&gt;
 site-title-foreground: &lt;&lt;colour primary&gt;&gt;
@@ -11692,9 +11692,9 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
     }
 }</pre>
 </div>
-<div created="20200414150455988" creator="LinOnetwo" modified="20200812005051463" tags="$:/tags/ViewTemplate" title="$:/plugins/linonetwo/inverse-link-and-folder/infobar" type="text/vnd.tiddlywiki">
+<div created="20200414150455988" creator="LinOnetwo" modified="20200812092829537" tags="$:/tags/ViewTemplate" title="$:/plugins/linonetwo/inverse-link-and-folder/infobar" type="text/vnd.tiddlywiki">
 <pre>\define text-pattern()
-$(currentTiddler)$
+$(currentTiddler)$(?i)
 \end
 
 &lt;&lt;inverse-link-and-folder_list-links filter:&quot;[regexp:text&lt;text-pattern&gt;] [regexp:title&lt;text-pattern&gt;] [all[current]backlinks[]] -[is[current]] -[tag[hide]] -[is[system]]&quot; class:&quot;horizontal-list-links&quot; &gt;&gt;</pre>
@@ -13183,7 +13183,7 @@ Enhances the link widget for on-hover previews
 <div created="20200811100950452" modified="20200811101000392" title="$:/state/plugin-info--795648560-$:/plugins/tobibeer/appear--448029843">
 <pre>readme</pre>
 </div>
-<div created="20200812003912842" modified="20200812005116350" title="$:/state/plugin-info--896887961-$:/plugins/linonetwo/inverse-link-and-folder">
+<div created="20200812003912842" modified="20200812092918232" title="$:/state/plugin-info--896887961-$:/plugins/linonetwo/inverse-link-and-folder">
 <pre>no</pre>
 </div>
 <div created="20200812003914979" modified="20200812003914979" title="$:/state/plugin-info--896887961-$:/plugins/linonetwo/inverse-link-and-folder--825990618">
@@ -13207,11 +13207,11 @@ Enhances the link widget for on-hover previews
 <div created="20200810064640743" modified="20200812015821165" title="$:/state/searchbar">
 <pre>show</pre>
 </div>
-<div created="20200810070730294" modified="20200812091516384" title="$:/state/searchtab-1444756290">
-<pre>$:/core/ui/AdvancedSearch/Shadows</pre>
+<div created="20200810070730294" modified="20200812093520987" title="$:/state/searchtab-1444756290">
+<pre>$:/core/ui/AdvancedSearch/Standard</pre>
 </div>
-<div created="20200811043520765" modified="20200812082603609" title="$:/state/ShowPaletteEditor">
-<pre>yes</pre>
+<div created="20200811043520765" modified="20200812093526363" title="$:/state/ShowPaletteEditor">
+<pre>no</pre>
 </div>
 <div created="20200810062326364" modified="20200812074134487" title="$:/state/sidebar">
 <pre>yes</pre>
@@ -13222,8 +13222,8 @@ Enhances the link widget for on-hover previews
 <div created="20200810061037999" modified="20200812065205897" title="$:/state/tab--1498284803">
 <pre>$:/core/ui/AdvancedSearch/System</pre>
 </div>
-<div created="20200810061745617" modified="20200812082805850" title="$:/state/tab--1963855381">
-<pre>$:/core/ui/ControlPanel/Theme</pre>
+<div created="20200810061745617" modified="20200812093018056" title="$:/state/tab--1963855381">
+<pre>$:/core/ui/ControlPanel/Palette</pre>
 </div>
 <div created="20200810061742431" modified="20200812073115685" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Basics</pre>
@@ -13240,7 +13240,7 @@ Enhances the link widget for on-hover previews
 <div created="20200811085347646" modified="20200811085347646" title="$:/state/tab-102244450">
 <pre>$:/core/ui/ControlPanel/Appearance</pre>
 </div>
-<div created="20200810061744143" modified="20200812082812018" title="$:/state/tab-1749438307">
+<div created="20200810061744143" modified="20200812093532059" title="$:/state/tab-1749438307">
 <pre>$:/core/ui/ControlPanel/Info</pre>
 </div>
 <div created="20200812073049733" modified="20200812073049733" title="$:/state/tab-2065006209">
@@ -13249,7 +13249,7 @@ Enhances the link widget for on-hover previews
 <div created="20200810062611186" modified="20200812074326120" title="$:/state/tab-738187504">
 <pre>$:/themes/jd/Mono/Config/SidebarSegments</pre>
 </div>
-<div created="20200810061145479" modified="20200812091721522" title="$:/state/tab/sidebar--595412856">
+<div created="20200810061145479" modified="20200812093511379" title="$:/state/tab/sidebar--595412856">
 <pre>Notes</pre>
 </div>
 <div created="20200810062946631" modified="20200812074240984" title="$:/state/tabs/controlpanel/toolbars-1345989671">
@@ -13258,7 +13258,7 @@ Enhances the link widget for on-hover previews
 <div created="20200812062138018" modified="20200812062138747" title="$:/state/toc/Notes-Daily Notes--36376767">
 <pre>close</pre>
 </div>
-<div created="20200812061443575" modified="20200812082817058" title="$:/state/toc/Notes-Daily Notes--817412315">
+<div created="20200812061443575" modified="20200812093505595" title="$:/state/toc/Notes-Daily Notes--817412315">
 <pre>close</pre>
 </div>
 <div created="20200810070151341" modified="20200810070217829" title="$:/state/toc/Notes-no-tag--36376767">
@@ -13267,7 +13267,7 @@ Enhances the link widget for on-hover previews
 <div created="20200810061717200" modified="20200812015946533" title="$:/state/toc/Notes-no-tag--817412315">
 <pre>close</pre>
 </div>
-<div created="20200812063524345" modified="20200812082817794" title="$:/state/toc/Notes-Untagged Notes--817412315">
+<div created="20200812063524345" modified="20200812093249778" title="$:/state/toc/Notes-Untagged Notes--817412315">
 <pre>close</pre>
 </div>
 <div created="20200811043235796" modified="20200811043235796" title="$:/state/toc/Notes/no-tag-bobo--817412315">
@@ -13285,13 +13285,13 @@ Enhances the link widget for on-hover previews
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div list="" title="$:/StoryList">
+<div created="20200812092916425" list="$:/ControlPanel" modified="20200812092916425" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20200810062703422" list="$:/core/ui/SideBarSegments/site-title $:/core/ui/SideBarSegments/site-subtitle $:/core/ui/SideBarSegments/page-controls $:/core/ui/SideBarSegments/search $:/core/ui/SideBarSegments/tabs" modified="20200810062703422" title="$:/tags/SideBarSegment">
 <pre></pre>
 </div>
-<div created="20200810061035521" modified="20200812091605217" title="$:/temp/advancedsearch">
+<div created="20200810061035521" modified="20200812093522164" title="$:/temp/advancedsearch">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
