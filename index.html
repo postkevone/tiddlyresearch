@@ -147,6 +147,12 @@ Error message and password prompt
 
 <li>$:/_sq/Stories/config/twostorybreakpoint</li>
 
+<li>$:/_sq/Stories/divertTiddlerEditMacro</li>
+
+<li>$:/_sq/Stories/divertTiddlerMacro</li>
+
+<li>$:/_sq/Stories/Story2HistoryList</li>
+
 <li>$:/_sq/Stories/Story2StoryList</li>
 
 <li>$:/config/_sq/Stories/story2</li>
@@ -384,6 +390,50 @@ Error message and password prompt
 <li>$:/Import!!popup-Daily Notes</li>
 
 <li>$:/isEncrypted</li>
+
+<li>$:/language/Buttons/Clone/Hint</li>
+
+<li>$:/language/Buttons/Close/Hint</li>
+
+<li>$:/language/Buttons/CloseAll/Hint</li>
+
+<li>$:/language/Buttons/CloseOthers/Hint</li>
+
+<li>$:/language/Buttons/Delete/Hint</li>
+
+<li>$:/language/Buttons/Edit/Hint</li>
+
+<li>$:/language/Buttons/ExportPage/Hint</li>
+
+<li>$:/language/Buttons/ExportTiddler/Hint</li>
+
+<li>$:/language/Buttons/ExportTiddlers/Hint</li>
+
+<li>$:/language/Buttons/Fold/Hint</li>
+
+<li>$:/language/Buttons/FoldAll/Hint</li>
+
+<li>$:/language/Buttons/FoldOthers/Hint</li>
+
+<li>$:/language/Buttons/Info/Hint</li>
+
+<li>$:/language/Buttons/NewHere/Hint</li>
+
+<li>$:/language/Buttons/NewJournal/Hint</li>
+
+<li>$:/language/Buttons/NewJournalHere/Hint</li>
+
+<li>$:/language/Buttons/NewTiddler/Hint</li>
+
+<li>$:/language/Buttons/OpenWindow/Hint</li>
+
+<li>$:/language/Buttons/Permalink/Hint</li>
+
+<li>$:/language/Buttons/Permaview/Hint</li>
+
+<li>$:/language/Buttons/Unfold/Hint</li>
+
+<li>$:/language/Buttons/UnfoldAll/Hint</li>
 
 <li>$:/language/DefaultNewTiddlerTitle</li>
 
@@ -664,7 +714,708 @@ Error message and password prompt
 <div bag="default" created="20170616192701335" modified="20200811130712376" revision="0" title="$:/_sq/Stories/config/twostorybreakpoint" type="text/vnd.tiddlywiki">
 <pre>769px</pre>
 </div>
-<div bag="default" created="20170615140314952" list="" modified="20200812071303633" revision="0" title="$:/_sq/Stories/Story2StoryList" type="text/vnd.tiddlywiki">
+<div bag="default" caption="{{$:/_sq/Stories/icons/divert-right.svg}}" created="20170616074148780" description="divert right/left" list-before="$:/core/ui/Buttons/delete" modified="20200812075524088" revision="0" tags="$:/tags/EditToolbar" title="$:/_sq/Stories/divertTiddlerEditMacro" type="text/vnd.tiddlywiki">
+<pre>\define divertTiddlerEditButton()
+&lt;$set name=&quot;original&quot; value={{!!draft.title}}&gt;
+&lt;$set name=&quot;otherStoryList&quot;  filter=&quot;[enlist{$:/_sq/Stories/StoriesList!!list}] -[&lt;tv-story-list&gt;]&quot; select=&quot;0&quot;&gt;
+&lt;$set name=&quot;otherHistoryList&quot; filter=&quot;[enlist{$:/_sq/Stories/HistoriesList!!list}] -[&lt;tv-history-list&gt;]&quot; select=&quot;0&quot;&gt;
+	&lt;$button class=&lt;&lt;tv-config-toolbar-class&gt;&gt; tooltip=&quot;Divert this note to the other story for viewing&quot;&gt;
+		&lt;$navigator story=&lt;&lt;otherStoryList&gt;&gt; history=&lt;&lt;otherHistoryList&gt;&gt; &gt;
+			&lt;$action-navigate $to=&lt;&lt;original&gt;&gt; /&gt;
+		&lt;/$navigator&gt;
+		&lt;span class=&quot;sq-button-divert-right sq-button-divert&quot;&gt;{{$:/_sq/Stories/icons/divert-right.svg}}&lt;/span&gt;&lt;span class=&quot;sq-button-divert-left sq-button-divert&quot;&gt;{{$:/_sq/Stories/icons/divert-left.svg}}&lt;/span&gt;
+	&lt;/$button&gt;
+&lt;/$set&gt;
+&lt;/$set&gt;
+&lt;/$set&gt;
+\end
+
+&lt;&lt;divertTiddlerEditButton&gt;&gt;</pre>
+</div>
+<div bag="default" caption="{{$:/_sq/Stories/icons/divert-right.svg}} divert left/right" created="20170609055347900" description="Divert left/right" list-before="" modified="20200812075543545" revision="0" tags="$:/tags/ViewToolbar" title="$:/_sq/Stories/divertTiddlerMacro" type="text/vnd.tiddlywiki">
+<pre>\define divertTiddlerButton()
+&lt;$set name=&quot;otherStoryList&quot; filter=&quot;[enlist{$:/_sq/Stories/StoriesList!!list}] -[&lt;tv-story-list&gt;]&quot; select=&quot;0&quot;&gt;
+&lt;$set name=&quot;otherHistoryList&quot; filter=&quot;[enlist{$:/_sq/Stories/HistoriesList!!list}] -[&lt;tv-history-list&gt;]&quot; select=&quot;0&quot;&gt;
+	&lt;$button class=&lt;&lt;tv-config-toolbar-class&gt;&gt; tooltip=&quot;Divert this note to the other story&quot;&gt;
+		&lt;$navigator story=&lt;&lt;tv-story-list&gt;&gt; history=&lt;&lt;tv-history-list&gt;&gt; &gt;
+			&lt;$action-sendmessage $message=&quot;tm-close-tiddler&quot; $param=&lt;&lt;currentTiddler&gt;&gt; /&gt;
+		&lt;/$navigator&gt;
+		&lt;$navigator story=&lt;&lt;otherStoryList&gt;&gt; history=&lt;&lt;otherHistoryList&gt;&gt; &gt;
+			&lt;$action-navigate $to=&lt;&lt;currentTiddler&gt;&gt; /&gt;
+		&lt;/$navigator&gt;	
+		&lt;span class=&quot;sq-button-divert-right sq-button-divert&quot;&gt;{{$:/_sq/Stories/icons/divert-right.svg}}&lt;/span&gt;&lt;span class=&quot;sq-button-divert-left sq-button-divert&quot;&gt;{{$:/_sq/Stories/icons/divert-left.svg}}&lt;/span&gt;
+	&lt;/$button&gt;
+&lt;/$set&gt;
+&lt;/$set&gt;
+\end
+
+&lt;&lt;divertTiddlerButton&gt;&gt;
+</pre>
+</div>
+<div bag="default" created="20200425131030296" current-tiddler="Notes" modified="20200812075605951" revision="0" title="$:/_sq/Stories/Story2HistoryList" type="application/json">
+<pre>[
+    {
+        &quot;title&quot;: &quot;$:/config/Tiddlers/TitleLinks&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 249.296875,
+            &quot;left&quot;: 1230,
+            &quot;width&quot;: 183.515625,
+            &quot;right&quot;: 1413.515625,
+            &quot;bottom&quot;: 269.296875,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/divertTiddlerMacro&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 623.296875,
+            &quot;left&quot;: 1230,
+            &quot;width&quot;: 220.390625,
+            &quot;right&quot;: 1450.390625,
+            &quot;bottom&quot;: 643.296875,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/divertTiddlerMacro'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/divertTiddlerMacro&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/divertTiddlerMacro'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/divertTiddlerMacro&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/divertTiddlerEditMacro&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 319.296875,
+            &quot;left&quot;: 1230,
+            &quot;width&quot;: 245.53125,
+            &quot;right&quot;: 1475.53125,
+            &quot;bottom&quot;: 339.296875,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/divertTiddlerEditMacro'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/divertTiddlerEditMacro&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryToggleMenu&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 537.296875,
+            &quot;left&quot;: 1230,
+            &quot;width&quot;: 283.546875,
+            &quot;right&quot;: 1513.546875,
+            &quot;bottom&quot;: 557.296875,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryTogglePageControl&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 297.296875,
+            &quot;left&quot;: 1230,
+            &quot;width&quot;: 326.734375,
+            &quot;right&quot;: 1556.734375,
+            &quot;bottom&quot;: 317.296875,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/Templates/StoryTogglePageControl'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryTogglePageControl&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/Templates/StoryTogglePageControl'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryTogglePageControl&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/Templates/StoryTogglePageControl'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryTogglePageControl&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/Templates/StoryToggleMenu'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryToggleMenu&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/Templates/StoryToggleMenu'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryToggleMenu&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/divertTiddlerEditMacro'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/divertTiddlerEditMacro&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/Templates/StoryTogglePageControl'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryTogglePageControl&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/Templates/StoryTogglePageControl'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryTogglePageControl&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/Templates/StoryTogglePageControl'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryTogglePageControl&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/Templates/StoryToggleMenu'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryToggleMenu&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/Templates/StoryToggleMenu'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryToggleMenu&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/Templates/StoryTogglePageControl'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/Templates/StoryTogglePageControl&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/divertTiddlerEditMacro'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/divertTiddlerEditMacro&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/ui/SideBar/Open&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 337.296875,
+            &quot;left&quot;: 1230,
+            &quot;width&quot;: 161.8125,
+            &quot;right&quot;: 1391.8125,
+            &quot;bottom&quot;: 357.296875,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/core/ui/SideBar/Open'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/core/ui/SideBar/Open&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/divertTiddlerEditMacro'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/divertTiddlerEditMacro&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/divertTiddlerEditMacro'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/divertTiddlerEditMacro&quot;
+    },
+    {
+        &quot;title&quot;: &quot;TiddlyBlink&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Stories-overview&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 1035.921875,
+            &quot;left&quot;: 1190,
+            &quot;width&quot;: 101.6875,
+            &quot;right&quot;: 1291.6875,
+            &quot;bottom&quot;: 1054.921875,
+            &quot;height&quot;: 19
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/.giffmex/Customize.TiddlyBlink&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 735.625,
+            &quot;left&quot;: 107.5,
+            &quot;width&quot;: 145.171875,
+            &quot;right&quot;: 252.671875,
+            &quot;bottom&quot;: 755.625,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/.giffmex/meta/hack.tiddlyblink&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 757.625,
+            &quot;left&quot;: 107.5,
+            &quot;width&quot;: 129.59375,
+            &quot;right&quot;: 237.09375,
+            &quot;bottom&quot;: 777.625,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;TiddlyBlink&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 161.296875,
+            &quot;left&quot;: 221.953125,
+            &quot;width&quot;: 71.859375,
+            &quot;right&quot;: 293.8125,
+            &quot;bottom&quot;: 181.296875,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;TiddlyBlink&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 161.296875,
+            &quot;left&quot;: 221.953125,
+            &quot;width&quot;: 71.859375,
+            &quot;right&quot;: 293.8125,
+            &quot;bottom&quot;: 181.296875,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Stories-overview&quot;,
+        &quot;fromPageRect&quot;: {}
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Stories-overview'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Stories-overview&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Stories-overview'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Stories-overview&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Stories'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Plugin maker&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 481.34375,
+            &quot;left&quot;: 2259,
+            &quot;width&quot;: 80.890625,
+            &quot;right&quot;: 2339.890625,
+            &quot;bottom&quot;: 500.34375,
+            &quot;height&quot;: 19
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Plugin maker'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Plugin maker&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Stories&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 296.84375,
+            &quot;left&quot;: 2259,
+            &quot;width&quot;: 41.453125,
+            &quot;right&quot;: 2300.453125,
+            &quot;bottom&quot;: 315.84375,
+            &quot;height&quot;: 19
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Plugin maker&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 501.34375,
+            &quot;left&quot;: 2259,
+            &quot;width&quot;: 80.890625,
+            &quot;right&quot;: 2339.890625,
+            &quot;bottom&quot;: 520.34375,
+            &quot;height&quot;: 19
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Plugin maker'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Plugin maker&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Stories'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Stories&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/config/Settings&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 360.171875,
+            &quot;left&quot;: 1245,
+            &quot;width&quot;: 182.21875,
+            &quot;right&quot;: 1427.21875,
+            &quot;bottom&quot;: 379.171875,
+            &quot;height&quot;: 19
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/config/Settings'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/config/Settings&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/config/Settings&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 360.171875,
+            &quot;left&quot;: 1245,
+            &quot;width&quot;: 182.21875,
+            &quot;right&quot;: 1427.21875,
+            &quot;bottom&quot;: 379.171875,
+            &quot;height&quot;: 19
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/config/Settings'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/config/Settings&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Stories'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Stories&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Stories'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Stories&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Stories'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 463.734375,
+            &quot;left&quot;: 2321.1875,
+            &quot;width&quot;: 476.734375,
+            &quot;right&quot;: 2797.921875,
+            &quot;bottom&quot;: 482.734375,
+            &quot;height&quot;: 19
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Pack stories to plugin'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Pack stories to plugin&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Stories-overview&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Stories changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Stories changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 573.203125,
+            &quot;left&quot;: 2255.625,
+            &quot;width&quot;: 127.640625,
+            &quot;right&quot;: 2383.265625,
+            &quot;bottom&quot;: 592.203125,
+            &quot;height&quot;: 19
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/widgets/action-addtohistory&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 1023.453125,
+            &quot;left&quot;: 1194.5,
+            &quot;width&quot;: 263.703125,
+            &quot;right&quot;: 1458.203125,
+            &quot;bottom&quot;: 1042.453125,
+            &quot;height&quot;: 19
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Pack stories to plugin'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Pack stories to plugin&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/widgets/action-addtohistory&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 653.453125,
+            &quot;left&quot;: 1194.5,
+            &quot;width&quot;: 263.703125,
+            &quot;right&quot;: 1458.203125,
+            &quot;bottom&quot;: 672.453125,
+            &quot;height&quot;: 19
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Stories changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Stories_changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Stories_changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/_sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/_sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Pack stories to plugin'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Pack stories to plugin&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Pack stories to plugin'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Pack stories to plugin&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Pack stories to plugin'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Pack stories to plugin&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/_sq/Stories/story2/EditTemplate&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 242.78125,
+            &quot;left&quot;: 1226.5,
+            &quot;width&quot;: 273.875,
+            &quot;right&quot;: 1500.375,
+            &quot;bottom&quot;: 262.78125,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Pack stories to plugin'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Pack stories to plugin&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of 'Pack stories to plugin'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Pack stories to plugin&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/sq/Stories/story2/EditTemplate&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 242.78125,
+            &quot;left&quot;: 1226.5,
+            &quot;width&quot;: 267.65625,
+            &quot;right&quot;: 1494.15625,
+            &quot;bottom&quot;: 262.78125,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/sq/Stories/storyRiverRatio&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 330.78125,
+            &quot;left&quot;: 1302.75,
+            &quot;width&quot;: 235.375,
+            &quot;right&quot;: 1538.125,
+            &quot;bottom&quot;: 350.78125,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/sq/Stories/story2-fontsize&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 220.78125,
+            &quot;left&quot;: 1522.875,
+            &quot;width&quot;: 234.171875,
+            &quot;right&quot;: 1757.046875,
+            &quot;bottom&quot;: 240.78125,
+            &quot;height&quot;: 20
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/config/sq/Stories/story2-fontsize'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/config/sq/Stories/story2/fontsize-title&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Draft of '$:/plugins/sq/Stories/changelog'&quot;
+    },
+    {
+        &quot;title&quot;: &quot;$:/plugins/sq/Stories/changelog&quot;
+    },
+    {
+        &quot;title&quot;: &quot;Notes&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 103.015625,
+            &quot;left&quot;: 1309.75,
+            &quot;width&quot;: 29.25,
+            &quot;right&quot;: 1339,
+            &quot;bottom&quot;: 138.015625,
+            &quot;height&quot;: 35
+        }
+    },
+    {
+        &quot;title&quot;: &quot;Notes&quot;,
+        &quot;fromPageRect&quot;: {
+            &quot;top&quot;: 103.015625,
+            &quot;left&quot;: 1309.75,
+            &quot;width&quot;: 29.25,
+            &quot;right&quot;: 1339,
+            &quot;bottom&quot;: 138.015625,
+            &quot;height&quot;: 35
+        }
+    }
+]</pre>
+</div>
+<div bag="default" created="20170615140314952" list="" modified="20200812075605950" revision="0" title="$:/_sq/Stories/Story2StoryList" type="text/vnd.tiddlywiki">
 <pre></pre>
 </div>
 <div bag="default" created="20170615081040584" modified="20200811050857938" revision="0" title="$:/config/_sq/Stories/story2" type="text/vnd.tiddlywiki">
@@ -10462,6 +11213,72 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 <div title="$:/isEncrypted">
 <pre>no</pre>
 </div>
+<div created="20200812075748507" modified="20200812075749943" title="$:/language/Buttons/Clone/Hint">
+<pre>Clone this note</pre>
+</div>
+<div created="20200812075355158" modified="20200812075358078" title="$:/language/Buttons/Close/Hint">
+<pre>Close this note</pre>
+</div>
+<div created="20200812074947569" modified="20200812074950692" title="$:/language/Buttons/CloseAll/Hint">
+<pre>Close all notes</pre>
+</div>
+<div created="20200812080125040" modified="20200812080125772" title="$:/language/Buttons/CloseOthers/Hint">
+<pre>Close other notes</pre>
+</div>
+<div created="20200812075406304" modified="20200812075408232" title="$:/language/Buttons/Delete/Hint">
+<pre>Delete this note</pre>
+</div>
+<div created="20200812075415703" modified="20200812075418221" title="$:/language/Buttons/Edit/Hint">
+<pre>Edit this note</pre>
+</div>
+<div created="20200812075230378" modified="20200812075232054" title="$:/language/Buttons/ExportPage/Hint">
+<pre>Export all notes</pre>
+</div>
+<div created="20200812075911264" modified="20200812075916325" title="$:/language/Buttons/ExportTiddler/Hint">
+<pre>Export note</pre>
+</div>
+<div created="20200812075923314" modified="20200812075924523" title="$:/language/Buttons/ExportTiddlers/Hint">
+<pre>Export notes</pre>
+</div>
+<div created="20200812080244082" modified="20200812080245987" title="$:/language/Buttons/Fold/Hint">
+<pre>Fold the body of this note</pre>
+</div>
+<div created="20200812080138694" modified="20200812080139217" title="$:/language/Buttons/FoldAll/Hint">
+<pre>Fold the bodies of all opened notes</pre>
+</div>
+<div created="20200812080149181" modified="20200812080149558" title="$:/language/Buttons/FoldOthers/Hint">
+<pre>Fold the bodies of other opened notes</pre>
+</div>
+<div created="20200812075728721" modified="20200812075731681" title="$:/language/Buttons/Info/Hint">
+<pre>Show information for this note</pre>
+</div>
+<div created="20200812075710291" modified="20200812075715096" title="$:/language/Buttons/NewHere/Hint">
+<pre>Create a new note tagged with this one</pre>
+</div>
+<div created="20200812075107983" modified="20200812075109926" title="$:/language/Buttons/NewJournal/Hint">
+<pre>Create a new journal note</pre>
+</div>
+<div created="20200812075738507" modified="20200812075742394" title="$:/language/Buttons/NewJournalHere/Hint">
+<pre>Create a new journal note tagged with this one</pre>
+</div>
+<div created="20200812075155781" modified="20200812075157597" title="$:/language/Buttons/NewTiddler/Hint">
+<pre>Create a new note</pre>
+</div>
+<div created="20200812080005801" modified="20200812080006788" title="$:/language/Buttons/OpenWindow/Hint">
+<pre>Open note in new window</pre>
+</div>
+<div created="20200812075934816" modified="20200812075936220" title="$:/language/Buttons/Permalink/Hint">
+<pre>Set browser address bar to a direct link to this note</pre>
+</div>
+<div created="20200812075946866" modified="20200812075954732" title="$:/language/Buttons/Permaview/Hint">
+<pre>Set browser address bar to a direct link to all the notes in this story</pre>
+</div>
+<div created="20200812080252092" modified="20200812080253553" title="$:/language/Buttons/Unfold/Hint">
+<pre>Unfold the body of this note</pre>
+</div>
+<div created="20200812080159467" modified="20200812080159998" title="$:/language/Buttons/UnfoldAll/Hint">
+<pre>Unfold the bodies of all opened notes</pre>
+</div>
 <div created="20200811051026390" modified="20200811051026790" title="$:/language/DefaultNewTiddlerTitle">
 <pre>New Note</pre>
 </div>
@@ -13038,7 +13855,7 @@ Enhances the link widget for on-hover previews
 <div created="20200810064640743" modified="20200812015821165" title="$:/state/searchbar">
 <pre>show</pre>
 </div>
-<div created="20200810070730294" modified="20200812072514506" title="$:/state/searchtab-1444756290">
+<div created="20200810070730294" modified="20200812080104104" title="$:/state/searchtab-1444756290">
 <pre>$:/core/ui/AdvancedSearch/Shadows</pre>
 </div>
 <div created="20200811043520765" modified="20200812012328519" title="$:/state/ShowPaletteEditor">
@@ -13080,7 +13897,7 @@ Enhances the link widget for on-hover previews
 <div created="20200810062611186" modified="20200812074326120" title="$:/state/tab-738187504">
 <pre>$:/themes/jd/Mono/Config/SidebarSegments</pre>
 </div>
-<div created="20200810061145479" modified="20200812074354816" title="$:/state/tab/sidebar--595412856">
+<div created="20200810061145479" modified="20200812080504146" title="$:/state/tab/sidebar--595412856">
 <pre>Notes</pre>
 </div>
 <div created="20200810062946631" modified="20200812074240984" title="$:/state/tabs/controlpanel/toolbars-1345989671">
@@ -13089,7 +13906,7 @@ Enhances the link widget for on-hover previews
 <div created="20200812062138018" modified="20200812062138747" title="$:/state/toc/Notes-Daily Notes--36376767">
 <pre>close</pre>
 </div>
-<div created="20200812061443575" modified="20200812073039493" title="$:/state/toc/Notes-Daily Notes--817412315">
+<div created="20200812061443575" modified="20200812080415505" title="$:/state/toc/Notes-Daily Notes--817412315">
 <pre>close</pre>
 </div>
 <div created="20200810070151341" modified="20200810070217829" title="$:/state/toc/Notes-no-tag--36376767">
@@ -13098,7 +13915,7 @@ Enhances the link widget for on-hover previews
 <div created="20200810061717200" modified="20200812015946533" title="$:/state/toc/Notes-no-tag--817412315">
 <pre>close</pre>
 </div>
-<div created="20200812063524345" modified="20200812073038485" title="$:/state/toc/Notes-Untagged Notes--817412315">
+<div created="20200812063524345" modified="20200812080416442" title="$:/state/toc/Notes-Untagged Notes--817412315">
 <pre>close</pre>
 </div>
 <div created="20200811043235796" modified="20200811043235796" title="$:/state/toc/Notes/no-tag-bobo--817412315">
@@ -13116,13 +13933,13 @@ Enhances the link widget for on-hover previews
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div list="" title="$:/StoryList">
+<div created="20200812075438454" list="" modified="20200812080426026" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20200810062703422" list="$:/core/ui/SideBarSegments/site-title $:/core/ui/SideBarSegments/site-subtitle $:/core/ui/SideBarSegments/page-controls $:/core/ui/SideBarSegments/search $:/core/ui/SideBarSegments/tabs" modified="20200810062703422" title="$:/tags/SideBarSegment">
 <pre></pre>
 </div>
-<div created="20200810061035521" modified="20200812073003708" title="$:/temp/advancedsearch">
+<div created="20200810061035521" modified="20200812080257737" title="$:/temp/advancedsearch">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
