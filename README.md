@@ -15,7 +15,7 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 ## Credits
 
 ### Plugins
-[Streams](https://saqimtiaz.github.io/sq-tw/streams.html), [Tiddly Remember](https://sobjornstad.github.io/TiddlyRemember/), [Drift](https://akhater.github.io/drift/), [tobibeer plugins](http://tobibeer.github.io/tw5-plugins/#Plugins), [linonetwo](https://borber.cn/wiki/#:%5B%5BHello%20World%5D%5D), [Stroll](https://giffmex.org/stroll/stroll.html)
+[Streams](https://saqimtiaz.github.io/sq-tw/streams.html), [TiddlyRemember](https://sobjornstad.github.io/TiddlyRemember/), [Drift](https://akhater.github.io/drift/), [tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins), [linonetwo](https://borber.cn/wiki/#:%5B%5BHello%20World%5D%5D), [Stroll](https://giffmex.org/stroll/stroll.html)
 
 ### Themes
 [Mono Theme](http://j.d.mono.tiddlyspot.com/)
