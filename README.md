@@ -20,7 +20,7 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 * The reference field of a card is generated from the title of the main note at the moment of the creation, but it won't automatically update when the title changes
 
-* When using Stories, the popup preview is fixed to the position of the story river on the left, even when previewing links from the story river on the right
+* When using Stories, the popup preview is fixed to the vertical position of the story river on the left, even when previewing links from the story river on the right
 
 ## Credits
 
