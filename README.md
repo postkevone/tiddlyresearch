@@ -14,13 +14,13 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 ## Known Issues
 
-* TiddlyRemember doesn't support images (you can use them in TiddlyResearch but you won't be able to see them in Anki)
+* TiddlyRemember doesn't support images (you can still use them in TiddlyResearch but you won't be able to see them in Anki)
 
-* Preview only shows the body of the note, (it won't preview the nodes of a note, but can only preview a single node)
+* Preview only shows the body of the note, (preview works only for single nodes or the body part of note)
 
 * The reference field of a card is generated from the title of the main note, but it won't automatically update when the title changes
 
-* When using Stories, the preview of a references follows only the position of the left story river not the right one
+* When using Stories, the popup preview is fixed to the position of the story river on the left, even when previewing links from the story river on the right
 
 ## Credits
 
