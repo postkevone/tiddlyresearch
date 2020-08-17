@@ -22,9 +22,9 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 * The popup preview only shows the body of a note and not its nodes
 
-* The reference field of a card is generated from the title of the main note at the moment of the creation, but it won't automatically update when the main note title changes
+* The reference field of a Anki card is generated from the title of the main note at the moment of the creation, but it won't automatically update when the main note title changes
 
-* When using Stories, the popup preview is always fixed to the vertical position of the story river on the left
+* When using stories, the popup preview is always fixed to the vertical position of the story river on the left
 
 ## Credits
 
