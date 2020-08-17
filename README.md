@@ -18,7 +18,7 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 * Anki cards support only unlinked references (you can still use backlinks but only for direct reference)
 
-* TiddlyRemember doesn't support images (you can still use them in TiddlyResearch but you won't be able to see them in Anki)
+* Anki cards don't support images (you can still use them in TiddlyResearch but you won't be able to see them in Anki)
 
 * The popup preview only shows the body of a note and not its nodes
 
