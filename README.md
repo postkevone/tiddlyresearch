@@ -14,7 +14,7 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 ## Known Issues
 
-* Deleting a note won't delete its nodes
+* Deleting a note won't delete its nodes, you need to delete them manually first
 
 * Anki cards support only unlinked references (you can still use backlinks but only for direct reference)
 
