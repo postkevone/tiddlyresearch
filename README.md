@@ -16,13 +16,9 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 * Anki cards don't support images (you can still use them in TiddlyResearch but you won't be able to see them in Anki) [issue#13](https://github.com/sobjornstad/TiddlyRemember/issues/13)
 
-* The popup preview only shows the body of a note and not its nodes
+* The title of a node won't automatically update when the main note title changes
 
 * Anki cards support only unlinked references (you can still use backlinks but only for linking to a note)
-
-* The reference field of a Anki card is generated from the title of the main note at the moment of the creation, but it won't automatically update when the main note title changes
-
-* When using stories, the popup preview is always fixed to the vertical position of the story river on the left
 
 ## Credits
 
