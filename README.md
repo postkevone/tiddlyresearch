@@ -14,11 +14,9 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 ## Known Issues
 
-* Deleting a note won't delete its nodes, you need to delete them manually first
-
 * Anki cards support only unlinked references (you can still use backlinks but only for linking to a note)
 
-* Anki cards don't support images (you can still use them in TiddlyResearch but you won't be able to see them in Anki)
+* Anki cards don't support images (you can still use them in TiddlyResearch but you won't be able to see them in Anki) [Issue #13](https://github.com/sobjornstad/TiddlyRemember/issues/13)
 
 * The popup preview only shows the body of a note and not its nodes
 
