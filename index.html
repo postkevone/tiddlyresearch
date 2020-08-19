@@ -359,6 +359,10 @@ Error message and password prompt
 
 <li>$:/config/flibbles/relink/fields/title</li>
 
+<li>$:/config/flibbles/relink/macros/remembercz/text</li>
+
+<li>$:/config/flibbles/relink/macros/rememberq/text</li>
+
 <li>$:/config/Navigation/openLinkFromInsideRiver</li>
 
 <li>$:/config/Navigation/openLinkFromOutsideRiver</li>
@@ -685,8 +689,6 @@ Error message and password prompt
 
 <li>$:/plugins/tobibeer/preview</li>
 
-<li>$:/plugins/tobibeer/preview/defaults/delay</li>
-
 <li>$:/plugins/tobibeer/preview/defaults/exclude</li>
 
 <li>$:/plugins/tobibeer/preview/defaults/keys</li>
@@ -788,6 +790,8 @@ Error message and password prompt
 <li>$:/state/edit/references--1996154837</li>
 
 <li>$:/state/edit/references--2088225623</li>
+
+<li>$:/state/edit/references-1001471217</li>
 
 <li>$:/state/edit/references-1120488784</li>
 
@@ -1237,8 +1241,8 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
-<div created="20200818010428625" modified="20200818075527072" stream-list="[[#Getting Started/20200818010512053]] [[#Getting Started/20200818010516442]] [[#Getting Started/20200818010522881]] [[#Getting Started/20200818010527618]] [[#Getting Started/20200818010532242]]" stream-type="default" tags="Note Folder" title="#Getting Started">
-<pre>|!Version |0.54|
+<div created="20200818010428625" modified="20200819001517731" stream-list="[[#Getting Started/20200818010512053]] [[#Getting Started/20200818010516442]] [[#Getting Started/20200818010522881]] [[#Getting Started/20200818010527618]] [[#Getting Started/20200818010532242]]" stream-type="default" tags="Note Folder" title="#Getting Started">
+<pre>|!Version |0.55|
 |!Updated |&lt;$view field=&quot;modified&quot; format=&quot;date&quot; template=&quot;MMM DDth, YYYY&quot; /&gt;|
 |!&lt;$text text=&quot;GitHub&quot;&gt;&lt;/$text&gt; |https://github.com/kebifurai/TiddlyResearch|</pre>
 </div>
@@ -1512,7 +1516,7 @@ reference={{{ [{!!parent}get[text]] }}}/&gt;</pre>
 &lt;&lt;divertTiddlerButton&gt;&gt;
 </pre>
 </div>
-<div bag="default" created="20170615140314952" list="" modified="20200818041642561" revision="0" title="$:/_sq/Stories/Story2StoryList" type="text/vnd.tiddlywiki">
+<div bag="default" created="20170615140314952" list="" modified="20200819010029190" revision="0" title="$:/_sq/Stories/Story2StoryList" type="text/vnd.tiddlywiki">
 <pre></pre>
 </div>
 <div bag="default" created="20170615081040584" modified="20200816122250870" revision="0" title="$:/config/_sq/Stories/story2" type="text/vnd.tiddlywiki">
@@ -1643,6 +1647,12 @@ reference={{{ [{!!parent}get[text]] }}}/&gt;</pre>
 </div>
 <div created="20200818070308808" modified="20200818070831448" title="$:/config/flibbles/relink/fields/title">
 <pre>reference</pre>
+</div>
+<div created="20200819002519580" modified="20200819002519580" title="$:/config/flibbles/relink/macros/remembercz/text">
+<pre>wikitext</pre>
+</div>
+<div created="20200819002907747" modified="20200819002907747" title="$:/config/flibbles/relink/macros/rememberq/text">
+<pre>wikitext</pre>
 </div>
 <div created="20200810061838157" modified="20200811052949571" title="$:/config/Navigation/openLinkFromInsideRiver">
 <pre>top</pre>
@@ -12746,7 +12756,7 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
     }
 }</pre>
 </div>
-<div created="20200414150455988" creator="LinOnetwo" modified="20200818072405411" tags="$:/tags/ViewTemplate" title="$:/plugins/linonetwo/inverse-link-and-folder/infobar" type="text/vnd.tiddlywiki">
+<div created="20200414150455988" creator="LinOnetwo" modified="20200819002155902" tags="$:/tags/ViewTemplate" title="$:/plugins/linonetwo/inverse-link-and-folder/infobar" type="text/vnd.tiddlywiki">
 <pre>\define text-pattern()
 $(currentTiddler)$(?i)
 \end
@@ -12762,7 +12772,7 @@ filtertitle:&quot;[regexp:title&lt;text-pattern&gt;] -[regexp:title&lt;text-patt
 filtertext:&quot;[regexp:text&lt;text-pattern&gt;] -[regexp:text&lt;text-pattern-title&gt;] -[all[current]backlinks[]] -[all[current]tagging[]] -[is[current]] -[tag[hide]] -[is[system]]&quot;
 &gt;&gt;</pre>
 </div>
-<div created="20200414150455988" creator="LinOnetwo" modified="20200814062842309" tags="$:/tags/Macro" title="$:/plugins/linonetwo/inverse-link-and-folder/list-link" type="text/vnd.tiddlywiki">
+<div created="20200414150455988" creator="LinOnetwo" modified="20200819002214823" tags="$:/tags/Macro" title="$:/plugins/linonetwo/inverse-link-and-folder/list-link" type="text/vnd.tiddlywiki">
 <pre>\define inverse-link-and-folder_list-links(filtertag, filterbacklink,filtertitle,filtertext,type:&quot;ul&quot;,subtype:&quot;li&quot;)
 \whitespace trim
   &lt;$type$ class=&quot;footer&quot;&gt;
@@ -14176,32 +14186,30 @@ reference={{{ [{!!parent}get[text]] }}}/&gt;
     }
 }</pre>
 </div>
-<div created="20200818043128578" modified="20200818043525330" title="$:/plugins/tobibeer/preview/defaults/delay">
-<pre>400</pre>
-</div>
 <div created="20200818024741505" modified="20200818024741927" title="$:/plugins/tobibeer/preview/defaults/exclude">
 <pre>[is[system]] [all[shadows]]</pre>
 </div>
-<div created="20200811081143992" modified="20200811081143992" title="$:/plugins/tobibeer/preview/defaults/keys">
-<pre></pre>
+<div created="20200818230439809" modified="20200818230736792" title="$:/plugins/tobibeer/preview/defaults/keys">
+<pre>SHIFT</pre>
 </div>
-<div created="20200811105020095" modified="20200818075457106" tags="$:/tags/Stylesheet" title="$:/plugins/tobibeer/preview/styles">
+<div created="20200811105020095" modified="20200819005646820" tags="$:/tags/Stylesheet" title="$:/plugins/tobibeer/preview/styles">
 <pre>.tc-popup.tc-preview-tiddler{
 	position:fixed !important;
 	left:15px !important;
 	top:190px !important;
 	width:350px !important;
-	height:450px !important;
+	height:76vh !important;
 	width:100%;
 	padding:-1em 0.25em !important;
 }</pre>
 </div>
-<div created="20200818024845318" modified="20200818075453643" title="$:/plugins/tobibeer/preview/template">
+<div created="20200818231535755" modified="20200819005716309" title="$:/plugins/tobibeer/preview/template">
 <pre>\define node-list()
 $(currentTiddler)$/2
 \end
 
-&lt;div style=&quot;overflow: auto; max-height: 425px !important; font-size: 12px;&quot;&gt;
+&lt;div style=&quot;overflow: auto; max-height: 73vh !important; font-size: 12px;&quot;&gt;
+{{||$:/core/ui/ViewTemplate/tags}}
 &lt;$list filter=&quot;[&lt;currentTiddler&gt;] [prefix&lt;node-list&gt;]&quot;&gt;
    &lt;$transclude mode=&quot;block&quot; /&gt;
 &lt;/$list&gt;
@@ -14348,6 +14356,9 @@ $(currentTiddler)$/2
 <div created="20200818012049638" modified="20200818012052958" title="$:/state/edit/references--2088225623">
 <pre>hide</pre>
 </div>
+<div created="20200819002725271" modified="20200819002727143" title="$:/state/edit/references-1001471217">
+<pre>hide</pre>
+</div>
 <div created="20200811090000729" modified="20200811090001651" title="$:/state/edit/references-1120488784">
 <pre>hide</pre>
 </div>
@@ -14405,13 +14416,13 @@ $(currentTiddler)$/2
 <div created="20200814073231409" modified="20200814073233273" title="$:/state/plugin-info--896887961-$:/core">
 <pre>no</pre>
 </div>
-<div created="20200814073234169" modified="20200818070833533" title="$:/state/plugin-info--896887961-$:/plugins/flibbles/relink">
+<div created="20200814073234169" modified="20200819002917824" title="$:/state/plugin-info--896887961-$:/plugins/flibbles/relink">
 <pre>no</pre>
 </div>
 <div created="20200814073235601" modified="20200818065656310" title="$:/state/plugin-info--896887961-$:/plugins/flibbles/relink---548854025">
 <pre>configuration</pre>
 </div>
-<div created="20200812003912842" modified="20200814090048984" title="$:/state/plugin-info--896887961-$:/plugins/linonetwo/inverse-link-and-folder">
+<div created="20200812003912842" modified="20200819002218060" title="$:/state/plugin-info--896887961-$:/plugins/linonetwo/inverse-link-and-folder">
 <pre>no</pre>
 </div>
 <div created="20200812003914979" modified="20200814073503970" title="$:/state/plugin-info--896887961-$:/plugins/linonetwo/inverse-link-and-folder--825990618">
@@ -14438,7 +14449,7 @@ $(currentTiddler)$/2
 <div created="20200814080933524" modified="20200818031312226" title="$:/state/plugin-info--896887961-$:/plugins/tobibeer/appear--524859434">
 <pre>contents</pre>
 </div>
-<div created="20200811081133738" modified="20200818043526213" title="$:/state/plugin-info--896887961-$:/plugins/tobibeer/preview">
+<div created="20200811081133738" modified="20200818231744819" title="$:/state/plugin-info--896887961-$:/plugins/tobibeer/preview">
 <pre>no</pre>
 </div>
 <div created="20200811081137097" modified="20200818042911083" title="$:/state/plugin-info--896887961-$:/plugins/tobibeer/preview---536113993">
@@ -14453,13 +14464,13 @@ $(currentTiddler)$/2
 <div created="20200810064640743" modified="20200816041043599" title="$:/state/searchbar">
 <pre>hide</pre>
 </div>
-<div created="20200810070730294" modified="20200818075533633" title="$:/state/searchtab-1444756290">
-<pre>$:/core/ui/AdvancedSearch/Standard</pre>
+<div created="20200810070730294" modified="20200818080339238" title="$:/state/searchtab-1444756290">
+<pre>$:/core/ui/AdvancedSearch/Shadows</pre>
 </div>
 <div created="20200811043520765" modified="20200816073158812" title="$:/state/ShowPaletteEditor">
 <pre>no</pre>
 </div>
-<div created="20200810062326364" modified="20200818073154115" title="$:/state/sidebar">
+<div created="20200810062326364" modified="20200818232032147" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20200816064459860" modified="20200816064459860" title="$:/state/sq/streams/current-edit-tiddler--1158310497">
@@ -14501,13 +14512,13 @@ $(currentTiddler)$/2
 <div created="20200815091320448" modified="20200815091320448" title="$:/state/sq/streams/current-edit-tiddler-805440200">
 <pre>20200815091320444</pre>
 </div>
-<div created="20200818011716868" modified="20200818011716868" title="$:/state/sq/streams/visibility/#Keyboard Shortcuts/20200818011201393--1343554481">
+<div created="20200818011716868" modified="20200819010031749" title="$:/state/sq/streams/visibility/#Keyboard Shortcuts/20200818011201393--1343554481">
 <pre>hide</pre>
 </div>
 <div created="20200818011339440" modified="20200818020134398" title="$:/state/sq/streams/visibility/#Keyboard Shortcuts/20200818011201393-292667280">
 <pre>hide</pre>
 </div>
-<div created="20200818011717596" modified="20200818011717596" title="$:/state/sq/streams/visibility/#Keyboard Shortcuts/20200818011202484--1343554481">
+<div created="20200818011717596" modified="20200819010032757" title="$:/state/sq/streams/visibility/#Keyboard Shortcuts/20200818011202484--1343554481">
 <pre>hide</pre>
 </div>
 <div created="20200818011408512" modified="20200818020133134" title="$:/state/sq/streams/visibility/#Keyboard Shortcuts/20200818011202484-292667280">
@@ -14648,10 +14659,10 @@ $(currentTiddler)$/2
 <div created="20200811085348627" modified="20200817004729363" title="$:/state/tab--509593366">
 <pre>$:/core/ui/ControlPanel/Palette</pre>
 </div>
-<div created="20200818062801858" modified="20200818065839369" title="$:/state/tab--824315756">
-<pre>$:/plugins/flibbles/relink/ui/configuration/Fields</pre>
+<div created="20200818062801858" modified="20200819002503990" title="$:/state/tab--824315756">
+<pre>$:/plugins/flibbles/relink/ui/configuration/Macros</pre>
 </div>
-<div created="20200810085026060" modified="20200817004710490" title="$:/state/tab--86143343">
+<div created="20200810085026060" modified="20200818232720613" title="$:/state/tab--86143343">
 <pre>$:/core/ui/ControlPanel/Plugins/Installed/Plugins</pre>
 </div>
 <div created="20200810062402177" modified="20200812073114389" title="$:/state/tab--959111941">
@@ -14660,7 +14671,7 @@ $(currentTiddler)$/2
 <div created="20200811085347646" modified="20200817004729866" title="$:/state/tab-102244450">
 <pre>$:/core/ui/ControlPanel/Info</pre>
 </div>
-<div created="20200810061744143" modified="20200818065651705" title="$:/state/tab-1749438307">
+<div created="20200810061744143" modified="20200819002349509" title="$:/state/tab-1749438307">
 <pre>$:/core/ui/ControlPanel/Plugins</pre>
 </div>
 <div created="20200812073049733" modified="20200816122449063" title="$:/state/tab-2065006209">
@@ -14669,7 +14680,7 @@ $(currentTiddler)$/2
 <div created="20200810062611186" modified="20200812074326120" title="$:/state/tab-738187504">
 <pre>$:/themes/jd/Mono/Config/SidebarSegments</pre>
 </div>
-<div created="20200810061145479" modified="20200818073230747" title="$:/state/tab/sidebar--595412856">
+<div created="20200810061145479" modified="20200819010106045" title="$:/state/tab/sidebar--595412856">
 <pre>$:/TiddlyResearch/Sidebar/Folders</pre>
 </div>
 <div created="20200810062946631" modified="20200818062553242" title="$:/state/tabs/controlpanel/toolbars-1345989671">
@@ -14678,7 +14689,7 @@ $(currentTiddler)$/2
 <div created="20200814115234015" modified="20200814115237311" title="$:/state/toc/All Notes-Getting Started-311091236">
 <pre>open</pre>
 </div>
-<div created="20200816114126657" modified="20200818070925909" title="$:/state/toc/Folder-#Getting Started--1779660019">
+<div created="20200816114126657" modified="20200819010045365" title="$:/state/toc/Folder-#Getting Started--1779660019">
 <pre>close</pre>
 </div>
 <div created="20200815031931100" modified="20200815103251375" title="$:/state/toc/Folder-Getting Started--1779660019">
@@ -14762,7 +14773,7 @@ $(currentTiddler)$/2
 <div created="20200810062703422" list="$:/core/ui/SideBarSegments/site-title $:/core/ui/SideBarSegments/site-subtitle $:/core/ui/SideBarSegments/page-controls $:/core/ui/SideBarSegments/search $:/core/ui/SideBarSegments/tabs" modified="20200810062703422" title="$:/tags/SideBarSegment">
 <pre></pre>
 </div>
-<div created="20200810061035521" modified="20200818075534778" title="$:/temp/advancedsearch">
+<div created="20200810061035521" modified="20200819005738332" title="$:/temp/advancedsearch">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -14829,7 +14840,7 @@ $(currentTiddler)$/2
 <div created="20200810061032673" modified="20200810061233198" title="$:/temp/search">
 <pre></pre>
 </div>
-<div created="20200811081117367" modified="20200818075507793" title="$:/temp/tobibeer/preview-1-tiddler">
+<div created="20200811081117367" modified="20200819010209060" title="$:/temp/tobibeer/preview-1-tiddler">
 <pre>How to create Anki cards</pre>
 </div>
 <div created="20200812010458884" modified="20200818034907211" title="$:/temp/tobibeer/preview-2-tiddler">
@@ -16329,8 +16340,8 @@ padding: 0;
 <div created="20200818010856781" modified="20200818010903660" parent="Backlinking and references" stream-type="default" title="Backlinking and references/20200818010856781">
 <pre>//Next [[How to create Anki cards]]//</pre>
 </div>
-<div created="20200818043736917" modified="20200818043810640" parent="Backlinking and references" stream-type="default" title="Backlinking and references/20200818043736916">
-<pre>Hover over one link for 0.4s to show its preview</pre>
+<div created="20200818043736917" modified="20200819010139161" parent="Backlinking and references" stream-type="default" title="Backlinking and references/20200818043736916">
+<pre>Hover a link while pressing &lt;kbd&gt;shift&lt;/kbd&gt; or keep hovering on it for 1.5s to show its preview</pre>
 </div>
 <div created="20200818011921622" modified="20200818011947021" stream-list="[[Final tips and advanced shortcuts/20200818011925148]] [[Final tips and advanced shortcuts/20200818011926447]] [[Final tips and advanced shortcuts/20200818011929886]] [[Final tips and advanced shortcuts/20200818011933257]] [[Final tips and advanced shortcuts/20200818011937650]] [[Final tips and advanced shortcuts/20200818011943617]] [[Final tips and advanced shortcuts/20200818011947017]]" stream-type="default" tags="[[#Getting Started]] Note" title="Final tips and advanced shortcuts">
 <pre></pre>
