@@ -14,11 +14,9 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 ## Known Issues
 
-* Anki cards don't support images (you can still use them in TiddlyResearch but you won't be able to see them in Anki) [issue#13](https://github.com/sobjornstad/TiddlyRemember/issues/13)
-
 * The title of a node won't automatically update when the main note title changes
 
-* Anki cards support only unlinked references (you can still use backlinks but only for linking to a note)
+* Anki cards don't support images (you can still use them in TiddlyResearch but you won't be able to see them in Anki) [issue#13](https://github.com/sobjornstad/TiddlyRemember/issues/13)
 
 ## Credits
 
