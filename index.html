@@ -1249,8 +1249,8 @@ Error message and password prompt
 <!--~~ Ordinary tiddlers ~~-->
 
 <div id="storeArea" style="display:none;">
-<div created="20200818010428625" modified="20200819012640419" stream-list="[[#Getting Started/20200818010512053]] [[#Getting Started/20200818010516442]] [[#Getting Started/20200818010522881]] [[#Getting Started/20200818010527618]] [[#Getting Started/20200818010532242]]" stream-type="default" tags="Note Folder" title="#Getting Started">
-<pre>|!Version |0.56|
+<div created="20200818010428625" modified="20200819023737339" stream-list="[[#Getting Started/20200818010512053]] [[#Getting Started/20200818010516442]] [[#Getting Started/20200818010522881]] [[#Getting Started/20200818010527618]] [[#Getting Started/20200818010532242]]" stream-type="default" tags="Note Folder" title="#Getting Started">
+<pre>|!Version |0.57|
 |!Updated |&lt;$view field=&quot;modified&quot; format=&quot;date&quot; template=&quot;MMM DDth, YYYY&quot; /&gt;|
 |!&lt;$text text=&quot;GitHub&quot;&gt;&lt;/$text&gt; |https://github.com/kebifurai/TiddlyResearch|</pre>
 </div>
@@ -12776,7 +12776,7 @@ very-muted-foreground: &lt;&lt;colour foreground&gt;&gt;</pre>
     }
 }</pre>
 </div>
-<div created="20200414150455988" creator="LinOnetwo" modified="20200819002155902" tags="$:/tags/ViewTemplate" title="$:/plugins/linonetwo/inverse-link-and-folder/infobar" type="text/vnd.tiddlywiki">
+<div created="20200414150455988" creator="LinOnetwo" modified="20200819023613795" tags="$:/tags/ViewTemplate" title="$:/plugins/linonetwo/inverse-link-and-folder/infobar" type="text/vnd.tiddlywiki">
 <pre>\define text-pattern()
 $(currentTiddler)$(?i)
 \end
@@ -12785,11 +12785,15 @@ $(currentTiddler)$(?i)
 $(currentTiddler)$/2
 \end
 
+\define text-pattern-backlink()
+\u005B\u005B$(currentTiddler)$\u005D\u005D
+\end
+
 &lt;&lt;inverse-link-and-folder_list-links
 filtertag:&quot;[all[current]tagging[]] -[is[current]] -[tag[hide]] -[is[system]]&quot;
-filterbacklink:&quot;[all[current]backlinks[]] -[is[current]] -[tag[hide]] -[is[system]]&quot;
+filterbacklink:&quot;[all[current]backlinks[]] [regexp:text&lt;text-pattern-backlink&gt;] -[is[current]] -[tag[hide]] -[is[system]]&quot;
 filtertitle:&quot;[regexp:title&lt;text-pattern&gt;] -[regexp:title&lt;text-pattern-title&gt;] -[all[current]backlinks[]] -[all[current]tagging[]] -[is[current]] -[tag[hide]] -[is[system]]&quot;
-filtertext:&quot;[regexp:text&lt;text-pattern&gt;] -[regexp:text&lt;text-pattern-title&gt;] -[all[current]backlinks[]] -[all[current]tagging[]] -[is[current]] -[tag[hide]] -[is[system]]&quot;
+filtertext:&quot;[regexp:text&lt;text-pattern&gt;] -[regexp:text&lt;text-pattern-title&gt;] -[all[current]backlinks[]] -[regexp:text&lt;text-pattern-backlink&gt;] -[all[current]tagging[]] -[is[current]] -[tag[hide]] -[is[system]]&quot;
 &gt;&gt;</pre>
 </div>
 <div created="20200414150455988" creator="LinOnetwo" modified="20200819002214823" tags="$:/tags/Macro" title="$:/plugins/linonetwo/inverse-link-and-folder/list-link" type="text/vnd.tiddlywiki">
@@ -14487,7 +14491,7 @@ $(currentTiddler)$/2
 <div created="20200810064640743" modified="20200816041043599" title="$:/state/searchbar">
 <pre>hide</pre>
 </div>
-<div created="20200810070730294" modified="20200819014812368" title="$:/state/searchtab-1444756290">
+<div created="20200810070730294" modified="20200819023731048" title="$:/state/searchtab-1444756290">
 <pre>$:/core/ui/AdvancedSearch/Standard</pre>
 </div>
 <div created="20200811043520765" modified="20200816073158812" title="$:/state/ShowPaletteEditor">
@@ -14694,7 +14698,7 @@ $(currentTiddler)$/2
 <div created="20200811085347646" modified="20200817004729866" title="$:/state/tab-102244450">
 <pre>$:/core/ui/ControlPanel/Info</pre>
 </div>
-<div created="20200810061744143" modified="20200819014822873" title="$:/state/tab-1749438307">
+<div created="20200810061744143" modified="20200819023749136" title="$:/state/tab-1749438307">
 <pre>$:/core/ui/ControlPanel/Info</pre>
 </div>
 <div created="20200812073049733" modified="20200816122449063" title="$:/state/tab-2065006209">
@@ -14703,7 +14707,7 @@ $(currentTiddler)$/2
 <div created="20200810062611186" modified="20200812074326120" title="$:/state/tab-738187504">
 <pre>$:/themes/jd/Mono/Config/SidebarSegments</pre>
 </div>
-<div created="20200810061145479" modified="20200819012644832" title="$:/state/tab/sidebar--595412856">
+<div created="20200810061145479" modified="20200819023242335" title="$:/state/tab/sidebar--595412856">
 <pre>$:/TiddlyResearch/Sidebar/Folders</pre>
 </div>
 <div created="20200810062946631" modified="20200819013522235" title="$:/state/tabs/controlpanel/toolbars-1345989671">
@@ -14790,7 +14794,7 @@ $(currentTiddler)$/2
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20200819014815753" list="[[#Getting Started]]" modified="20200819014815753" title="$:/StoryList">
+<div created="20200819023740441" list="[[#Getting Started]]" modified="20200819023740441" title="$:/StoryList">
 <pre></pre>
 </div>
 <div created="20200819013117996" list="$:/core/ui/EditorToolbar/paint $:/core/ui/EditorToolbar/opacity $:/core/ui/EditorToolbar/line-width $:/core/ui/EditorToolbar/rotate-left $:/core/ui/EditorToolbar/clear $:/core/ui/EditorToolbar/bold $:/core/ui/EditorToolbar/italic $:/core/ui/EditorToolbar/strikethrough $:/core/ui/EditorToolbar/underline $:/core/ui/EditorToolbar/superscript $:/core/ui/EditorToolbar/subscript $:/core/ui/EditorToolbar/mono-line $:/core/ui/EditorToolbar/linkify $:/core/ui/EditorToolbar/transcludify $:/core/ui/EditorToolbar/mono-block $:/core/ui/EditorToolbar/quote $:/core/ui/EditorToolbar/list-bullet $:/core/ui/EditorToolbar/list-number $:/core/ui/EditorToolbar/heading-1 $:/core/ui/EditorToolbar/heading-2 $:/core/ui/EditorToolbar/heading-3 $:/core/ui/EditorToolbar/heading-4 $:/core/ui/EditorToolbar/heading-5 $:/core/ui/EditorToolbar/heading-6 $:/core/ui/EditorToolbar/link $:/core/ui/EditorToolbar/excise $:/core/ui/EditorToolbar/picture $:/core/ui/EditorToolbar/stamp $:/core/ui/EditorToolbar/size $:/core/ui/EditorToolbar/editor-height $:/core/ui/EditorToolbar/more $:/core/ui/EditorToolbar/preview $:/core/ui/EditorToolbar/preview-type data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3Csvg%20width%3D%2218px%22%20height%3D%2218px%22%20viewBox%3D%220%200%201792%201792%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1120%20576q0%2013-9.5%2022.5t-22.5%209.5-22.5-9.5-9.5-22.5q0-46-54-71t-106-25q-13%200-22.5-9.5t-9.5-22.5%209.5-22.5%2022.5-9.5q50%200%2099.5%2016t87%2054%2037.5%2090zm160%200q0-72-34.5-134t-90-101.5-123-62-136.5-22.5-136.5%2022.5-123%2062-90%20101.5-34.5%20134q0%20101%2068%20180%2010%2011%2030.5%2033t30.5%2033q128%20153%20141%20298h228q13-145%20141-298%2010-11%2030.5-33t30.5-33q68-79%2068-180zm128%200q0%20155-103%20268-45%2049-74.5%2087t-59.5%2095.5-34%20107.5q47%2028%2047%2082%200%2037-25%2064%2025%2027%2025%2064%200%2052-45%2081%2013%2023%2013%2047%200%2046-31.5%2071t-77.5%2025q-20%2044-60%2070t-87%2026-87-26-60-70q-46%200-77.5-25t-31.5-71q0-24%2013-47-45-29-45-81%200-37%2025-64-25-27-25-64%200-54%2047-82-4-50-34-107.5t-59.5-95.5-74.5-87q-103-113-103-268%200-99%2044.5-184.5t117-142%20164-89%20186.5-32.5%20186.5%2032.5%20164%2089%20117%20142%2044.5%20184.5z%22%20fill%3D%22%23fff%22%2F%3E%3C%2Fsvg%3E%0A%3C!--%20Source%3A%20FontAwesome%20--%3E $:/plugins/sobjornstad/TiddlyRemember/toolbar/rememberq $:/plugins/sobjornstad/TiddlyRemember/toolbar/remembercz-reference $:/plugins/sobjornstad/TiddlyRemember/toolbar/remembercz $:/plugins/tiddlywiki/katex/ui/EditorToolbar/katex $:/plugins/sobjornstad/TiddlyRemember/toolbar/rememberq-reference $:/TiddlyResearch/Highlight $:/TiddlyResearch/Image $:/TiddlyResearch/ImageHTML" modified="20200819013124352" title="$:/tags/EditorToolbar">
@@ -14799,7 +14803,7 @@ $(currentTiddler)$/2
 <div created="20200810062703422" list="$:/core/ui/SideBarSegments/site-title $:/core/ui/SideBarSegments/site-subtitle $:/core/ui/SideBarSegments/page-controls $:/core/ui/SideBarSegments/search $:/core/ui/SideBarSegments/tabs" modified="20200810062703422" title="$:/tags/SideBarSegment">
 <pre></pre>
 </div>
-<div created="20200810061035521" modified="20200819014813633" title="$:/temp/advancedsearch">
+<div created="20200810061035521" modified="20200819023732288" title="$:/temp/advancedsearch">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -14866,8 +14870,8 @@ $(currentTiddler)$/2
 <div created="20200810061032673" modified="20200810061233198" title="$:/temp/search">
 <pre></pre>
 </div>
-<div created="20200811081117367" modified="20200819014804009" title="$:/temp/tobibeer/preview-1-tiddler">
-<pre>Backlinking and references</pre>
+<div created="20200811081117367" modified="20200819023642715" title="$:/temp/tobibeer/preview-1-tiddler">
+<pre>notetest/20200819023623474</pre>
 </div>
 <div created="20200812010458884" modified="20200818034907211" title="$:/temp/tobibeer/preview-2-tiddler">
 <pre>#Keyboard Shortcuts</pre>
