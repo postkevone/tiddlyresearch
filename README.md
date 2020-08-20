@@ -14,9 +14,7 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 ## Known Issues
 
-* Stories is not compatible with the mobile view of Mono Theme
-
-* Anki cards don't support images (you can still use them in TiddlyResearch but you won't be able to see them in Anki) [issue#13](https://github.com/sobjornstad/TiddlyRemember/issues/13)
+* Anki cards only support plain text (you can still use images and other media or formatting in TiddlyResearch but you won't be able to see them in Anki) [issue#13](https://github.com/sobjornstad/TiddlyRemember/issues/13)
 
 ## Credits
 
