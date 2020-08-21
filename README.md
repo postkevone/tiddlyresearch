@@ -14,7 +14,7 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 ## Known Issues
 
-* Anki cards only support plain text (you can still use images and other media or formatting in TiddlyResearch but you won't be able to see them in Anki) [issue#13](https://github.com/sobjornstad/TiddlyRemember/issues/13)
+* Anki cards only support plain text [Support syncing some subset of formatting to Anki #3](https://github.com/sobjornstad/TiddlyRemember/issues/3)
 
 ## Credits
 
