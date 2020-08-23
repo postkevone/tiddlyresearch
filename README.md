@@ -14,9 +14,9 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 * Preview popup with editor capabilities
 
-* Multiple notes can be viewed or edited at once thanks to the double-sided view
+* Double-sided view (multiple notes can be viewed or edited at once)
 
-* Mobile support
+* Full mobile support
 
 ## Known Issues
 
