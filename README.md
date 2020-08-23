@@ -4,7 +4,7 @@ Tiddly Research is a free, simple and local note-taking environment based on Tid
 
 Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
-## Core features
+## Core Features
 
 * Bidirectional note linking on multiple levels (tags, linked and unlinked references)
 
@@ -12,7 +12,7 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 * Integration with the spaced repetition flashcards tool [Anki](https://apps.ankiweb.net/)
 
-## Other features
+## Other Features
 
 * Preview popup with editor capabilities
 
