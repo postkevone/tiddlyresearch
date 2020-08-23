@@ -12,6 +12,12 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 * Integration with the spaced repetition flashcards tool [Anki](https://apps.ankiweb.net/)
 
+* Preview popup with editor capabilities
+
+* Multiple notes can be viewed or edited at once thanks to the double-sided view
+
+* Mobile support
+
 ## Known Issues
 
 * Anki cards only support plain text ([issue#3](https://github.com/sobjornstad/TiddlyRemember/issues/3))
