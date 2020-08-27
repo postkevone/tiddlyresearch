@@ -16,18 +16,12 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 * Preview popup with editor capabilities
 
-* Double-sided view (multiple notes can be viewed or edited at once)
-
 * Full mobile support
-
-## Known Issues
-
-* Anki cards only support plain text ([issue#3](https://github.com/sobjornstad/TiddlyRemember/issues/3))
 
 ## Credits
 
 ### Plugins
-[Streams](https://saqimtiaz.github.io/sq-tw/streams.html), [TiddlyRemember](https://sobjornstad.github.io/TiddlyRemember/), [Drift](https://akhater.github.io/drift/), [tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins), [linonetwo](https://borber.cn/wiki/#:%5B%5BHello%20World%5D%5D), [Stroll](https://giffmex.org/stroll/stroll.html)
+[Streams](https://saqimtiaz.github.io/sq-tw/streams.html), [TiddlyRemember](https://sobjornstad.github.io/TiddlyRemember/), [Drift](https://akhater.github.io/drift/), [tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins), [linonetwo](https://borber.cn/wiki/#:%5B%5BHello%20World%5D%5D)
 
 ### Themes
-[Mono Theme](http://j.d.mono.tiddlyspot.com/)
+[notebook](https://nicolas.petton.fr/tw/project-manager.html)
