@@ -12,6 +12,8 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 * Integration with the spaced repetition flashcards tool [Anki](https://apps.ankiweb.net/)
 
+* Projects and TODO lists
+
 * Tiddler preview popup with editor capabilities
 
 * Full mobile support
