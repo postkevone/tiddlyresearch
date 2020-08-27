@@ -12,9 +12,7 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch).
 
 * Integration with the spaced repetition flashcards tool [Anki](https://apps.ankiweb.net/)
 
-## Other Features
-
-* Preview popup with editor capabilities
+* Tiddler preview popup with editor capabilities
 
 * Full mobile support
 
