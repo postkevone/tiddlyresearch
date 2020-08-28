@@ -16,8 +16,6 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
 * Tiddler preview popup with editor capabilities
 
-* Full mobile support
-
 ## Credits
 
 ### Plugins
