@@ -1,6 +1,6 @@
 # [Tiddly Research](https://kebifurai.github.io/TiddlyResearch)
 
-Tiddly Research is a free, simple and local note-taking environment based on TiddlyWiki.
+Tiddly Research is a free and local note-taking environment based on TiddlyWiki.
 
 Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
