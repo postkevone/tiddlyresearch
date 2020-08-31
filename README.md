@@ -19,7 +19,7 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 ## Credits
 
 ### Plugins
-[Streams](https://saqimtiaz.github.io/sq-tw/streams.html), [TiddlyRemember](https://sobjornstad.github.io/TiddlyRemember/), [Drift](https://akhater.github.io/drift/), [tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins), [linonetwo](https://borber.cn/wiki/#:%5B%5BHello%20World%5D%5D), [danielo515](http://contextplugin.tiddlyspot.com)
+[Streams](https://saqimtiaz.github.io/sq-tw/streams.html), [TiddlyRemember](https://sobjornstad.github.io/TiddlyRemember/), [Drift](https://akhater.github.io/drift/), [tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins), [linonetwo](https://onetwo.ren/wiki/#:Index), [danielo515](http://contextplugin.tiddlyspot.com)
 
 ### Themes
 [notebook](https://nicolas.petton.fr/tw/project-manager.html)
