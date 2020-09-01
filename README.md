@@ -18,8 +18,4 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
 ## Credits
 
-### Plugins
-[Streams](https://saqimtiaz.github.io/sq-tw/streams.html), [TiddlyRemember](https://sobjornstad.github.io/TiddlyRemember/), [Drift](https://akhater.github.io/drift/), [tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins), [linonetwo](https://onetwo.ren/wiki/#:Index), [danielo515](http://contextplugin.tiddlyspot.com)
-
-### Themes
-[notebook](https://nicolas.petton.fr/tw/project-manager.html)
+[saqimtiaz](https://saqimtiaz.github.io/sq-tw/streams.html), [sobjornstad](https://sobjornstad.github.io/TiddlyRemember/), [akhater](https://akhater.github.io/drift/), [tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins), [linonetwo](https://onetwo.ren/wiki/#:Index), [Nicolas Petton](https://nicolas.petton.fr/tw/project-manager.html) [danielo515](http://contextplugin.tiddlyspot.com)
