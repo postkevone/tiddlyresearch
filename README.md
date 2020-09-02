@@ -16,6 +16,8 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
 * Tiddler preview popup with editor capabilities
 
+* Sexy black theme
+
 ## Credits
 
 [saqimtiaz](https://saqimtiaz.github.io/sq-tw/streams.html), [sobjornstad](https://sobjornstad.github.io/TiddlyRemember/), [akhater](https://akhater.github.io/drift/), [tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins), [linonetwo](https://onetwo.ren/wiki/#:Index), [Nicolas Petton](https://nicolas.petton.fr/tw/project-manager.html), [danielo515](http://contextplugin.tiddlyspot.com)
