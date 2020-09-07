@@ -4,9 +4,6 @@ Tiddly Research is a free and local note-taking environment based on TiddlyWiki.
 
 Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
-## TiddlyWiki Compatibility
-#### 5.1.22
-
 ## Core Features
 
 * Bidirectional note linking on multiple levels (tags, linked and unlinked references)
@@ -17,7 +14,7 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
 * Projects and TODO's
 
-* Tiddler preview popup with editor capabilities
+* Horizontal view and popup previews
 
 * Sexy black theme
 
@@ -25,8 +22,10 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
 TiddlyResearch DOES modify some core files of TiddlyWiki.
 
-Please do not update the TiddlyWiki's core until a compatible version of TiddlyResearch gets released.
+Do not update the TiddlyWiki's core until a compatible version of TiddlyResearch gets released.
+
+##### TiddlyWiki Compatibility: 5.1.22
 
 ## Credits
 
-[saqimtiaz](https://saqimtiaz.github.io/sq-tw/streams.html), [sobjornstad](https://sobjornstad.github.io/TiddlyRemember/), [akhater](https://akhater.github.io/drift/), [tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins), [linonetwo](https://onetwo.ren/wiki/#:Index), [Nicolas Petton](https://nicolas.petton.fr/tw/project-manager.html), [danielo515](http://contextplugin.tiddlyspot.com).
+[saqimtiaz](https://saqimtiaz.github.io/sq-tw/streams.html)/[sobjornstad](https://sobjornstad.github.io/TiddlyRemember/)/[akhater](https://akhater.github.io/drift/)/[crazko](https://github.com/crazko/krystal)/[tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins)/[linonetwo](https://onetwo.ren/wiki/#:Index)/[Nicolas Petton](https://nicolas.petton.fr/tw/project-manager.html)/[danielo515](http://contextplugin.tiddlyspot.com)
