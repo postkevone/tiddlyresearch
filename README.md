@@ -24,9 +24,9 @@ TiddlyResearch simulates some of the key features of Roam Research and RemNote, 
 
 Its main goal was to create a way to keep your Anki cards/notes always organized and accessible, that's why I think the current state of TiddlyResearch will fit most people with the same needs as mine.
 
-also
+##### also
 
-TiddlyResearch DOES modify some core files of TiddlyWiki.
+TiddlyResearch DOES modify some core javascript tiddlers of TiddlyWiki.
 
 Do not update TiddlyWiki's core until a compatible version of TiddlyResearch gets released.
 
