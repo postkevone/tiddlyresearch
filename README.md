@@ -1,6 +1,6 @@
-# [Tiddly Research](https://kebifurai.github.io/TiddlyResearch)
+# [TiddlyResearch](https://kebifurai.github.io/TiddlyResearch)
 
-Tiddly Research is a free and local note-taking environment based on TiddlyWiki.
+TiddlyResearch is a free and local note-taking environment based on TiddlyWiki.
 
 Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
@@ -20,9 +20,14 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
 ## Disclaimer
 
+TiddlyResearch simulates some of the key features of Roam Research and RemNote, but its main goal is not to create another copy of those two great webapps.
+Its main goal is to have a way to keep your Anki cards/notes always organized and accessible, that's why I think the current state of TiddlyResearch will fit most people with the same needs as mine.
+
+also
+
 TiddlyResearch DOES modify some core files of TiddlyWiki.
 
-Do not update the TiddlyWiki's core until a compatible version of TiddlyResearch gets released.
+Do not update TiddlyWiki's core until a compatible version of TiddlyResearch gets released.
 
 ##### TiddlyWiki Compatibility: 5.1.22
 
