@@ -20,8 +20,9 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
 ## Disclaimer
 
-TiddlyResearch simulates some of the key features of Roam Research and RemNote, but its main goal is not to create another copy of those two great webapps.
-Its main goal is to have a way to keep your Anki cards/notes always organized and accessible, that's why I think the current state of TiddlyResearch will fit most people with the same needs as mine.
+TiddlyResearch simulates some of the key features of Roam Research and RemNote, but its main goal was not to create another copy of those two great webapps.
+
+Its main goal was to create a way to keep your Anki cards/notes always organized and accessible, that's why I think the current state of TiddlyResearch will fit most people with the same needs as mine.
 
 also
 
