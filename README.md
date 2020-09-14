@@ -1,12 +1,12 @@
-# [TiddlyResearch](https://kebifurai.github.io/TiddlyResearch)
+# Tiddly Research
 
-TiddlyResearch is a free and local note-taking environment based on TiddlyWiki.
+Tiddly Research is a free and local note-taking environment based on [TiddlyWiki](https://tiddlywiki.com/)
 
 Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
 ## Core Features
 
-* Bidirectional note linking on multiple levels (tags, linked and unlinked references)
+* Bidirectional note linking on multiple levels
 
 * Bullet point based hierarchical note taking structure
 
@@ -14,15 +14,19 @@ Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
 
 * Projects and TODO's
 
-* Horizontal view and popup previews
+## Design Goodies
 
-* Sexy black theme
+* Popup previews
+
+* Horizontal view
+
+* MacOS inspired black theme
 
 ## Disclaimer
 
-TiddlyResearch simulates some of the key features of Roam Research and RemNote, but its main purpose is not to be a complete copy of those two great apps.
+Tiddly Research simulates some of the key features of [Roam Research](https://roamresearch.com/) and [RemNote](https://www.remnote.io/), but its main purpose is not to be a copy of those two great apps.
 
-TiddlyResearch should be used to keep your Anki cards/notes always organized and accessible, that is why I think the current state of TiddlyResearch will fit most people with the same needs as mine.
+Tiddly Research should be used to keep your Anki cards/notes always organized and accessible, that is why I think the current state of TiddlyResearch will fit most people with the same needs as mine.
 
 **also**
 
