@@ -30,9 +30,9 @@ Tiddly Research should be used to keep your Anki cards/notes always organized an
 
 **also**
 
-TiddlyResearch DOES modify some core javascript tiddlers of TiddlyWiki.
+Tiddly Research DOES modify some core javascript tiddlers of TiddlyWiki.
 
-Do not update TiddlyWiki's core until a compatible version of TiddlyResearch gets released.
+Do not update TiddlyWiki's core until a compatible version of Tiddly Research gets released.
 
 **TiddlyWiki Compatibility: 5.1.22**
 
