@@ -1,0 +1,74 @@
+{
+    "description": "essential tiddlers",
+    "plugin-type": "plugin",
+    "title": "$:/plugins/kebi/tiddlyresearch",
+    "type": "application/json",
+    "version": "1.0.2",
+    "tiddlers": {
+        "$:/config/flibbles/relink/macros/rememberq/text": {
+            "created": "20200905042527106",
+            "text": "wikitext",
+            "title": "$:/config/flibbles/relink/macros/rememberq/text",
+            "modified": "20200905052646704"
+        },
+        "$:/config/flibbles/relink/macros/remembercz/text": {
+            "created": "20200905042540938",
+            "text": "wikitext",
+            "title": "$:/config/flibbles/relink/macros/remembercz/text",
+            "modified": "20200905052651823"
+        },
+        "@ibox": {
+            "created": "20141211130114064",
+            "creator": "Tobias Beer",
+            "text": "<$image source=<<image>> width=\"100%\" height=\"100%\"/><$reveal type=match text=\"\" default=<<caption>>><$transclude tiddler=<<image>> field=caption/></$reveal><$reveal type=nomatch text=\"\" default=caption><<caption>></$reveal>",
+            "title": "@ibox",
+            "tags": "",
+            "summary": "the default modal template used with the ibox macro",
+            "modifier": "Tobias Beer",
+            "modified": "20200906094241110",
+            "name": ""
+        },
+        "$:/.tb/macros/ibox": {
+            "created": "20141211131633372",
+            "text": "\\define ibox(image, caption, template:\"@ibox\", btn-class:\"ibox-btn\", direct)\n<$reveal type=match text=\"\" default=\"$direct$\"><$button class=\"$btn-class$\"><$action-sendmessage $message=\"tm-modal\" $param=\"$template$\" image=\"$image$\" caption=\"$caption$\"/><$image source=\"$image$\"/></$button></$reveal><$reveal type=nomatch text=\"\" default=\"$direct$\"><$button class=\"$btn-class$\"><$action-sendmessage $message=\"tm-modal\" $param=\"$image$\"/><$image source=\"$image$\"/></$button></$reveal><style>\n.ibox-btn{\npadding:0;\n}\n\n.ibox-btn img{\nwidth:150px;\n}\n\n.tc-modal .tc-modal-body > div > img{\n width:100%;\n}\n</style>\n\\end",
+            "title": "$:/.tb/macros/ibox",
+            "tags": "$:/tags/Macro",
+            "modifier": "Tobias Beer",
+            "modified": "20200906094443544",
+            "creator": "Tobias Beer"
+        },
+        "$:/config/flibbles/relink/macros/remembercz/reference": {
+            "created": "20200907091508430",
+            "text": "title",
+            "title": "$:/config/flibbles/relink/macros/remembercz/reference",
+            "modified": "20200907091513296"
+        },
+        "$:/config/flibbles/relink/macros/rememberq/reference": {
+            "created": "20200907091605193",
+            "text": "title",
+            "title": "$:/config/flibbles/relink/macros/rememberq/reference",
+            "modified": "20200907091612588",
+            "tags": ""
+        },
+        "embed": {
+            "text": "<div style=\"border-radius: 7.5px; padding: 1em 1.5em; background-color: #444444 !important\">\n<$link>{{!!title}}</$link>\n{{||$:/core/ui/ViewTemplate/tags}}\n{{!!text}}\n{{||$:/plugins/sq/streams/stream-view-template}}\n</div>",
+            "title": "embed",
+            "modified": "20200913054301099",
+            "created": "20200912232336043"
+        },
+        "$:/config/flibbles/relink/macros/rememberp/text": {
+            "created": "20200930123337877",
+            "text": "wikitext",
+            "title": "$:/config/flibbles/relink/macros/rememberp/text",
+            "modified": "20200930123345520",
+            "tags": ""
+        },
+        "$:/config/flibbles/relink/macros/rememberp/reference": {
+            "created": "20200930123319494",
+            "text": "title",
+            "title": "$:/config/flibbles/relink/macros/rememberp/reference",
+            "modified": "20200930123331058",
+            "tags": ""
+        }
+    }
+}

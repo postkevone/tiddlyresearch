@@ -1,0 +1,245 @@
+{
+    "author": "Soren Bjornstad",
+    "core-version": ">=5.1.21",
+    "description": "(tiddlyresearch fork) TiddlyRemember: Embed Anki notes in your TiddlyWiki",
+    "list": "readme license",
+    "plugin-type": "plugin",
+    "source": "https://github.com/sobjornstad/TiddlyRemember",
+    "title": "$:/plugins/sobjornstad/TiddlyRemember",
+    "type": "application/json",
+    "version": "1.2.0",
+    "tiddlers": {
+        "$:/config/TiddlyRemember/DeckMapping": {
+            "title": "$:/config/TiddlyRemember/DeckMapping",
+            "created": "20200516223625569",
+            "modified": "20200516223658777",
+            "tags": "",
+            "text": ""
+        },
+        "$:/config/TiddlyRemember/IdPrefix": {
+            "title": "$:/config/TiddlyRemember/IdPrefix",
+            "created": "20200516223625569",
+            "modified": "20200516223658777",
+            "tags": "",
+            "text": ""
+        },
+        "$:/config/TiddlyRemember/TagMapping": {
+            "title": "$:/config/TiddlyRemember/TagMapping",
+            "created": "20200516190911842",
+            "modified": "20200516223231730",
+            "tags": "",
+            "text": ""
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/icons/lightbulb-black.svg": {
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/icons/lightbulb-black.svg",
+            "created": "20200517161140014",
+            "modified": "20200517161732249",
+            "type": "image/svg+xml",
+            "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<svg width=\"18px\" height=\"18px\" viewBox=\"0 0 1792 1792\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M1120 576q0 13-9.5 22.5t-22.5 9.5-22.5-9.5-9.5-22.5q0-46-54-71t-106-25q-13 0-22.5-9.5t-9.5-22.5 9.5-22.5 22.5-9.5q50 0 99.5 16t87 54 37.5 90zm160 0q0-72-34.5-134t-90-101.5-123-62-136.5-22.5-136.5 22.5-123 62-90 101.5-34.5 134q0 101 68 180 10 11 30.5 33t30.5 33q128 153 141 298h228q13-145 141-298 10-11 30.5-33t30.5-33q68-79 68-180zm128 0q0 155-103 268-45 49-74.5 87t-59.5 95.5-34 107.5q47 28 47 82 0 37-25 64 25 27 25 64 0 52-45 81 13 23 13 47 0 46-31.5 71t-77.5 25q-20 44-60 70t-87 26-87-26-60-70q-46 0-77.5-25t-31.5-71q0-24 13-47-45-29-45-81 0-37 25-64-25-27-25-64 0-54 47-82-4-50-34-107.5t-59.5-95.5-74.5-87q-103-113-103-268 0-99 44.5-184.5t117-142 164-89 186.5-32.5 186.5 32.5 164 89 117 142 44.5 184.5z\"/></svg>\n<!-- Source: FontAwesome -->"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/icons/lightbulb-white.svg": {
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/icons/lightbulb-white.svg",
+            "created": "20200517161252694",
+            "modified": "20200517161645377",
+            "type": "image/svg+xml",
+            "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<svg width=\"18px\" height=\"18px\" viewBox=\"0 0 1792 1792\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M1120 576q0 13-9.5 22.5t-22.5 9.5-22.5-9.5-9.5-22.5q0-46-54-71t-106-25q-13 0-22.5-9.5t-9.5-22.5 9.5-22.5 22.5-9.5q50 0 99.5 16t87 54 37.5 90zm160 0q0-72-34.5-134t-90-101.5-123-62-136.5-22.5-136.5 22.5-123 62-90 101.5-34.5 134q0 101 68 180 10 11 30.5 33t30.5 33q128 153 141 298h228q13-145 141-298 10-11 30.5-33t30.5-33q68-79 68-180zm128 0q0 155-103 268-45 49-74.5 87t-59.5 95.5-34 107.5q47 28 47 82 0 37-25 64 25 27 25 64 0 52-45 81 13 23 13 47 0 46-31.5 71t-77.5 25q-20 44-60 70t-87 26-87-26-60-70q-46 0-77.5-25t-31.5-71q0-24 13-47-45-29-45-81 0-37 25-64-25-27-25-64 0-54 47-82-4-50-34-107.5t-59.5-95.5-74.5-87q-103-113-103-268 0-99 44.5-184.5t117-142 164-89 186.5-32.5 186.5 32.5 164 89 117 142 44.5 184.5z\" fill=\"#fff\"/></svg>\n<!-- Source: FontAwesome -->"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/license": {
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/license",
+            "type": "text/plain",
+            "text": "The MIT License (MIT)\n\nCopyright (c) 2020 Soren Bjornstad.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/macros/remember": {
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/macros/remember",
+            "created": "20200510004110231",
+            "modified": "20200730205800000",
+            "tags": "$:/tags/Macro",
+            "type": "text/vnd.tiddlywiki",
+            "text": "\\define remembertwo(id, reference)\n\t<div class=\"tr-selfidentification\">\n\t\t<$set name=\"selfid\" filter=\"\"\"[enlist[$reference$]]\"\"\" value=\"\"\"[<$link to=\"$reference$\">$reference$</$link>: $id$]\"\"\" emptyValue=\"[$id$]\">\n\t\t\t<<selfid>>\n\t\t</$set>\n\t</div>\n\t<div class=\"rid\">\n\t\t[$id$]\n\t</div>\n\t<div class=\"tr-reference\">\n\t\t<$text text=<<__reference__>>/>\n\t</div>\n\\end\n\n\\define rememberq(id, question, answer, reference: \"\")\n    <div class=\"rememberq remembertwo\">\n        <div class=\"rquestion tr-ritem\">\n            <div>Q:</div>\n            <p>$question$</p>\n        </div>\n        <div class=\"ranswer tr-ritem\">\n            <div>A:</div>\n            <p>$answer$</p>\n        </div>\n\t\t<$macrocall $name=remembertwo id=<<__id__>> reference=<<__reference__>>/>\n    </div>\n\\end\n\n\\define rememberp(id, first, second, reference: \"\")\n    <div class=\"rememberp remembertwo\">\n        <div class=\"rfirst tr-ritem\">\n            <div>1:</div>\n            <p>$first$</p>\n        </div>\n        <div class=\"rsecond tr-ritem\">\n            <div>2:</div>\n            <p>$second$</p>\n        </div>\n\t\t<$macrocall $name=remembertwo id=<<__id__>> reference=<<__reference__>>/>\n    </div>\n\\end\n\n\\define remembercz(id, text, mode: \"block\", reference: \"\")\n\t<$list filter=\"[[$mode$]match[inline]]\">\n\t\t<$macrocall $name=twRememberClozeInline id=<<__id__>> text=<<__text__>> reference=<<__reference__>>/>\n\t</$list>\n\t<$list filter=\"[[$mode$]!match[inline]]\">\n\t\t<$macrocall $name=twRememberClozeBlock id=<<__id__>> text=<<__text__>> reference=<<__reference__>>/>\n\t</$list>\n\\end\n\n\\define twRememberClozeBlock(id, text, reference)\n\t<div class=\"remembercz\">\n\t\t<span class=\"cloze-identifier\">cloze: </span>\n\t\t<span class=\"cloze-text\">$text$</span>\n\t\t<div class=\"tr-selfidentification\">\n\t\t\t<$set name=\"selfid\" filter=\"\"\"[enlist[$reference$]]\"\"\" value=\"\"\"[<$link to=\"$reference$\">$reference$</$link>: $id$]\"\"\" emptyValue=\"[$id$]\">\n\t\t\t\t<<selfid>>\n\t\t\t</$set>\n\t\t</div>\n\t\t<div class=\"rid\">\n\t\t\t[$id$]\n\t\t</div>\n\t\t<div class=\"tr-reference\">\n\t\t\t<$text text=<<__reference__>>/>\n\t\t</div>\n\t</div>\n\\end\n\n\\define twRememberClozeInline(id, text, reference)\n\t<span class=\"remembercz\">\n\t\t<span class=\"cloze-identifier\">{cloze: </span>\n\t\t<span class=\"cloze-text\">$text$</span>\n\t\t<span class=\"cloze-identifier\">}</span>\n\t\t<div class=\"tr-selfidentification\">\n\t\t\t<$set name=\"selfid\" filter=\"\"\"[enlist[$reference$]]\"\"\" value=\"\"\"[<$link to=\"$reference$\">$reference$</$link>: $id$]\"\"\" emptyValue=\"[$id$]\">\n\t\t\t\t<<selfid>>\n\t\t\t</$set>\n\t\t</div>\n\t\t<div class=\"rid\">\n\t\t\t[$id$]\n\t\t</div>\n\t\t<div class=\"tr-reference\">\n\t\t\t<$text text=<<__reference__>>/>\n\t\t</div>\n\t</span>\n\\end"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/readme": {
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/readme",
+            "type": "text/vnd.tiddlywiki",
+            "text": "TiddlyRemember is a tool that integrates TiddlyWiki with Anki.\nYou can interleave questions with your notes in TiddlyWiki,\n    then sync them into Anki notes with one click.\nYou can edit and move the questions around your TiddlyWiki,\n    and they will stay connected to the Anki notes.\nScheduling information in Anki is preserved when editing notes in TiddlyWiki.\n\n* [[Documentation|https://sobjornstad.github.io/TiddlyRemember/]]\n* [[GitHub|https://github.com/sobjornstad/TiddlyRemember]]\n"
+        },
+        "$:/config/ShortcutInfo/remembercz": {
+            "title": "$:/config/ShortcutInfo/remembercz",
+            "created": "20200926193600000",
+            "modified": "20200926193600000",
+            "tags": "",
+            "type": "text/vnd.tiddlywiki",
+            "text": "Create a new `remembercz` macro snippet"
+        },
+        "$:/config/ShortcutInfo/rememberq": {
+            "title": "$:/config/ShortcutInfo/rememberq",
+            "created": "20200926193600000",
+            "modified": "20200926193600000",
+            "tags": "",
+            "type": "text/vnd.tiddlywiki",
+            "text": "Create a new `rememberq` macro snippet"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/stylesheets/remember": {
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/stylesheets/remember",
+            "text": "div.remembertwo {\n\tborder-left: 3px solid <<colour tag-background>>;\n\tpadding-left: 0.5em;\n\tmargin-bottom: 22px; /* line-height of the selfidentification block */\n}\n\ndiv.remembertwo .tr-ritem p {\n\tmargin-top: 0px;\n\tmargin-bottom: 0px;\n\tmargin-left: 2em;\n}\n\ndiv.remembertwo .tr-ritem div {\n\tfont-weight: bold;\n\tcolor: <<colour primary>>;\n\tfloat: left;\n}\n\ndiv.remembertwo div.tr-selfidentification {\n\tfloat: right;\n\tcolor: <<colour muted-foreground>>;\n}\n\ndiv.remembercz {\n\tborder-left: 3px solid <<colour tag-background>>;\n\tpadding-left: 0.5em;\n\tline-height: 22px; /* default; setting explicitly */\n}\n\n.remembercz > span.cloze-identifier {\n\tcolor: <<colour tag-background>>;\n}\n\n.remembercz div.tr-selfidentification {\n\tfloat: right;\n\tmargin-left: 0.5em;\n\tcolor: <<colour muted-foreground>>;\n}\n\n/* the separate reference and ID fields are only for TR's benefit */\ndiv.remembertwo div.tr-reference, .remembercz div.tr-reference {\n\tdisplay: none;\n}\n\ndiv.remembertwo div.rid, .remembercz div.rid {\n\tdisplay: none;\n}",
+            "created": "20200510004425508",
+            "modified": "20200517155210548",
+            "tags": "$:/tags/Stylesheet",
+            "type": "text/vnd.tiddlywiki"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/templates/AnkiDecks": {
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/templates/AnkiDecks",
+            "created": "20200516223716380",
+            "modified": "20200516232507031",
+            "revision": "7",
+            "tags": "",
+            "type": "text/vnd.tiddlywiki",
+            "text": "<ul id=\"anki-decks\">\n\t<$list\n\t\t\tfilter=\"[[$:/config/TiddlyRemember/DeckMapping]get[text]splitregexp[\\n]!is[blank]]\"\n\t\t\tvariable=\"subfilter\">\n\t\t<$list filter=\"[<currentTiddler>subfilter<subfilter>]\">\n\t\t\t<li><<currentTiddler>></li>\n\t\t</$list>\n\t</$list>\n</ul>"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/templates/AnkiTags": {
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/templates/AnkiTags",
+            "created": "20200516191131056",
+            "modified": "20200516232427612",
+            "revision": "174",
+            "tags": "",
+            "type": "text/vnd.tiddlywiki",
+            "text": "<ul id=\"anki-tags\">\n\t<$list\n\t\t\tfilter=\"[[$:/config/TiddlyRemember/TagMapping]get[text]splitregexp[\\n]!is[blank]]\"\n\t\t\tvariable=\"subfilter\">\n\t\t<$list filter=\"[<currentTiddler>subfilter<subfilter>]\">\n\t\t\t<li><<currentTiddler>></li>\n\t\t</$list>\n\t</$list>\n</ul>"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/templates/TiddlyRememberParseable": {
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/templates/TiddlyRememberParseable",
+            "created": "20200510211830000",
+            "modified": "20200516223853339",
+            "tags": "",
+            "type": "text/vnd.tiddlywiki",
+            "text": "\\import [[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]\n\n{{||$:/plugins/sobjornstad/TiddlyRemember/templates/AnkiDecks}}\n{{||$:/plugins/sobjornstad/TiddlyRemember/templates/AnkiTags}}\n\n<$transclude mode=\"block\" />\n"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/toolbar/remembercz": {
+            "created": "20200517155905263",
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/toolbar/remembercz",
+            "caption": "RememberCz",
+            "condition": "[<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]",
+            "description": "Remember Cloze Deletion",
+            "icon": "$:/plugins/sobjornstad/TiddlyRemember/icons/lightbulb-black.svg",
+            "list-after": "$:/plugins/sobjornstad/TiddlyRemember/toolbar/rememberq",
+            "modified": "20200930121606514",
+            "shortcuts": "((remembercz))",
+            "tags": "$:/tags/EditorToolbar tiddlyresearch",
+            "type": "text/vnd.tiddlywiki",
+            "text": "\\define getMacro()\n<$macrocall $name=\"remembercz\" id=<<currentTiddler>> text=\"\n\n\" reference=\"$(stream-title)$\"/>\n\\end\n\n<$set name=\"stream-title\" value=<<stream-root-title>>>\n\t<$action-sendmessage\n\t\t$message=\"tm-edit-text-operation\"\n\t\t$param=\"replace-selection\"\n\t\ttext=<<getMacro>>\n\t/>\n</$set>\n"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/toolbar/rememberq": {
+            "created": "20161118171456554",
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/toolbar/rememberq",
+            "caption": "RememberQ",
+            "condition": "[<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]",
+            "description": "Remember Question/Answer",
+            "icon": "$:/plugins/sobjornstad/TiddlyRemember/icons/lightbulb-white.svg",
+            "modified": "20200930121601035",
+            "shortcuts": "((rememberq))",
+            "tags": "$:/tags/EditorToolbar tiddlyresearch",
+            "type": "text/vnd.tiddlywiki",
+            "text": "\\define getMacro()\n<$macrocall $name=\"rememberq\" id=<<currentTiddler>> question=\"\n\n\" answer=\"\n\n\" reference=\"$(stream-title)$\"/>\n\\end\n\n<$set name=\"stream-title\" value=<<stream-root-title>>>\n\t<$action-sendmessage\n\t\t$message=\"tm-edit-text-operation\"\n\t\t$param=\"replace-selection\"\n\t\ttext=<<getMacro>>\n\t/>\n</$set>\n"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/toolbar/remembercz-reference": {
+            "created": "20200930121628160",
+            "text": "\\define getMacro()\n<$macrocall $name=\"remembercz\" id=<<currentTiddler>> text=\"\n\n\" reference={{{ [{!!parent}get[text]] }}}/>\n\\end\n\n<$action-sendmessage\n\t$message=\"tm-edit-text-operation\"\n\t$param=\"replace-selection\"\n\ttext=<<getMacro>>\n/>\n",
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/toolbar/remembercz-reference",
+            "caption": "RememberCz-reference",
+            "condition": "[<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]",
+            "description": "Remember Cloze Deletion",
+            "icon": "$:/plugins/sobjornstad/TiddlyRemember/icons/lightbulb-black.svg",
+            "list-after": "$:/plugins/sobjornstad/TiddlyRemember/toolbar/remembercz",
+            "modified": "20201001013628528",
+            "shortcuts": "((remembercz-reference))",
+            "tags": "$:/tags/EditorToolbar tiddlyresearch",
+            "type": "text/vnd.tiddlywiki"
+        },
+        "$:/plugins/sobjornstad/TiddlyRemember/toolbar/rememberq-reference": {
+            "created": "20200930121726020",
+            "text": "\\define getMacro()\n<$macrocall $name=\"rememberq\" id=<<currentTiddler>> question=\"\n\n\" answer=\"\n\n\" reference={{{ [{!!parent}get[text]] }}}/>\n\\end\n\n<$action-sendmessage\n\t$message=\"tm-edit-text-operation\"\n\t$param=\"replace-selection\"\n\ttext=<<getMacro>>\n/>\n",
+            "title": "$:/plugins/sobjornstad/TiddlyRemember/toolbar/rememberq-reference",
+            "caption": "RememberQ-reference",
+            "condition": "[<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]",
+            "description": "Remember Question/Answer",
+            "icon": "$:/plugins/sobjornstad/TiddlyRemember/icons/lightbulb-white.svg",
+            "modified": "20201001013708809",
+            "shortcuts": "((rememberq-reference))",
+            "tags": "$:/tags/EditorToolbar tiddlyresearch",
+            "type": "text/vnd.tiddlywiki",
+            "list-after": "$:/plugins/sobjornstad/TiddlyRemember/toolbar/rememberq"
+        },
+        "$:/config/ShortcutInfo/remembercz-reference": {
+            "created": "20200930121908961",
+            "text": "Create a new `remembercz` macro snippet with parent reference",
+            "title": "$:/config/ShortcutInfo/remembercz-reference",
+            "modified": "20200930121935208",
+            "tags": "tiddlyresearch",
+            "type": "text/vnd.tiddlywiki"
+        },
+        "$:/config/ShortcutInfo/rememberq-reference": {
+            "created": "20200926193600000",
+            "title": "$:/config/ShortcutInfo/rememberq-reference",
+            "modified": "20200930121958799",
+            "tags": "tiddlyresearch",
+            "type": "text/vnd.tiddlywiki",
+            "text": "Create a new `rememberq` macro snippet with parent reference"
+        },
+        "$:/config/shortcuts/remembercz": {
+            "created": "20200926193600000",
+            "title": "$:/config/shortcuts/remembercz",
+            "modified": "20200930122530836",
+            "tags": "tiddlyresearch",
+            "type": "text/vnd.tiddlywiki",
+            "text": "ctrl-shift-Comma"
+        },
+        "$:/config/shortcuts/rememberq": {
+            "created": "20200926193600000",
+            "title": "$:/config/shortcuts/rememberq",
+            "modified": "20200930122524701",
+            "tags": "tiddlyresearch",
+            "type": "text/vnd.tiddlywiki",
+            "text": "ctrl-shift-Period"
+        },
+        "$:/config/shortcuts-mac/rememberq": {
+            "created": "20200930122331510",
+            "title": "$:/config/shortcuts-mac/rememberq",
+            "text": "shift-cmd-Period",
+            "modified": "20200930122812743",
+            "tags": "tiddlyresearch"
+        },
+        "$:/config/shortcuts-mac/remembercz": {
+            "created": "20200930122301839",
+            "title": "$:/config/shortcuts-mac/remembercz",
+            "text": "shift-cmd-Comma",
+            "modified": "20200930122820299",
+            "tags": "tiddlyresearch"
+        },
+        "$:/config/shortcuts-mac/remembercz-reference": {
+            "created": "20200930122348693",
+            "title": "$:/config/shortcuts-mac/remembercz-reference",
+            "text": "alt-cmd-Comma",
+            "modified": "20200930122827040",
+            "tags": "tiddlyresearch"
+        },
+        "$:/config/shortcuts/remembercz-reference": {
+            "created": "20200930122341193",
+            "title": "$:/config/shortcuts/remembercz-reference",
+            "text": "ctrl-alt-Comma",
+            "modified": "20200930122834417",
+            "tags": "tiddlyresearch"
+        },
+        "$:/config/shortcuts/rememberq-reference": {
+            "created": "20200930122432806",
+            "title": "$:/config/shortcuts/rememberq-reference",
+            "text": "ctrl-alt-Period",
+            "modified": "20200930122840013",
+            "tags": "tiddlyresearch"
+        },
+        "$:/config/shortcuts-mac/rememberq-reference": {
+            "created": "20200930122438296",
+            "title": "$:/config/shortcuts-mac/rememberq-reference",
+            "text": "alt-cmd-Period",
+            "modified": "20200930122847159",
+            "tags": "tiddlyresearch"
+        }
+    }
+}

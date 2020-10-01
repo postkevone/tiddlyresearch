@@ -1,0 +1,525 @@
+{
+    "author": "Saq Imtiaz",
+    "core-version": ">=5.1.22",
+    "description": "(tiddlyresearch fork) Streams - a different way to write",
+    "plugin-type": "plugin",
+    "title": "$:/plugins/sq/streams",
+    "type": "application/json",
+    "version": "0.1.15",
+    "tiddlers": {
+        "$:/plugins/sq/streams/action-macros": {
+            "created": "20200930113111326",
+            "title": "$:/plugins/sq/streams/action-macros",
+            "text": "\\whitespace trim\n\n\\define save-edit-node-actions()\n<!-- handle saving a node being edited -->\n<!-- XXX draft -->\n<$action-deletetiddler $tiddler=<<row-edit-state>> />\n\\end\n\n\\define indent-node-actions()\n<!-- handle indenting a node -->\n<$set name=\"old-parent-nodes\" filter=\"[{!!parent}get[stream-list]]\" select=\"0\">\n<$set name=\"previous-node\" filter=\"[enlist<old-parent-nodes>is[tiddler]before<currentTiddler>]\" select=\"0\">\n<$list filter=\"[<previous-node>minlength[1]]\" variable=\"_NULL\">\n\t<$action-listops $tiddler=<<previous-node>> $field=\"stream-list\" $subfilter=\"+[is[tiddler]] [<currentTiddler>]\"/>\n\t<$action-listops $tiddler={{!!parent}} $field=\"stream-list\" $subfilter=\"+[is[tiddler]] -[<currentTiddler>]\"/>\n\t<$action-setfield $tiddler=<<currentTiddler>> parent=<<previous-node>> />\n</$list>\n</$set>\n</$set>\n\\end\n\n\n\\define unindent-node-actions()\n<!-- handle unindenting a node -->\n<$set name=\"new-parent\" filter=\"[{!!parent}get[parent]]\" select=\"0\">\n<$set name=\"new-parent-nodes\" filter=\"[<new-parent>get[stream-list]]\" select=\"0\">\n<$set name=\"new-next-node\" filter=\"[enlist<new-parent-nodes>is[tiddler]after{!!parent}]\" select=\"0\">\n<$list filter=\"[<new-parent>minlength[1]]\" variable=\"_NULL\">\n\t<$action-listops $tiddler=<<new-parent>> $field=\"stream-list\" $subfilter=\"+[is[tiddler]] +[insertbefore:new-next-node<currentTiddler>]\"/>\n\t<$action-listops $tiddler={{!!parent}} $field=\"stream-list\" $subfilter=\"+[is[tiddler]] -[<currentTiddler>]\"/>\n\t<$action-setfield $tiddler=<<currentTiddler>> parent=<<new-parent>> />\n</$list>\n</$set>\n</$set>\n</$set>\n\\end\n\n\n\\define demote-node-actions()\n<$set name=\"parent-nodes\" filter=\"[{!!parent}get[stream-list]]\" select=\"0\">\n\t<$list filter=\"[enlist<parent-nodes>after<currentTiddler>]\" variable=\"next-node\">\n\t\t<$action-listops $tiddler={{!!parent}} $field=\"stream-list\" $subfilter=\"+[insertbefore:currentTiddler<next-node>]\"/>\n\t</$list>\n</$set>\n\\end\n\n\n\\define promote-node-actions()\n<$set name=\"parent-nodes\" filter=\"[{!!parent}get[stream-list]]\" select=\"0\">\n\t<$list filter=\"[enlist<parent-nodes>before<currentTiddler>]\" variable=\"previous-node\">\n\t\t<$action-listops $tiddler={{!!parent}} $field=\"stream-list\" $subfilter=\"+[insertbefore:previous-node<currentTiddler>]\"/>\n\t</$list>\n</$set>\n\\end\n\n\n\\define save-node-actions()\n<$list filter=\"\"\"[{$:/config/sq/streams/split-at-caret}match[yes]]\"\"\" variable=\"_NULL\" emptyMessage=<<add-node-actions>> >\n<$list filter=\"[<selectionEnd>!is[blank]else[0]!match[0]]\" variable=\"_NULL\">\n<$list filter=\"[<currentTiddler>get[text]length[]subtract<selectionEnd>!match[0]]\" variable=\"_NULL\" emptyMessage=<<add-node-actions>>>\n\t<$macrocall $name=\"add-node-actions\" startText={{{[<currentTiddler>get[text]split[]rest<selectionEnd>join[]trim[]]}}} streamList={{!!stream-list}} /><!--insertPosition=\"title\"-->\n\t<$action-setfield $tiddler=\"$:/state/sq/streams/caret-position\" text=\"0\"/>\n\t<$action-setfield $tiddler=<<currentTiddler>> text={{{[<currentTiddler>get[text]split[]first<selectionEnd>join[]]}}} stream-list=\"\"/>\n</$list>\n</$list>\n<$list filter=\"[<selectionEnd>!is[blank]else[0]match[0]]\" variable=\"_NULL\">\n\t<$list filter=\"[<currentTiddler>!has[text]]\" variable=\"_NULL\" emptyMessage=<<add-node-actions \"\" \"title\">> >\n\t\t<$list filter=\"\"\"[{$:/config/sq/streams/exit-on-saving-empty-node}match[yes]]\"\"\" variable=\"_NULL\" emptyMessage=<<add-node-actions>> >\n\t\t\t<<cancel-edit-node-actions>>\n\t\t</$list>\n\t</$list>\n</$list>\n</$list>\n\\end\n\n\n\\define add-node-actions(startText:\"\",insertPosition:\"after\",streamList:\"\")\n<!-- handle saving a node edit and creating a new subsequent node -->\n<$set name=\"parent\" filter=\"[<currentTiddler>match<stream-root-title>] ~[{!!parent}] +[first[]]\" select=\"0\">\n<$wikify name=\"new-node\" text={{$:/config/sq/streams/new-node-title}}>\n\t<$action-createtiddler $basetitle=<<new-node>> text=<<__startText__>> $template={{$:/config/sq/streams/new-node-tiddler-template}} parent=<<parent>> stream-type=\"default\" stream-list=<<__streamList__>>/>\n\t<$set name=\"parent-nodes\" filter=\"[<parent>get[stream-list]]\" select=\"0\">\n\t<$set name=\"next-node\" filter=\"[enlist<parent-nodes>is[tiddler]$insertPosition$<currentTiddler>]\" select=\"0\">\n\t<$action-listops $tiddler=<<parent>> $field=\"stream-list\" $subfilter=\"+[is[tiddler]] +[insertbefore:next-node<new-node>]\"/>\n\t<$list filter=\"[<parent>!has[stream-type]]\" variable=\"_NULL\">\n\t\t<$action-setfield $tiddler=<<parent>> stream-type=\"default\"/>\n\t</$list>\n\t</$set>\n\t</$set>\n\t<$action-setfield $tiddler=<<row-edit-state>> text=<<new-node>>/>\n</$wikify>\n</$set>\n\\end\n\n\n\\define save-multiple-actions()\n<!-- handle multiple nodes entered at once -->\n<$action-ifconfirmed $message=\"Split into multiple nodes?\" $prompt={{$:/config/sq/streams/prompt-split-to-multiple}}>\n<$list filter=\"[{!!text}splitregexp{$:/config/sq/streams/node-split-regexp}rest[]]\" variable=\"fragment\">\n\t<$macrocall $name=\"add-node-actions\" startText=<<fragment>> />\n</$list>\n<$action-setfield $tiddler=<<currentTiddler>> text={{{[{!!text}splitregexp{$:/config/sq/streams/node-split-regexp}first[]]}}}/>\n<<add-node-actions>>\n</$action-ifconfirmed>\n\\end\n\n\n\\define cancel-edit-node-actions()\n<!-- handle cancelling the edit on an empty node -->\n<$list filter=\"[<currentTiddler>!has[stream-list]!has[text]]\" variable=\"_NULL\">\n\t<$action-listops $tiddler={{{[{!!parent}]}}} $field=\"stream-list\" $subfilter=\"+[is[tiddler]] -[<currentTiddler>]\"/>\n\t<$action-deletetiddler $tiddler=<<currentTiddler>> />\n</$list>\n<$action-deletetiddler $tiddler=<<row-edit-state>> />\n\\end\n\n\n\\define merge-with-previous-node-actions()\n<!-- handle backspace on an empty node -->\n<$list filter=\"\"\"[<currentTiddler>!has[text]]\"\"\" variable=\"_NULL\">\n\t<<cancel-edit-node-actions>>\n\t<<focus-higher-node-actions>>\n</$list>\n\n<$list filter=\"\"\"[<currentTiddler>has[text]]\"\"\" variable=\"_NULL\">\n<$list filter=\"[<selectionEnd>match[0]]\" variable=\"_NULL\">\n\n<!--<$action-log/>-->\n\t<$set name=\"parent\" value={{!!parent}} select=\"0\">\n\t<$set name=\"stream-list\" filter=\"[<parent>get[stream-list]]\" select=\"0\">\n\t<$list filter=\"[enlist<stream-list>before<currentTiddler>]\" variable=\"previous-node\">\n\t\t<$list filter=\"[<previous-node>!has[stream-list]]\" variable=\"_NULL\">\n\t\t<$action-ifconfirmed $message=\"Merge with previous node?\" $prompt={{$:/config/sq/streams/prompt-merge-with-previous}}>\n\t\t\t<$action-setfield $tiddler=\"$:/state/sq/streams/caret-position\" text={{{[<previous-node>get[text]length[]]}}}/>\n\t\t\t<$action-setfield $tiddler=<<previous-node>> text={{{[<previous-node>get[text]!is[blank]else[]addsuffix{!!text}]}}} stream-list={{!!stream-list}}/>\n\t\t\t<$action-setfield $tiddler=<<row-edit-state>> text=<<previous-node>>/>\n\t\t\t<$action-listops $tiddler={{!!parent}} $field=\"stream-list\" $subfilter=\"+[is[tiddler]] -[<currentTiddler>]\"/>\t\t\t\n\t\t\t<$action-deletetiddler $tiddler=<<currentTiddler>>/>\n\t\t</$action-ifconfirmed>\t\n\t\t</$list>\n\t</$list>\n\t</$set>\n\t</$set>\n\t\n</$list>\n</$list>\n\n\\end\n\n\n\\define delete-node-actions()\n<$action-ifconfirmed  $message=\"Do you wish to delete this tiddler?\">\n\t<$transclude tiddler=\"$:/plugins/sq/streams/delete-hook/actions\"/>\n\t<$action-deletetiddler $tiddler=<<currentTiddler>> />\n\t<$list filter=\"[<row-edit-state>get[text]match<currentTiddler>]\">\n\t\t<<focus-higher-node-actions>>\n\t</$list>\n</$action-ifconfirmed>\n\\end\n\n\n\\define rename-node-actions()\n<$action-withinput message=\"Rename this tiddler?\" default=<<currentTiddler>> actions=\"\"\"\n\t<$action-sendmessage $message=\"tm-rename-tiddler\" from=<<currentTiddler>> to=<<userInput>>/>\n\t<$list filter=\"[<row-edit-state>match<currentTiddler>]\" variable=\"_NULL\">\n\t\t<$action-setfield $tiddler=<<row-edit-state>> text=<<userInput>>/>\n\t</$list>\n\"\"\"/>\n\\end\n\n\n\\define find-last-child()\n<!-- used by focus-higher-node-actions macro -->\n<$list filter=\"[enlist{!!stream-list}is[tiddler]last[]]\" emptyMessage=\"\"\"<$action-setfield $tiddler=<<row-edit-state>> text=<<currentTiddler>>/>\"\"\">\n\t<$macrocall $name=\"find-last-child\"/>\n</$list>\n\\end\n\n\n\\define focus-higher-node-actions()\n<!-- handles moving up in the nodes with the keyboard -->\n<$set name=\"old-parent\" value={{!!parent}} select=\"0\">\n<$set name=\"old-parent-nodes\" filter=\"[<old-parent>get[stream-list]]\" select=\"0\">\n<$set name=\"old-active-node\" value=<<currentTiddler>> >\n<$list filter=\"[enlist<old-parent-nodes>is[tiddler]before<currentTiddler>]\" emptyMessage=\"\"\"<$list filter=\"[<old-parent>!match<stream-root-title>]\"><$action-setfield $tiddler=<<row-edit-state>> text=<<old-parent>> /></$list>\"\"\">\n\t<$macrocall $name=\"find-last-child\"/>\n</$list>\n</$set>\n</$set>\n</$set>\n\\end\n\n\n\\define find-next-downwards-node()\n<!-- used by focus-lower-node-actions macro -->\n<$list filter=\"[<currentTiddler>has[parent]]\" variable=\"_NULL\">\n<$set name=\"old-parent\" value={{!!parent}} select=\"0\">\n<$set name=\"old-parent-nodes\" filter=\"[<old-parent>get[stream-list]]\" select=\"0\">\n<$list filter=\"[enlist<old-parent-nodes>is[tiddler]after<currentTiddler>]\" emptyMessage=\"\"\"<$set name=\"currentTiddler\" value=<<old-parent>>><<find-next-downwards-node>></$set>\"\"\">\n\t<$action-setfield $tiddler=<<row-edit-state>> text=<<currentTiddler>>/>\t\n</$list>\n</$set>\n</$set>\n</$list>\n\\end\n\n\n\\define focus-lower-node-actions()\n<!-- handles moving down in the nodes with the keyboard -->\n<!--if children, get the first child-->\n<$list filter=\"[<currentTiddler>has[stream-list]]\" variable=\"_NULL\">\n\t<$set name=\"next-node\" filter=\"[enlist{!!stream-list}is[tiddler]first[]]\" select=\"0\">\n\t\t<$action-setfield $tiddler=<<row-edit-state>> text=<<next-node>> />\n\t</$set>\n</$list>\n<!-- if no children-->\n<!--- get closest ancestor with next sibling -->\n<$list filter=\"[<currentTiddler>!has[stream-list]]\" variable=\"_NULL\">\n\t<$set name=\"old-active-node\" value=<<currentTiddler>> >\n\t\t<<find-next-downwards-node>>\n\t</$set>\n</$list>\n\\end\n\n\n\\define node-drag-start-actions()\n<!-- parameter to draggable widget -->\n<$action-setfield $tiddler=<<drag-title-state>> text=<<currentTiddler>>/>\n<$action-setfield $tiddler=\"$:/state/sq/nodes/global-drag-state\" text=\"yes\"/>\n<$set name=\"siblings\" filter=\"[{!!parent}get[stream-list]]\" select=\"0\">\n<$list filter=\"[enlist<siblings>after<currentTiddler>]\" variable=\"next-node\">\n\t<$action-setfield $tiddler=<<drag-title-nextsibling-state>> text=<<next-node>> />\n</$set>\n\\end\n\n\n\\define node-drag-end-actions()\n<!-- parameter to draggable widget -->\n<$action-deletetiddler $filter=\"\"\"[<drag-title-state>][<drag-title-nextsibling-state>][[$:/state/sq/nodes/global-drag-state]]\"\"\" />\n\\end\n\n\n\\define stream-drop-actions()\n<!-- handles drag and drop -->\n<$set name=\"parent\" value=<<dropTargetTiddler>>>\n<!-- if target has no stream-type, assign one -->\n<$list filter=\"[<dropTargetTiddler>!has[stream-type]]\">\n\t<$action-setfield $tiddler=<<dropTargetTiddler>> stream-type=\"default\"/>\n</$list>\n<!-- if action tiddler has no stream-type, assign one -->\n<$list filter=\"[<actionTiddler>!has[stream-type]]\" variable=\"_NULL\">\n\t<$action-setfield $tiddler=<<actionTiddler>> stream-type=\"default\" />\n</$list>\n<!-- if we are dropping onto a new parent, then we might need to handle modifier keys -->\n<$list filter=\"[<actionTiddler>get[parent]!match<parent>] [<actionTiddler>!has[parent]]\" variable=\"_NULL\">\n\t<$wikify name=\"new-node\" text={{$:/config/sq/streams/new-node-title}}>\n\t\t<!-- ctrl modifier key on drop event -->\n\t\t<!-- create a new node with text of dropped node -->\n\t\t<$list filter=\"[<modifier>match[ctrl]]\" variable=\"_NULL\">\n\t\t\t<$action-createtiddler $basetitle=<<new-node>> text={{{ [<actionTiddler>get[text]] }}} parent=<<parent>> stream-type=\"default\"/>\n\t\t</$list>\n\t\t<!-- shift modifier key on drop event -->\n\t\t<$list filter=\"[<modifier>match[shift]]\" variable=\"_NULL\">\n\t\t\t<!-- create new node on target, in correct position, text is a transclusion-->\n\t\t\t<$action-createtiddler $basetitle=<<new-node>> text={{{ [<actionTiddler>addprefix[{{]addsuffix[||embed}}]] }}} parent=<<parent>> stream-type=\"default\"/>\n\t\t</$list>\n\t\t<!-- insert into correct position on new parent -->\t\t\t\n\t\t<$action-listops $tiddler=<<dropTargetTiddler>> $field=\"stream-list\" $subfilter=\"+[insertbefore:currentTiddler<new-node>]\"/>\n\t</$wikify>\n\t<!-- no modifier key on drop event -->\n\t<!-- insert in correct position on new parent, and remove from old parent -->\n\t<!-- assign new parent -->\n\t<$list filter=\"[<modifier>match[normal]]\" variable=\"_NULL\">\n\t\t<$action-listops $tiddler=<<dropTargetTiddler>> $field=\"stream-list\" $subfilter=\"+[insertbefore:currentTiddler<actionTiddler>]\"/>\n\t\t<$set name=\"original-parent\" filter=\"[<actionTiddler>get[parent]]\" select=\"0\">\n\t\t\t<$action-listops $tiddler=<<original-parent>> $field=\"stream-list\" $subfilter=\"-[title<actionTiddler>]\"/>\n\t\t</$set>\n\t\t<$action-setfield $tiddler=<<actionTiddler>> parent=<<parent>>/>\n\t</$list>\n</$list>\n<!-- we are dropping on to the same parent, insert in the correct position -->\n<$list filter=\"[<actionTiddler>get[parent]match<parent>]\" variable=\"_NULL\">\n\t<$action-listops $tiddler=<<dropTargetTiddler>> $field=\"stream-list\" $subfilter=\"+[insertbefore:currentTiddler<actionTiddler>]\"/>\n</$list>\n</$set>\n\\end",
+            "modified": "20200930113129061",
+            "tags": "tiddlyresearch"
+        },
+        "$:/plugins/sq/streams/breadcrumbs-view-template": {
+            "title": "$:/plugins/sq/streams/breadcrumbs-view-template",
+            "created": "20200529205858594",
+            "list-before": "$:/core/ui/ViewTemplate/body",
+            "modified": "20200530055142652",
+            "tags": "$:/tags/ViewTemplate",
+            "type": "text/vnd.tiddlywiki",
+            "text": "\\whitespace trim\n\\define stream-show-breadcrumbs()\n<$list filter=\"[<currentTiddler>has[stream-type]]\">\n\t<$list filter=\"[<currentTiddler>has[parent]]\">\n\t\t<$set name=\"currentTiddler\" filter=\"[{!!parent}]\" select=\"0\">\n\t\t\t<<stream-show-breadcrumbs>>\n\t\t</$set>\n\t</$list>\t\n\t<$list filter=\"[<currentTiddler>!match<storyTiddler>]\">\n\t\t<$wikify name=\"display-title\" text={{{ [<currentTiddler>get[text]!is[blank]] ~[{!!title}] }}}>\n\t\t\t<span class=\"sq-breadcrumbs-fragment\">\n\t\t\t<$link to=<<currentTiddler>>>\n\t\t\t\t<$text text={{{ [<display-title>split[]first[50]join[]] }}}/>\n\t\t\t</$link>>\n\t\t\t</span>\n\t\t</$wikify>\n\t</$list>\n</$list>\n\\end\n<$list filter=\"[{$:/config/sq/streams/enable-breadcrumbs}match[yes]]\" variable=\"_NULL\">\n<<stream-show-breadcrumbs>>\n</$list>\n\n"
+        },
+        "$:/plugins/sq/streams/icons/node-expand-arrow": {
+            "title": "$:/plugins/sq/streams/icons/node-expand-arrow",
+            "created": "20200526035137040",
+            "modified": "20200526100520031",
+            "type": "text/vnd.tiddlywiki",
+            "text": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\"><path d=\"M13.75 9.56879C14.0833 9.76124 14.0833 10.2424 13.75 10.4348L8.5 13.4659C8.16667 13.6584 7.75 13.4178 7.75 13.0329L7.75 6.97072C7.75 6.58582 8.16667 6.34525 8.5 6.5377L13.75 9.56879Z\"></path></svg>"
+        },
+        "$:/config/sq/streams/enable-breadcrumbs": {
+            "title": "$:/config/sq/streams/enable-breadcrumbs",
+            "description": "set to yes to enable breadcrumbs in nodes",
+            "text": "yes"
+        },
+        "$:/config/sq/streams/enable-edit-toolbar": {
+            "title": "$:/config/sq/streams/enable-edit-toolbar",
+            "created": "20200602090532488",
+            "modified": "20200602090550929",
+            "tags": "",
+            "type": "text/vnd.tiddlywiki",
+            "description": "set to yes to enable toolbar in editor",
+            "text": "no"
+        },
+        "$:/config/sq/streams/exit-on-saving-empty-node": {
+            "title": "$:/config/sq/streams/exit-on-saving-empty-node",
+            "created": "20200816133119526",
+            "modified": "20200816133424674",
+            "tags": "",
+            "description": "Set to \"yes\" to exit edit mode on saving an empty node",
+            "type": "text/vnd.tiddlywiki",
+            "text": "no"
+        },
+        "$:/config/sq/streams/new-node-tiddler-template": {
+            "title": "$:/config/sq/streams/new-node-tiddler-template",
+            "created": "20200529191923702",
+            "modified": "20200529192753844",
+            "tags": "",
+            "type": "text/vnd.tiddlywiki"
+        },
+        "$:/config/sq/streams/new-node-title": {
+            "created": "20200529131431245",
+            "title": "$:/config/sq/streams/new-node-title",
+            "modified": "20200930113637832",
+            "tags": "tiddlyresearch",
+            "type": "text/vnd.tiddlywiki",
+            "description": "wikitext that is wikified to generate the title for new nodes",
+            "text": "<<now \"[UTC]YYYY0MM0DD0hh0mm0ssXXX\">>"
+        },
+        "$:/config/sq/streams/node-split-regexp": {
+            "title": "$:/config/sq/streams/node-split-regexp",
+            "created": "20200528183035516",
+            "modified": "20200528184917861",
+            "tags": "",
+            "type": "text/vnd.tiddlywiki",
+            "description": "Regular expression that is used to split longform text into multiple tiddlers",
+            "text": "\\n\\n"
+        },
+        "$:/config/sq/streams/prompt-merge-with-previous": {
+            "title": "$:/config/sq/streams/prompt-merge-with-previous",
+            "created": "20200816133119526",
+            "modified": "20200816133424674",
+            "tags": "",
+            "description": "Set to \"yes\" to be prompted before merging a node with the previous node",
+            "type": "text/vnd.tiddlywiki",
+            "text": "yes"
+        },
+        "$:/config/sq/streams/prompt-split-to-multiple": {
+            "title": "$:/config/sq/streams/prompt-split-to-multiple",
+            "created": "20200816133119526",
+            "modified": "20200816133424674",
+            "tags": "",
+            "description": "Set to \"yes\" to be prompted before splitting a node to multiple nodes",
+            "type": "text/vnd.tiddlywiki",
+            "text": "yes"
+        },
+        "$:/config/ShortcutInfo/streams-cancel-edit": {
+            "title": "$:/config/ShortcutInfo/streams-cancel-edit",
+            "text": "Cancel and exit editing"
+        },
+        "$:/config/ShortcutInfo/streams-delete": {
+            "title": "$:/config/ShortcutInfo/streams-delete",
+            "text": "Delete node"
+        },
+        "$:/config/ShortcutInfo/streams-demote": {
+            "title": "$:/config/ShortcutInfo/streams-demote",
+            "text": "Demote node"
+        },
+        "$:/config/ShortcutInfo/streams-focus-higher": {
+            "title": "$:/config/ShortcutInfo/streams-focus-higher",
+            "text": "Move focus to higher node"
+        },
+        "$:/config/ShortcutInfo/streams-focus-lower": {
+            "title": "$:/config/ShortcutInfo/streams-focus-lower",
+            "text": "Move focus to lower node"
+        },
+        "$:/config/ShortcutInfo/streams-indent": {
+            "title": "$:/config/ShortcutInfo/streams-indent",
+            "text": "Indent node"
+        },
+        "$:/config/ShortcutInfo/streams-merge-with-previous": {
+            "title": "$:/config/ShortcutInfo/streams-merge-with-previous",
+            "text": "Merge with previous node, if caret is at start of a node"
+        },
+        "$:/config/ShortcutInfo/streams-promote": {
+            "title": "$:/config/ShortcutInfo/streams-promote",
+            "text": "Promote node"
+        },
+        "$:/config/ShortcutInfo/streams-rename": {
+            "title": "$:/config/ShortcutInfo/streams-rename",
+            "text": "Rename node"
+        },
+        "$:/config/ShortcutInfo/streams-save-and-continue": {
+            "title": "$:/config/ShortcutInfo/streams-save-and-continue",
+            "text": "Save and create next node"
+        },
+        "$:/config/ShortcutInfo/streams-save-and-exit": {
+            "title": "$:/config/ShortcutInfo/streams-save-and-exit",
+            "text": "Save and exit editing"
+        },
+        "$:/config/ShortcutInfo/streams-save-multiple": {
+            "title": "$:/config/ShortcutInfo/streams-save-multiple",
+            "text": "Split and save as multiple nodes"
+        },
+        "$:/config/ShortcutInfo/streams-unindent": {
+            "title": "$:/config/ShortcutInfo/streams-unindent",
+            "text": "Unindent node"
+        },
+        "$:/config/shortcuts/streams-cancel-edit": {
+            "title": "$:/config/shortcuts/streams-cancel-edit",
+            "created": "20200914162547334",
+            "modified": "20200914162547341",
+            "type": "text/vnd.tiddlywiki",
+            "text": "Escape"
+        },
+        "$:/config/shortcuts/streams-delete": {
+            "title": "$:/config/shortcuts/streams-delete",
+            "created": "20200914163552494",
+            "modified": "20200914163552502",
+            "type": "text/vnd.tiddlywiki",
+            "text": "ctrl-Delete"
+        },
+        "$:/config/shortcuts/streams-demote": {
+            "title": "$:/config/shortcuts/streams-demote",
+            "created": "20200914163104446",
+            "modified": "20200914163104456",
+            "type": "text/vnd.tiddlywiki",
+            "text": "alt-Down"
+        },
+        "$:/config/shortcuts/streams-focus-higher": {
+            "title": "$:/config/shortcuts/streams-focus-higher",
+            "created": "20200914163342651",
+            "modified": "20200914163342659",
+            "type": "text/vnd.tiddlywiki",
+            "text": "ctrl-Up"
+        },
+        "$:/config/shortcuts/streams-focus-lower": {
+            "title": "$:/config/shortcuts/streams-focus-lower",
+            "created": "20200914163347755",
+            "modified": "20200914163347764",
+            "type": "text/vnd.tiddlywiki",
+            "text": "ctrl-Down"
+        },
+        "$:/config/shortcuts/streams-indent": {
+            "title": "$:/config/shortcuts/streams-indent",
+            "created": "20200914162901728",
+            "modified": "20200914162901735",
+            "type": "text/vnd.tiddlywiki",
+            "text": "Tab"
+        },
+        "$:/config/shortcuts/streams-merge-with-previous": {
+            "title": "$:/config/shortcuts/streams-merge-with-previous",
+            "created": "20200914164323982",
+            "modified": "20200914164323991",
+            "type": "text/vnd.tiddlywiki",
+            "text": "Backspace"
+        },
+        "$:/config/shortcuts/streams-promote": {
+            "title": "$:/config/shortcuts/streams-promote",
+            "created": "20200914163110776",
+            "modified": "20200914163110785",
+            "type": "text/vnd.tiddlywiki",
+            "text": "alt-Up"
+        },
+        "$:/config/shortcuts/streams-rename": {
+            "title": "$:/config/shortcuts/streams-rename",
+            "created": "20200914163600676",
+            "modified": "20200914163600683",
+            "type": "text/vnd.tiddlywiki",
+            "text": "alt-R"
+        },
+        "$:/config/shortcuts/streams-save-and-continue": {
+            "title": "$:/config/shortcuts/streams-save-and-continue",
+            "created": "20200914164329638",
+            "modified": "20200914164329647",
+            "type": "text/vnd.tiddlywiki",
+            "text": "Enter"
+        },
+        "$:/config/shortcuts/streams-save-and-exit": {
+            "title": "$:/config/shortcuts/streams-save-and-exit",
+            "created": "20200914163850209",
+            "modified": "20200914163850217",
+            "type": "text/vnd.tiddlywiki",
+            "text": "ctrl-Enter"
+        },
+        "$:/config/shortcuts/streams-save-multiple": {
+            "title": "$:/config/shortcuts/streams-save-multiple",
+            "created": "20200914163843685",
+            "modified": "20200914163843694",
+            "type": "text/vnd.tiddlywiki",
+            "text": "alt-Enter"
+        },
+        "$:/config/shortcuts/streams-unindent": {
+            "title": "$:/config/shortcuts/streams-unindent",
+            "created": "20200914162907631",
+            "modified": "20200914162907639",
+            "type": "text/vnd.tiddlywiki",
+            "text": "shift-Tab"
+        },
+        "$:/config/sq/streams/split-at-caret": {
+            "title": "$:/config/sq/streams/split-at-caret",
+            "created": "20200816133119526",
+            "modified": "20200816133424674",
+            "tags": "",
+            "description": "Set to \"yes\" to split text at caret position on saving a node",
+            "type": "text/vnd.tiddlywiki",
+            "text": "yes"
+        },
+        "$:/config/sq/streams/stream-enable-filter": {
+            "title": "$:/config/sq/streams/stream-enable-filter",
+            "created": "20200528183035516",
+            "modified": "20200528184917861",
+            "tags": "",
+            "type": "text/vnd.tiddlywiki",
+            "description": "Filter that determines which tiddlers get the add node button at the bottom",
+            "text": "[!is[shadow]]"
+        },
+        "$:/plugins/sq/streams/contextmenu/contextmenu-styles": {
+            "created": "20200602120854810",
+            "title": "$:/plugins/sq/streams/contextmenu/contextmenu-styles",
+            "text": ".sq-contextmenu {\n\tpadding: 12px 0;\n\tbox-shadow: rgba(0, 0, 0, 0.40) 0px 2px 20px;\n\tfont-family: \"Segoe UI\", Roboto, Helvetica, Arial;\n\tfont-size: 13px;\n\tmargin-top: 4px;\n\tmin-width: 100px;\n\tmax-width: 240px;\n\tleft: -16px;\n\tdisplay: flex;\n\tflex-direction: column;\n\tborder-radius: 6px;\n\tborder: 1px solid #dce0e2;\n\ttransition: opacity 200ms ease 0s, transform 200ms ease 0s;\n\tmargin-top: 30px;\n}\n\n.sq-contextmenu .tc-menu-list-item {\n\tpadding: 0 18px;\n\tline-height: 24px;\n\twhite-space: nowrap;\n\tcolor: <<colour foreground>>;\n\tcursor: default !important;\n\ttext-indent: 0;\n}\n\n.sq-contextmenu-itemwrapper {\n\tdisplay: flex;\n\tjustify-content: space-between;\n\talign-items: center;\n\tposition: relative;\t\n}\n\n.sq-contextmenu-itemtext {\n\tdisplay: flex;\n\twhite-space: nowrap;\n\ttext-overflow: ellipsis;\n\tflex-grow: 1;\n\toverflow: hidden;\t\n}\n\n.sq-contextmenu-itemicon {\n\tcolor: <<colour foreground>>;\n\tmargin-left: 16px;\n\tmin-width: 22px;\t\n}\n\n.sq-contextmenu-divider {\n\tborder-top-width: 1px;\n\tborder-top-color: #eceef0;\n\tborder-top-style: solid;\n\tmargin: 6px 0;\n}",
+            "modified": "20200930113347274",
+            "tags": "$:/tags/Stylesheet tiddlyresearch",
+            "type": "text/css"
+        },
+        "$:/plugins/sq/streams/contextmenu/contextmenu-template": {
+            "title": "$:/plugins/sq/streams/contextmenu/contextmenu-template",
+            "created": "20200602163018613",
+            "modified": "20200603055942658",
+            "tags": "",
+            "type": "text/vnd.tiddlywiki",
+            "text": "\\define menu-item(title,subtitle:\"\",actions:\"\")\n\t\t<$button class=\"tc-menu-list-item tc-btn-invisible\" actions=<<__actions__>> >\n\t\t\t<span class=\"sq-contextmenu-itemwrapper\">\n\t\t\t\t<span class=\"sq-contextmenu-itemtext\">$title$</span>\n\t\t\t\t<span class=\"sq-contextmenu-itemicon\"><$macrocall $name=\"displayshortcuts\" $output=\"text/plain\" shortcuts=\"$subtitle$\" prefix=\"\" separator=\" \" suffix=\"\"/></span>\n\t\t\t</span>\n\t\t</$button>\n\\end\n\n\\define menu-divider() <div class=\"sq-contextmenu-divider\"/>\n\n<$reveal type=\"popup\" state=<<contextmenu-state>>  position=\"left\" tag=\"div\">\n\t<div class=\"tc-drop-down sq-contextmenu\">\n\t\t<$macrocall $name=\"menu-item\" title=\"Open\" actions=\"\"\"<$action-navigate/>\"\"\"/>\n\t\t<$macrocall $name=\"menu-item\" title=\"Rename\" subtitle=\"((streams-rename))\" actions=<<rename-node-actions>>/>\n\t\t<$macrocall $name=\"menu-item\" title=\"Delete\" subtitle=\"((streams-delete))\" actions=<<delete-node-actions>>/>\n\t\t<$list filter=\"[tag[$:/tags/streams/contextmenu]]\" variable=\"listItem\">\n\t\t\t<$macrocall $name=\"menu-item\" \n\t\t\t\ttitle={{{[<listItem>get[sq-contextmenu-name]]}}} \n\t\t\t\tsubtitle={{{[<listItem>get[key]] [<listItem>get[sq-contextmenu-subtitle]] +[first[]]}}} \n\t\t\t\tactions={{{[<listItem>get[text]]}}} />\n\t\t</$list>\n\t\t<<menu-divider>>\n\t\t<$macrocall $name=\"menu-item\" title=\"Keyboard Shortcuts (?)\" actions=\"\"\"<$action-navigate $to=\"$:/plugins/sq/streams/info/keyboard-shortcuts\"/>\"\"\"/>\n\t</div>\n</$reveal>"
+        },
+        "$:/plugins/sq/streams/contextmenu/contextmenu": {
+            "title": "$:/plugins/sq/streams/contextmenu/contextmenu",
+            "text": "/*\\\n\ntitle: $:/plugins/sq/streams/contextmenu/contextmenu\ntype: application/javascript\nmodule-type: widget-subclass\n\n\\*/\n(function(){\n\t\nexports.baseClass = \"button\";\n\nexports.name = \"contextmenu\";\n\t\nexports.constructor = function(parseTreeNode,options) {\n\tthis.initialise(parseTreeNode,options);\n};\n\nexports.prototype = {};\t\n\nexports.prototype.render = function(parent,nextSibling) {\n\tvar self = this;\n\t// Remember parent\n\tthis.parentDomNode = parent;\n\t// Compute attributes and execute state\n\tthis.computeAttributes();\n\tthis.execute();\n\t// Create element\n\tvar tag = \"div\";\n\tif(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {\n\t\ttag = this.buttonTag;\n\t}\n\tvar domNode = this.document.createElement(tag);\n\tvar classes = this[\"class\"].split(\" \") || [];\n\tvar isPoppedUp = (this.popup || this.popupTitle) && this.isPoppedUp();\n\tif(this.selectedClass) {\n\t\tif((this.set || this.setTitle) && this.setTo && this.isSelected()) {\n\t\t\t$tw.utils.pushTop(classes,this.selectedClass.split(\" \"));\n\t\t}\n\t}\n\tif(isPoppedUp) {\n\t\t$tw.utils.pushTop(classes,\"tc-popup-handle\");\n\t}\t\n\tclasses.push(\"sq-contextmenu-container\");\n\tdomNode.className = classes.join(\" \");\t\n\tdomNode.addEventListener(\"contextmenu\",function(event) {\n\t\tevent.preventDefault();\n\t\tif(self.popup || self.popupTitle) {\n\t\t\tself.triggerPopup(event);\n\t\t\tif(self.set || self.setTitle) {\n\t\t\t\tself.setTiddler();\n\t\t\t\thandled = true;\n\t\t\t}\n\t\t\tif(self.actions) {\n\t\t\t\tself.invokeActionString(self.actions,self,event);\n\t\t\t}\n\t\t}\n\t});\n\tparent.insertBefore(domNode,nextSibling);\n\tthis.renderChildren(domNode,null);\n\tthis.domNodes.push(domNode);\t\n}\t\n\t\n})();",
+            "type": "application/javascript",
+            "module-type": "widget-subclass"
+        },
+        "$:/plugins/sq/streams/droppable-tweaks.js": {
+            "title": "$:/plugins/sq/streams/droppable-tweaks.js",
+            "text": "/*\\\ntitle: $:/plugins/sq/streams/droppable-tweaks.js\ntype: application/javascript\nmodule-type: startup\n\\*/\n\nvar DroppableWidget = require(\"$:/core/modules/widgets/droppable.js\").droppable;\n\nDroppableWidget.prototype.render = function(parent,nextSibling) {\n    var self = this;\n    // Remember parent\n    this.parentDomNode = parent;\n    // Compute attributes and execute state\n    this.computeAttributes();\n    this.execute();\n    var tag = this.parseTreeNode.isBlock ? \"div\" : \"span\";\n    if(this.droppableTag && $tw.config.htmlUnsafeElements.indexOf(this.droppableTag) === -1) {\n        tag = this.droppableTag;\n    }\n    // Create element and assign classes\n    var domNode = this.document.createElement(tag),\n        classes = (this.droppableClass || \"\").split(\" \");\n    classes.push(\"tc-droppable\");\n    domNode.className = classes.join(\" \");\n    // Add event handlers\n    if(this.droppableEnable) {\n        $tw.utils.addEventListeners(domNode,[\n            {name: \"dragenter\", handlerObject: this, handlerMethod: \"handleDragEnterEvent\"},\n            {name: \"dragover\", handlerObject: this, handlerMethod: \"handleDragOverEvent\"},\n            {name: \"dragleave\", handlerObject: this, handlerMethod: \"handleDragLeaveEvent\"},\n            {name: \"drop\", handlerObject: this, handlerMethod: \"handleDropEvent\"}\n        ]);\t\t\n    }\n    // Insert element\n    parent.insertBefore(domNode,nextSibling);\n    this.renderChildren(domNode,null);\n    this.domNodes.push(domNode);\n    // Stack of outstanding enter/leave events\n    this.currentlyEntered = [];\n};\n\nDroppableWidget.prototype.leaveDrag = function(event) {\n    var pos = this.currentlyEntered.indexOf(event.target);\n    if(pos !== -1) {\n        this.currentlyEntered.splice(pos,1);\n    }\n    // Remove highlighting if we're leaving externally. The hacky second condition is to resolve a problem with Firefox whereby there is an erroneous dragenter event if the node being dragged is within the dropzone\n    if(this.currentlyEntered.length === 0 || (this.currentlyEntered.length === 1 && this.currentlyEntered[0] === $tw.dragInProgress)) {\n        this.currentlyEntered = [];\n        if(this.domNodes[0]) {\n            $tw.utils.removeClass(this.domNodes[0],\"tc-dragover\");\n        }\n    }\n};\n\nDroppableWidget.prototype.execute = function() {\n\tthis.droppableActions = this.getAttribute(\"actions\");\n\tthis.droppableEffect = this.getAttribute(\"effect\",\"copy\");\n\tthis.droppableTag = this.getAttribute(\"tag\");\n\tthis.droppableClass = this.getAttribute(\"class\");\n\tthis.droppableEnable = (this.getAttribute(\"enable\") || \"yes\") === \"yes\";\n\t// Make child widgets\n\tthis.makeChildWidgets();\n};",
+            "type": "application/javascript",
+            "module-type": "startup"
+        },
+        "$:/plugins/sq/streams/framed-engine-tweak": {
+            "title": "$:/plugins/sq/streams/framed-engine-tweak",
+            "text": "/*\\\n\ntitle: $:/plugins/sq/streams/framed-engine-tweak\ntype: application/javascript\nmodule-type: startup\n\n\\*/\n\nvar FramedEngine = require(\"$:/core/modules/editor/engines/framed.js\").FramedEngine;\n\nFramedEngine.prototype.focus = function() {\n\tif(this.domNode.focus && this.domNode.select) {\n\t\tthis.domNode.focus();\n\t\tif(this.widget.getAttribute(\"select\")===\"false\") {\n\t\t\tvar caretPosition = this.widget.getAttribute(\"caretPosition\",\"end\");\n\t\t\tcaretPosition = (caretPosition === \"end\") ? this.domNode.value.length : parseInt(caretPosition);\n\t\t\tthis.domNode.setSelectionRange(caretPosition,caretPosition);\n\t\t} else {\n\t\t\tthis.domNode.select();\n\t\t}\n\t}\n}",
+            "type": "application/javascript",
+            "module-type": "startup"
+        },
+        "$:/plugins/sq/streams/keyboard-tweak": {
+            "title": "$:/plugins/sq/streams/keyboard-tweak",
+            "text": "/*\\\n\ntitle: $:/plugins/sq/streams/keyboard-tweak\ntype: application/javascript\nmodule-type: startup\n\n\\*/\n\nvar kb = require(\"$:/core/modules/widgets/keyboard.js\").keyboard;\n\nkb.prototype.render = function(parent,nextSibling) {\n\tvar self = this;\n\t// Remember parent\n\tthis.parentDomNode = parent;\n\t// Compute attributes and execute state\n\tthis.computeAttributes();\n\tthis.execute();\n\tvar tag = this.parseTreeNode.isBlock ? \"div\" : \"span\";\n\tif(this.tag && $tw.config.htmlUnsafeElements.indexOf(this.tag) === -1) {\n\t\ttag = this.tag;\n\t}\n\t// Create element\n\tvar domNode = this.document.createElement(tag);\n\t// Assign classes\n\tvar classes = (this[\"class\"] || \"\").split(\" \");\n\tclasses.push(\"tc-keyboard\");\n\tdomNode.className = classes.join(\" \");\n\t// Add a keyboard event handler\n\tthis.preventDefault = this.getAttribute(\"preventDefault\") == \"false\" ? false : true;\t\n\tdomNode.addEventListener(\"keydown\",function (event) {\n\t\tif($tw.keyboardManager.checkKeyDescriptors(event,self.keyInfoArray)) {\n\t\t\tself.invokeActions(self,event);\n\t\t\tif(self.actions) {\n\t\t\t\tself.invokeActionString(self.actions,self,event);\n\t\t\t}\n\t\t\tself.dispatchMessage(event);\n\t\t\tevent.stopPropagation();\n\t\t\tif(self.preventDefault) {\n\t\t\t\tevent.preventDefault();\n\t\t\t}\n\t\t\treturn true;\n\t\t}\n\t\treturn false;\n\t},false);\n\t// Insert element\n\tparent.insertBefore(domNode,nextSibling);\n\tthis.renderChildren(domNode,null);\n\tthis.domNodes.push(domNode);\t\n}",
+            "type": "application/javascript",
+            "module-type": "startup"
+        },
+        "$:/plugins/sq/streams/selection-vars-tweak.js": {
+            "title": "$:/plugins/sq/streams/selection-vars-tweak.js",
+            "text": "/*\\\n\ntitle: $:/plugins/sq/streams/selection-vars-tweak.js\ntype: application/javascript\nmodule-type: startup\n\\*/\nvar Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\n\nWidget.prototype.selection_original_invokeActionString = Widget.prototype.invokeActionString;\n\nWidget.prototype.invokeActionString = function(actions,triggeringWidget,event,variables) {\n\t//variables.selection = \"xyz\";\n\tif(!variables) {\n\t\tvariables = {};\n\t}\n\t\n\tvar activeElement = document.activeElement;\n\tvar selection;\n\tif(activeElement && activeElement.tagName === \"IFRAME\") {\n\t\tvar idoc = activeElement.contentDocument || activeElement.contentWindow.document;\n\t\tactiveElement = idoc.activeElement;\n\t\tselection = idoc.getSelection();\n\t} else {\n\t\tselection = window.getSelection();\n\t}\n\t\n\tif(activeElement && selection && (activeElement.tagName === \"INPUT\" || activeElement.tagName === \"TEXTAREA\")) {\n\t\tvariables[\"selectionStart\"] = activeElement.selectionStart.toString();\n\t\tvariables[\"selectionEnd\"] = activeElement.selectionEnd.toString();\n\t\tvariables[\"selection\"] = selection.toString();\n\t}\n\t\n\t\n\tthis.selection_original_invokeActionString(actions,triggeringWidget,event,variables);\n}\n\n$tw.hooks.addHook(\"th-page-refreshed\",function handleEvent() {\n\t$tw.wiki.deleteTiddler(\"$:/state/sq/streams/caret-position\");\n});\n\n/*\n\nif(window.CodeMirror && document.activeElement.closest(\".CodeMirror\")) {\n\tvar cm = document.activeElement.closest(\".CodeMirror\").CodeMirror;\n\tvar cursor = cm.getCursor(\"start\");\n\tvar startRange = cm.getRange({\"line\":0,\"ch\":0},{\"line\":cursor.line,\"ch\":cursor.ch});\n\tvar selectionStart = startRange.length;\n\tvar selection = cm.getSelection();\n\tvar selectionEnd = selectionStart + selection.length();\n}\n\n*/",
+            "type": "application/javascript",
+            "module-type": "startup"
+        },
+        "$:/plugins/sq/streams/simple-engine-tweak": {
+            "title": "$:/plugins/sq/streams/simple-engine-tweak",
+            "text": "/*\\\r\n\r\ntitle: $:/plugins/sq/streams/simple-engine-tweak\r\ntype: application/javascript\r\nmodule-type: startup\r\n\r\n\\*/\r\n\r\nvar SimpleEngine = require(\"$:/core/modules/editor/engines/simple.js\").SimpleEngine;\r\n\r\nSimpleEngine.prototype.focus = function() {\r\n\tif(this.domNode.focus && this.domNode.select) {\r\n\t\tthis.domNode.focus();\r\n\t\tif(this.widget.getAttribute(\"select\")===\"false\") {\r\n\t\t\tvar caretPosition = this.widget.getAttribute(\"caretPosition\",\"end\");\r\n\t\t\tcaretPosition = (caretPosition === \"end\") ? this.domNode.value.length : parseInt(caretPosition);\r\n\t\t\tthis.domNode.setSelectionRange(caretPosition,caretPosition);\r\n\t\t} else {\r\n\t\t\tthis.domNode.select();\r\n\t\t}\r\n\t}\r\n}",
+            "type": "application/javascript",
+            "module-type": "startup"
+        },
+        "$:/plugins/sq/streams/delete-hook/actions": {
+            "created": "20200527200401408",
+            "title": "$:/plugins/sq/streams/delete-hook/actions",
+            "modified": "20200930114317518",
+            "tags": "$:/tags/deleteTiddlerAction tiddlyresearch",
+            "type": "text/vnd.tiddlywiki",
+            "text": "\\define delete-children()\n\t<$list filter=\"[enlist{!!stream-list}]\">\n\t\t<<delete-children>>\n\t</$list>\n\t<<$action-deletetiddler $filter=\"[enlist{!!stream-list}]\"/>\n\\end\n\n<$list filter=\"[<currentTiddler>has[stream-type]]\">\n\t<$list filter=\"[<currentTiddler>has[parent]]\">\n\t\t<$action-listops $tiddler={{!!parent}} $field=\"stream-list\" $subfilter=\"-[<currentTiddler>]\" />\n\t</$list>\n\t<$list variable=\"count\" filter=\"[enlist{!!stream-list}count[]!match[0]]\">\n\t\t<<delete-children>>\n\t</$list>\n</$list>"
+        },
+        "$:/plugins/sq/streams/delete-hook/hook": {
+            "title": "$:/plugins/sq/streams/delete-hook/hook",
+            "text": "/*\\\ntitle: $:/plugins/sq/streams/delete-hook/hook\ntype: application/javascript\nmodule-type: startup\n\n\\*/\n\n$tw.hooks.addHook(\"th-deleting-tiddler\",function(tiddler) {\n\tif(tiddler.fields[\"draft.of\"]) {\n\t\treturn;\n\t}\n\t\n\tvar executeDeleteHookTiddlers = function(tag) {\n\t\t$tw.utils.each($tw.wiki.filterTiddlers(\"[all[shadows+tiddlers]tag[\" + tag + \"]!has[draft.of]]\"),function(title) {\n\t\t\tvar parser = $tw.wiki.parseText(\"text/vnd.tiddlywiki\",$tw.wiki.getTiddlerText(title),{\n\t\t\t\t\tparentWidget: $tw.rootWidget,\n\t\t\t\t\tdocument: this.document\n\t\t\t\t}),\n\t\t\t\twidgetNode = $tw.wiki.makeWidget(parser,{\n\t\t\t\t\tparentWidget: $tw.rootWidget,\n\t\t\t\t\tdocument: this.document,\n\t\t\t\t\tvariables: {currentTiddler : tiddler.fields.title}\n\t\t\t\t});\n\t\t\tvar container = this.document.createElement(\"div\");\n\t\t\twidgetNode.render(container,null);\n\t\t\twidgetNode.invokeActions(this,null);\t\n\t\t});\n\t}\n\t\n\texecuteDeleteHookTiddlers(\"$:/tags/deleteTiddlerAction\");\n\n});",
+            "type": "application/javascript",
+            "module-type": "startup"
+        },
+        "$:/plugins/sq/streams/framed-editor-template": {
+            "title": "$:/plugins/sq/streams/framed-editor-template",
+            "created": "20200601145424630",
+            "modified": "20200602053704598",
+            "tags": "",
+            "type": "text/vnd.tiddlywiki",
+            "text": "<$edit-text tag=\"textarea\" autoHeight=\"yes\" minHeight=\"1em\" focus=\"yes\" select=\"false\" class=\"streams-editor tc-edit-texteditor tc-edit-texteditor-body\" caretPosition={{{[{$:/state/sq/streams/caret-position}!is[blank]else[end]]}}}><$set name=\"targetTiddler\"value=<<currentTiddler>>><$list filter=\"[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]\"><$reveal type=\"nomatch\" state=<<config-visibility-title>> text=\"hide\" class=\"tc-text-editor-toolbar-item-wrapper\"><$transclude tiddler=\"$:/core/ui/EditTemplate/body/toolbar/button\"\nmode=\"inline\"/></$reveal></$list></$set></$edit-text>"
+        },
+        "$:/plugins/sq/streams/info/keyboard-shortcuts": {
+            "title": "$:/plugins/sq/streams/info/keyboard-shortcuts",
+            "text": "!! Streams keyboard shortcuts\n\n<table>\n<tbody>\n<$list filter=\"[all[shadows+tiddlers]prefix[$:/config/ShortcutInfo/streams-]]\">\n<tr>\n<td>{{!!text}}</td>\n<td><$macrocall $name=\"displayshortcuts\" $output=\"text/plain\" shortcuts={{{[<currentTiddler>removeprefix[$:/config/ShortcutInfo/]addprefix[((]addsuffix[))]]}}} prefix=\"\" separator=\" \" suffix=\"\"/></td>\n</tr>\n</$list>\n</tbody>\n</table>\n\nShortcuts can be customized in the [[Control Panel|$:/core/ui/ControlPanel/KeyboardShortcuts]]\n\n''Drag and drop''\n\n* hold <kbd>control</kbd> key to drag and drop and create a copy of the node in another stream tiddler\n* hold <kbd>shift</kbd> key to drag and drop and create a node that transcludes the contents of this node, in another stream tiddler\n\n''for the moment it is a design decision to disallow copying/transcluding the node inside the same root (story) tiddler''\n\n//Note that it is a known limitation that copying a node or transcluding it does not apply to the children of the node. This is on the [[list of things to implement|Roadmap]].//"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/cancel-edit-node": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/cancel-edit-node",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-cancel-edit))",
+            "text": "<<cancel-edit-node-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/delete-node": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/delete-node",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-delete))",
+            "text": "<<delete-node-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/demote-node": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/demote-node",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-demote))",
+            "text": "<<demote-node-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/focus-higher-node": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/focus-higher-node",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-focus-higher))",
+            "text": "<<focus-higher-node-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/focus-lower-node": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/focus-lower-node",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-focus-lower))",
+            "text": "<<focus-lower-node-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/indent-node": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/indent-node",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-indent))",
+            "text": "<<indent-node-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/merge-with-previous": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/merge-with-previous",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-merge-with-previous))",
+            "prevent-default": "no",
+            "text": "<<merge-with-previous-node-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/promote-node": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/promote-node",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-promote))",
+            "text": "<<promote-node-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/rename-node": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/rename-node",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-rename))",
+            "text": "<<rename-node-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/save-and-continue": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/save-and-continue",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-save-and-continue))",
+            "text": "<<save-node-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/save-and-exit": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/save-and-exit",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-save-and-exit))",
+            "text": "<<save-edit-node-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/save-multiple": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/save-multiple",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-save-multiple))",
+            "text": "<<save-multiple-actions>>"
+        },
+        "$:/plugins/sq/streams/keyboard-shortcuts/unindent-node": {
+            "title": "$:/plugins/sq/streams/keyboard-shortcuts/unindent-node",
+            "tags": "$:/tags/streams/keyboard-shortcuts",
+            "key": "((streams-unindent))",
+            "text": "<<unindent-node-actions>>"
+        },
+        "$:/plugins/sq/streams/icons/new-node-btn": {
+            "title": "$:/plugins/sq/streams/icons/new-node-btn",
+            "created": "20200528160920973",
+            "modified": "20200528164140128",
+            "type": "text/vnd.tiddlywiki",
+            "text": "<svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\">\n<style>\n  .line{\n    stroke:#868c90;\n  }\n</style>\n  <circle cx=\"10.5\" cy=\"10.5\" r=\"9\" class=\"circle\" fill=\"#fff\" ></circle>\n  <line x1=\"6\" y1=\"10.5\" x2=\"15\" y2=\"10.5\" class=\"line\"></line>\n  <line x1=\"10.5\" y1=\"6\" x2=\"10.5\" y2=\"15\" class=\"line\"></line>\n</svg>"
+        },
+        "$:/plugins/sq/streams/nodes-list-template": {
+            "created": "20171022203553093",
+            "text": "\\import [[$:/plugins/sq/streams/action-macros]] [all[shadows+tiddlers]tag[$:/tags/streams/actionmacros]]  [all[shadows+tiddlers]tag[$:/tags/streams/user-actionmacros]]\n\\whitespace trim\n\n\\define stream-row-template()\n\\whitespace trim\n<$set name=\"row-children-visibility-state\" value=<<qualify \"$:/state/sq/streams/visibility/$(currentTiddler)$\">> >\n<$set name=\"enable-dnd-row\" filter=\"[<drag-title-nextsibling-state>get[text]match<currentTiddler>then[no]] ~[<enable-dnd>]\">\n<$droppable actions=<<stream-drop-actions>> tag=\"div\" enable=<<enable-dnd-row>> class={{{ stream-droppable [<enable-dnd>match[no]then[stream-node-disabled]] [<contextmenu-state>get[current]match<currentTiddler>then[stream-row-selected]else[]] +[join[ ]]}}} >\n  <div class=\"tc-droppable-placeholder\"/>\n  <div class={{{ stream-row [<row-children-visibility-state>get[text]match[hide]then[stream-row-children-collapsed]] [list[!!stream-list]is[tiddler]then[]else[stream-row-nochildren]] +[join[ ]]}}}>\n    <$contextmenu popup=<<contextmenu-state>> class=\"stream-node-control\" tag=\"div\" set={{{[<contextmenu-state>addsuffix[!!current]]}}} setTo=<<currentTiddler>> selectedClass=\"sq-contextmenu-active\" >\n      <div class=\"stream-node-collapser\">\n        <$button class=\"tc-btn-invisible\">\n          <$action-setfield $tiddler=<<row-children-visibility-state>> text={{{ [<row-children-visibility-state>get[text]match[hide]then[show]else[hide]] }}} />\n          {{$:/plugins/sq/streams/icons/node-expand-arrow}}\n        </$button>\n      </div>\n      <div class=\"stream-node-handle-wrapper\">\n        <$button tag=\"div\" to=<<currentTiddler>> class=\"tc-btn-invisible\" >\n          <$draggable tag=\"div\" tiddler=<<currentTiddler>> startactions=<<node-drag-start-actions>> endactions=<<node-drag-end-actions>> class=\"stream-node-handle\"><div class=\"stream-node-handle-inner\"/></$draggable>\n        </$button>\n      </div>  \n    </$contextmenu>\n    <$btn-dblclick tag=\"div\" class=\"stream-node-block\" >\n      <$reveal tag=\"div\" type=\"nomatch\" stateTitle=<<row-edit-state>> default=\"view\" text=<<currentTiddler>> >\n        \n          <$action-setfield $tiddler=<<row-edit-state>> text=<<currentTiddler>> />\n        \n        <$transclude mode=\"block\"/>\n        {{||$:/plugins/kebi/tiddlyresearch-references/filters-node}}\n      </$reveal>\n      <$reveal tag=\"div\" type=\"match\" stateTitle=<<row-edit-state>> default=\"view\" text=<<currentTiddler>> >\n        <$keyboard-plus shortcutTag=\"$:/tags/streams/keyboard-shortcuts\">\n          {{||$:/plugins/sq/streams/framed-editor-template}}\n        </$keyboard-plus> \n      </$reveal>\n    </$btn-dblclick>\n  </div>\n</$droppable>\n</$set>\n<$set name=\"enable-dnd\" filter=\"[<enable-dnd>match[no]] ~[<drag-title-state>get[text]match<currentTiddler>then[no]]\" select=\"0\">\n<$reveal tag=\"div\" type=\"nomatch\" stateTitle=<<row-children-visibility-state>> text=\"hide\">\n  <div class={{{ stream-row-children [<currentTiddler>!has[stream-list]then[stream-row-children-empty]] [<enable-dnd>match[no]then[stream-node-disabled]] +[join[ ]]}}} >\n    <$macrocall $name=\"stream\"/>\n  </div>\n</$reveal>\n</$set>\n</$set>\n\\end\n\n\n\\define stream()\n\\whitespace trim\n<div class=\"stream-list\">\n  <$vars dropTargetTiddler=<<currentTiddler>> >\n    <$list filter=\"[list[!!stream-list]!is[missing]]\">\n    <$set name=\"enable-dnd\" filter=\"[<enable-dnd>match[no]] ~[<drag-title-state>get[text]match<currentTiddler>then[no]]\" select=\"0\">\n      <<stream-row-template>>\n    </$set>\n    </$list>\n    <$tiddler tiddler=\"\">\n      <!-- to drop after the last child of any list level-->\n      <$droppable actions=<<stream-drop-actions>> tag=\"div\" enable=<<enable-dnd>> class=\"stream-droppable\">\n        <div class=\"tc-droppable-placeholder\">\n        &nbsp;\n        </div><!-- idea only want below div with height when its a child with no more children-->\n        <$list filter=\"[<currentTiddler>!has[stream-list]]\" variable=\"_NULL\"><div class=\"stream-droppable-spacer\"/></$list>\n      </$droppable>\n    </$tiddler>\n    <$list filter=\"[all[current]match<stream-root-title>]\" variable=\"_NULL\">\n      <!-- if we are the root, add a button to add more nodes-->\n      <div class=\"stream-row\">\n        <div class=\"stream-node-control stream-node-control-addnew\">\n          <div class=\"stream-node-collapser\">\n          </div>\n          <div class=\"stream-node-handle-wrapper\">\n            <$button tag=\"div\" class=\"tc-btn-invisible\" tooltip=\"add node\" actions=<<add-node-actions>> >\n              {{$:/plugins/sq/streams/icons/new-node-btn}}\n            </$button>\n          </div>\n        </div>\n        <div class=\"stream-node-block\">\n          <!--consider moving last child dropzone in here, though thats for children too-->\n        </div>\n      </div>        \n      <$set name=\"currentTiddler\" filter={{{[<contextmenu-state>get[current]]}}}>\n        {{||$:/plugins/sq/streams/contextmenu/contextmenu-template}}\n      </$set>\n    </$list>\n  </$vars>\n</div>\n\\end\n\n<$vars stream-root-title=<<currentTiddler>>\n  contextmenu-state=<<qualify \"$:/state/sq-context-popup/\">>\n  row-edit-state=<<qualify \"$:/state/sq/streams/current-edit-tiddler\">>\n  drag-title-state=<<qualify \"$:/state/sq/streams/current-drag-title\">>\n  drag-title-nextsibling-state=<<qualify \"$:/state/sq/streams/current-drag-nextsibling\">> \n  >\n  <div class={{{ stream-root [{$:/state/sq/nodes/global-drag-state}match[yes]then[stream-dragactive]] [<currentTiddler>!has[stream-list]then[stream-newlist]] +[join[ ]] }}}>\n    <$macrocall $name=\"stream\"/>\n  </div>\n</$vars>\n\n\n",
+            "title": "$:/plugins/sq/streams/nodes-list-template",
+            "modified": "20201001003333859",
+            "tags": "tiddlyresearch"
+        },
+        "$:/config/flibbles/relink/fields/parent": {
+            "title": "$:/config/flibbles/relink/fields/parent",
+            "created": "20200530105147302",
+            "modified": "20200530105155682",
+            "type": "text/vnd.tiddlywiki",
+            "text": "title"
+        },
+        "$:/config/flibbles/relink/fields/stream-list": {
+            "title": "$:/config/flibbles/relink/fields/stream-list",
+            "created": "20200530105147302",
+            "modified": "20200530105155682",
+            "type": "text/vnd.tiddlywiki",
+            "text": "list"
+        },
+        "$:/plugins/sq/streams/stream-view-template": {
+            "title": "$:/plugins/sq/streams/stream-view-template",
+            "created": "20170922203553093",
+            "modified": "20170929050808722",
+            "tags": "$:/tags/ViewTemplate",
+            "list-after": "$:/core/ui/ViewTemplate/body",
+            "text": "<$list filter=\"\"\"[<folded-state>get[text]!is[blank]else[show]!match[hide]]\"\"\" variable=\"_NULL\">\r\n<$list filter=\"\"\"[all[current]subfilter{$:/config/sq/streams/stream-enable-filter}]\"\"\">\r\n{{||$:/plugins/sq/streams/nodes-list-template}}\r\n</$list>\r\n</$list>"
+        },
+        "$:/plugins/sq/streams/styles": {
+            "created": "20170922203553093",
+            "title": "$:/plugins/sq/streams/styles",
+            "modified": "20200930113603419",
+            "tags": "$:/tags/Stylesheet tiddlyresearch",
+            "text": ".stream-root {\n\tmargin-left: -1em;\n}\n\n.stream-row {\n    display: flex;\n    flex: 0 0 auto;\n}\n\n.stream-row-children {\n\tdisplay:flex;\n\tflex: 0 0 auto;\n\tflex-direction: column;\n\t/*padding-left: 0.5em;*/\n\tborder-left: 1px solid <<color message-border>>;\n\tmargin-left: 30px;\n}\n\n.stream-row-children.stream-row-children-empty {\n\tborder-left: none;\n}\n\n.stream-node-disabled,\n.stream-droppable.tc-droppable.stream-node-disabled + div{\n\tbackground-color: <<color tiddler-editor-border>>;\n}\n\n.stream-row-selected,\n.stream-droppable.tc-droppable.stream-row-selected + div {\n\tbackground: <<color notification-background>>;\n\tcolor: <<color message-foreground>>;\n}\n\n.stream-droppable.tc-droppable.stream-node-disabled + div + .stream-droppable.tc-droppable.tc-dragover > .tc-droppable-placeholder {\n\tdisplay: none;\n}\n\n.stream-droppable.tc-droppable.stream-node-disabled + div + .stream-droppable.tc-droppable.tc-dragover {\n\tcursor: not-allowed;\n}\n\n.stream-droppable.tc-droppable.tc-dragover > .tc-droppable-placeholder {\n\tmargin-left: 29px;\n\tline-height: 5px;\n\theight: 5px;\n\tborder: 2px solid <<color dropzone-background>>;\n\tbackground-color: <<color dropzone-background>>;\n}\n\n.stream-droppable-spacer {\n\theight: 0.3em;\n}\n\n.stream-node-control {\n\tdisplay: flex;\n    flex: 0 0 45px;\n    padding-top: 4px;\n    padding-left: 4px;\n}\n\n.stream-node-control .stream-node-collapser,\n.stream-node-control .stream-node-handle-wrapper {\n    display: flex;\n    height: 13px;\n    width: 13px;\n    margin-top: 4px;\n    border-radius: 50%;\n    justify-content: center;\n    align-items: center;\n}\n\n.stream-node-control.stream-node-control-addnew .stream-node-handle-wrapper {\n\twidth: 20px;\n\theight: 20px;\n\tmargin-top: 0;\n}\n\n.stream-node-control.stream-node-control-addnew .stream-node-collapser {\n\twidth: 16px;\n}\n\n.stream-node-control.stream-node-control-addnew div.tc-btn-invisible svg {\n\topacity: 0.8;\n}\n\n\n.stream-node-control.stream-node-control-addnew div.tc-btn-invisible svg circle {\n\tfill: <<color tiddler-controls-foreground>>;\n\topacity: 0.6;\n}\n\n.stream-node-control.stream-node-control-addnew div.tc-btn-invisible svg line.line {\n\tstroke: <<color foreground>>;\n\topacity: 1;\n}\n\n.stream-node-control.stream-node-control-addnew div.tc-btn-invisible:hover svg circle {\n\tfill: <<color tiddler-controls-foreground-hover>>;\n}\n\n.stream-node-control .stream-node-collapser {\n\theight: 13px;\n\twidth: 20px;\n\topacity:0;\n}\n\n.stream-row-nochildren .stream-node-collapser {\n\tvisibility: hidden;\n}\n\n.stream-row:hover .stream-node-collapser,\n.stream-row-children-collapsed.stream-row:hover .stream-node-collapser {\n\topacity: 0.4;\n}\n\n.stream-row:hover .stream-node-collapser:hover,\n.stream-row-children-collapsed.stream-row:hover .stream-node-collapser:hover {\n\topacity: 0.9;\n}\n\n.stream-row-children-collapsed .stream-node-control .stream-node-collapser {\n\topacity: 0.4;\n}\n\n.stream-node-collapser button.tc-btn-invisible,\n.stream-node-collapser button.tc-btn-invisible:focus {\n\toutline: none;\n}\n\n.stream-node-collapser svg {\n\ttransform: rotateZ(90deg);\n\ttransition: transform 200ms ease-in-out 0s;\n}\n\n.stream-row-children-collapsed .stream-node-collapser svg {\n\ttransform: rotateZ(0deg);\n}\n\n.stream-node-control .stream-node-handle-wrapper .stream-node-handle {\n\twidth: 13px;\n\theight: 13px;\n\tdisplay: flex;\n\talign-items : center;\n\tjustify-content: center;\n}\n\n.stream-node-control .stream-node-handle-wrapper .stream-node-handle-inner {\n    border-radius: 50%;\n    width: 6px;\n    height: 6px;\n    background-color: <<color foreground>>;\n\topacity: 0.3;\n}\n\n/*\n.stream-row:hover .stream-node-control .stream-node-handle-wrapper .stream-node-handle-inner {\n\topacity: 0.7;\n}\n*/\n\n.stream-row:hover .stream-node-control .stream-node-handle-wrapper:hover .stream-node-handle-inner {\n\topacity: 1;\n} \n\n.stream-node-control.sq-contextmenu-active .stream-node-handle-wrapper .stream-node-handle-inner {\n\tborder: 5px solid #5778d8; /*b74e4e*/\n\topacity: 1;\n}\n\n\n.stream-node-block {\n    overflow-wrap: break-word;\n\t/* max-width: 550px; */\n    min-height: calc(1.5em + 8px);\n    box-sizing: border-box;\n    margin-top: -1px;\n    min-width: 100px;\n    width: 100%;\n    line-height: 1.5em;\n    cursor: text;\n    padding-top: 4px;\n    padding-bottom: 4px;\n\t/*white-space: pre-wrap;*/\n}\n\n.stream-node-block textarea {\n\twidth: 100%;\n\toutline-color: <<color tiddler-editor-border>>;\n\tborder: 1px solid <<color tiddler-editor-border>>;\n\n\tresize: none;\n}\n\n.stream-node-block textarea.streams-editor {\n\tline-height:1.5em;\n\tmargin-bottom: 0.6em;\n}\n\n.stream-node-block p:first-child {\n\tmargin-top:0;\n}\n\n.stream-node-block p:last-child {\n\tmargin-bottom:0;\n}\n\nspan.sq-breadcrumbs-fragment {\n    white-space: nowrap;\n    overflow: hidden;\n    display: inline-block;\n    text-overflow: ellipsis;\n    max-width: 500px;\n}\n\nspan.sq-breadcrumbs-fragment a.tc-tiddlylink {\n\tcolor: <<color foreground>>;\n}\n\n/*** framed engine styles ***/\n\n.tc-tiddler-frame .stream-node-block input.tc-edit-texteditor,\n.tc-tiddler-frame .stream-node-block textarea.tc-edit-texteditor,\n.tc-tiddler-frame .stream-node-block iframe.tc-edit-texteditor {\n\tbackground: <<color background>> !important;\n\tmargin-top:0;\n\tmargin-bottom: -1.6em;\n}\n\n<$reveal state=\"$:/config/sq/streams/enable-edit-toolbar\" type=\"nomatch\" text=\"yes\">\n.stream-node-block .tc-editor-toolbar {\n\tdisplay: none;\n}\n</$reveal>\n\n<$reveal state=\"$:/state/sq/streams/global-drag-state\" type=\"match\" text=\"yes\">\n\n/** active drag css **/\n\n</$reveal>\n\n<$reveal state=\"$:/state/sq/streams/global-drag-state\" type=\"nomatch\" text=\"yes\">\n\n/**no active drag css **/\n\n</$reveal>"
+        },
+        "$:/plugins/sq/streams/action-ifconfirmed.js": {
+            "title": "$:/plugins/sq/streams/action-ifconfirmed.js",
+            "text": "/*\\\n\ntitle: $:/plugins/sq/streams/action-ifconfirmed.js\ntype: application/javascript\nmodule-type: widget\n\nPrompt user for confirmation before executing actions contained inside the widget.\nIf the user cancels, the actions are not executed.\n\nExample:\n<$button>go\n<$action-ifconfirmed $message=\"Proceed?\">\n\t<$action-setfield $tiddler=\"lego\" $value=\"chopper\"/>\n</$action-ifconfirmed>\n</$button>\n\nParameters:\n$message : message to display\n\n\\*/\n(function(){\n\n/*jslint node: true, browser: true */\n/*global $tw: false */\n\"use strict\";\n\nvar Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\n\nvar IfConfirmedWidget = function(parseTreeNode,options) {\n\tthis.initialise(parseTreeNode,options);\n};\n\n/*\nInherit from the base widget class\n*/\nIfConfirmedWidget.prototype = new Widget();\n\n/*\nRender this widget into the DOM\n*/\nIfConfirmedWidget.prototype.render = function(parent,nextSibling) {\n\tthis.computeAttributes();\n\tthis.execute();\n\tthis.parentDomNode = parent;\n\tthis.renderChildren(parent,nextSibling);\n};\n\n/*\nCompute the internal state of the widget\n*/\nIfConfirmedWidget.prototype.execute = function() {\n\tthis.message = this.getAttribute(\"$message\");\n\tthis.prompt = this.getAttribute(\"$prompt\",\"yes\") == \"yes\" ? true : false;\n\tthis.makeChildWidgets();\n};\n\n/*\nRefresh the widget by ensuring our attributes are up to date\n*/\nIfConfirmedWidget.prototype.refresh = function(changedTiddlers) {\n\tvar changedAttributes = this.computeAttributes();\n\tif(changedAttributes[\"$message\"]) {\n\t\tthis.refreshSelf();\n\t\treturn true;\n\t}\n\treturn this.refreshChildren(changedTiddlers);\n};\n\n/*\nInvoke the action associated with this widget\n*/\nIfConfirmedWidget.prototype.invokeAction = function(triggeringWidget,event) {\n\tif(this.message) {\n\t\tvar status = true;\n\t\tif(this.prompt) {\n\t\t\tstatus = confirm(this.message);\n\t\t}\n\t\tif(status) {\n\t\t\tthis.invokeActions(triggeringWidget,event);\n\t\t\treturn true;\n\t\t}\n\t}\n};\n\nIfConfirmedWidget.prototype.allowActionPropagation = function() {\n\treturn false;\n};\n\nexports[\"action-ifconfirmed\"] = IfConfirmedWidget;\n\n})();",
+            "type": "application/javascript",
+            "module-type": "widget"
+        },
+        "$:/plugins/sq/streams/action-ifnoselection.js": {
+            "title": "$:/plugins/sq/streams/action-ifnoselection.js",
+            "text": "/*\\\n\ntitle: $:/plugins/sq/streams/action-ifnoselection.js\ntype: application/javascript\nmodule-type: widget\n\nDo not trigger actions within if there is text selected.\nAllows to select text in a button widget without triggering a click.\n\n\\*/\n(function(){\n\n/*jslint node: true, browser: true */\n/*global $tw: false */\n\"use strict\";\n\nvar Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\n\nvar IfNoSelectionWidget = function(parseTreeNode,options) {\n\tthis.initialise(parseTreeNode,options);\n};\n\n/*\nInherit from the base widget class\n*/\nIfNoSelectionWidget.prototype = new Widget();\n\n/*\nRender this widget into the DOM\n*/\nIfNoSelectionWidget.prototype.render = function(parent,nextSibling) {\n\tthis.computeAttributes();\n\tthis.execute();\n\tthis.parentDomNode = parent;\n\tthis.renderChildren(parent,nextSibling);\n};\n\n/*\nCompute the internal state of the widget\n*/\nIfNoSelectionWidget.prototype.execute = function() {\n\tthis.makeChildWidgets();\n};\n\n/*\nRefresh the widget by ensuring our attributes are up to date\n*/\nIfNoSelectionWidget.prototype.refresh = function(changedTiddlers) {\n\tvar changedAttributes = this.computeAttributes();\n\treturn this.refreshChildren(changedTiddlers);\n};\n\n/*\nInvoke the action associated with this widget\n*/\nIfNoSelectionWidget.prototype.invokeAction = function(triggeringWidget,event) {\n\t\n\tvar selection = window.getSelection();\n\tif(!selection.toString()) {\n\t\tthis.invokeActions(this,event);\n\t\treturn true;\n\t}\n};\n\nIfNoSelectionWidget.prototype.allowActionPropagation = function() {\n\treturn false;\n};\n\nexports[\"action-ifnoselection\"] = IfNoSelectionWidget;\n\n})();",
+            "type": "application/javascript",
+            "module-type": "widget"
+        },
+        "$:/plugins/sq/streams/action-withinput.js": {
+            "title": "$:/plugins/sq/streams/action-withinput.js",
+            "text": "/*\\\n\ntitle: $:/plugins/sq/streams/action-withinput.js\ntype: application/javascript\nmodule-type: widget\n\nPrompt user for input before executing actions contained inside the widget.\nThe string entered by the user is available in the variable userInput in the actions contained in the widget.\n\nPrompt user for confirmation before executing actions contained inside the widget.\nIf the user cancels, the actions are not executed.\n\nExample:\n<$button>go\n<$action-withinput message=\"What is your name?\" actions=\"\"\"<$action-setfield $tiddler=\"name\" $value=<<userInput>>/>\"\"\" />\n</$button>\n\nParameters:\nmessage : message to display\ndefault: default value, defaults to an empty string\n\n\n\n\n\\*/\n(function(){\n\n/*jslint node: true, browser: true */\n/*global $tw: false */\n\"use strict\";\n\nvar Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\n\nvar WithInputWidget = function(parseTreeNode,options) {\n\tthis.initialise(parseTreeNode,options);\n};\n\n/*\nInherit from the base widget class\n*/\nWithInputWidget.prototype = new Widget();\n\n/*\nRender this widget into the DOM\n*/\nWithInputWidget.prototype.render = function(parent,nextSibling) {\n\tthis.computeAttributes();\n\tthis.execute();\n\tthis.parentDomNode = parent;\n\tthis.renderChildren(parent,nextSibling);\n};\n\n/*\nCompute the internal state of the widget\n*/\nWithInputWidget.prototype.execute = function() {\n\tthis.message = this.getAttribute(\"message\");\n\tthis.defaultValue = this.getAttribute(\"default\",\"\");\n\tthis.actions = this.getAttribute(\"actions\");\n\tthis.makeChildWidgets();\n};\n\n/*\nRefresh the widget by ensuring our attributes are up to date\n*/\nWithInputWidget.prototype.refresh = function(changedTiddlers) {\n\tvar changedAttributes = this.computeAttributes();\n\tif(changedAttributes[\"message\"] || changedAttributes[\"default\"] || changedAttributes[\"actions\"]) {\n\t\tthis.refreshSelf();\n\t\treturn true;\n\t}\n\treturn this.refreshChildren(changedTiddlers);\n};\n\n/*\nInvoke the action associated with this widget\n*/\nWithInputWidget.prototype.invokeAction = function(triggeringWidget,event) {\n\tif(this.message && this.actions) {\n\t\tvar userData = prompt(this.message,this.defaultValue);\n\t\tif(userData != null) {\n\t\t\tthis.setVariable(\"userInput\",userData);\n\t\t\tthis.invokeActionString(this.actions,this,event);\n\t\t\treturn true;\n\t\t}\n\t}\n};\n\nWithInputWidget.prototype.allowActionPropagation = function() {\n\treturn false;\n};\n\nexports[\"action-withinput\"] = WithInputWidget;\n\n})();",
+            "type": "application/javascript",
+            "module-type": "widget"
+        },
+        "$:/plugins/sq/streams/action-withselection.js": {
+            "title": "$:/plugins/sq/streams/action-withselection.js",
+            "text": "/*\\\n\ntitle: $:/plugins/sq/streams/action-withselection.js\ntype: application/javascript\nmodule-type: widget\n\nTriggers an action string, providing certain variables.\nFor use in conjunction with the keyboard widget\nselectionStart : start position in characters of the selection\nselectionEnd: end position in characters of the selection\n\nExample:\n\n\\define kb-actions()\n<$action-withselection actions=\"\"\"\n<$action-setfield $tiddler=debug text=<<selection>> start=<<selectionStart>> end=<<selectionEnd>>/>\n\"\"\"/>\n\\end\n\n<$keyboard key=\"Enter\" actions=<<kb-actions>> >\n<$edit-text tiddler=\"temp\"/>\n</$keyboard>\n\n\\*/\n(function(){\n\n/*jslint node: true, browser: true */\n/*global $tw: false */\n\"use strict\";\n\nvar Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\n\nvar WithSelectionWidget = function(parseTreeNode,options) {\n\tthis.initialise(parseTreeNode,options);\n};\n\n/*\nInherit from the base widget class\n*/\nWithSelectionWidget.prototype = new Widget();\n\n/*\nRender this widget into the DOM\n*/\nWithSelectionWidget.prototype.render = function(parent,nextSibling) {\n\tthis.computeAttributes();\n\tthis.execute();\n\tthis.parentDomNode = parent;\n\tthis.renderChildren(parent,nextSibling);\n};\n\n/*\nCompute the internal state of the widget\n*/\nWithSelectionWidget.prototype.execute = function() {\n\tthis.actions = this.getAttribute(\"actions\");\n\tthis.makeChildWidgets();\n};\n\n/*\nRefresh the widget by ensuring our attributes are up to date\n*/\nWithSelectionWidget.prototype.refresh = function(changedTiddlers) {\n\tvar changedAttributes = this.computeAttributes();\n\tif(changedAttributes[\"actions\"]) {\n\t\tthis.refreshSelf();\n\t\treturn true;\n\t}\t\n\treturn this.refreshChildren(changedTiddlers);\n};\n\n/*\nInvoke the action associated with this widget\n*/\nWithSelectionWidget.prototype.invokeAction = function(triggeringWidget,event) {\n\tvar selection;\n\tvar iframe = triggeringWidget.domNodes[0].querySelector(\"iframe.streams-editor.tc-edit-texteditor.tc-edit-texteditor-body\");\n\tif(iframe) {\n\t\tvar idoc= iframe.contentDocument || iframe.contentWindow.document;\n\t\tselection = idoc.getSelection();\n\t} else {\n\t\tselection = window.getSelection();\n\t}\n\tvar el = selection.focusNode.children[0];\n\tif(selection && el) {\n\t\tthis.setVariable(\"selectionStart\",el.selectionStart.toString());\n\t\tthis.setVariable(\"selectionEnd\",el.selectionEnd.toString());\n\t\tthis.setVariable(\"selection\",selection.toString());\n\t}\n\tthis.invokeActionString(this.actions,this,event);\n\treturn true;\n};\n\n\nWithSelectionWidget.prototype.allowActionPropagation = function() {\n\treturn false;\n};\n\nexports[\"action-withselection\"] = WithSelectionWidget;\n\n})();",
+            "type": "application/javascript",
+            "module-type": "widget"
+        },
+        "$:/plugins/sq/streams/btn-dblclick": {
+            "title": "$:/plugins/sq/streams/btn-dblclick",
+            "text": "/*\\\n\ntitle: $:/plugins/sq/streams/btn-dblclick\ntype: application/javascript\nmodule-type: widget-subclass\n\n\\*/\n(function(){\n\t\nexports.baseClass = \"button\";\n\nexports.name = \"btn-dblclick\";\n\t\nexports.constructor = function(parseTreeNode,options) {\n\tthis.initialise(parseTreeNode,options);\n};\n\nexports.prototype = {};\t\n\nexports.prototype.render = function(parent,nextSibling) {\n\tvar self = this;\n\t// Remember parent\n\tthis.parentDomNode = parent;\n\t// Compute attributes and execute state\n\tthis.computeAttributes();\n\tthis.execute();\n\t// Create element\n\tvar tag = \"div\";\n\tif(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {\n\t\ttag = this.buttonTag;\n\t}\n\tvar domNode = this.document.createElement(tag);\n\tvar classes = this[\"class\"].split(\" \") || [];\n\tdomNode.className = classes.join(\" \");\t\n\tdomNode.addEventListener(\"dblclick\",function(event) {\n\t\tevent.preventDefault();\n\t\tif (window.getSelection) {\n\t\t\twindow.getSelection().removeAllRanges();\n\t\t} else if (document.selection) {\n\t\t\tdocument.selection.empty();\n\t\t}\n\t\tif(self.set || self.setTitle) {\n\t\t\tself.setTiddler();\n\t\t}\n\t\tif(self.actions) {\n\t\t\tself.invokeActionString(self.actions,self,event);\n\t\t}\n\t\tvar x = self.invokeActions(self,event);\n\t\treturn true;\n\t},false);\n\tparent.insertBefore(domNode,nextSibling);\n\tthis.renderChildren(domNode,null);\n\tthis.domNodes.push(domNode);\t\n}\t\n\t\n})();",
+            "type": "application/javascript",
+            "module-type": "widget-subclass"
+        },
+        "$:/plugins/sq/streams/widgets/keyboard-plus.js": {
+            "title": "$:/plugins/sq/streams/widgets/keyboard-plus.js",
+            "text": "/*\\\ntitle: $:/plugins/sq/streams/widgets/keyboard-plus.js\ntype: application/javascript\nmodule-type: widget\n\\*/\n(function(){\n\t\nvar Widget = require(\"$:/core/modules/widgets/widget.js\").widget;\n\nvar KeyboardWidget = function(parseTreeNode,options) {\n\tthis.initialise(parseTreeNode,options);\n};\n\n/*\nInherit from the base widget class\n*/\nKeyboardWidget.prototype = new Widget();\n\n/*\nRender this widget into the DOM\n*/\nKeyboardWidget.prototype.render = function(parent,nextSibling) {\n\tvar self = this;\n\t// Remember parent\n\tthis.parentDomNode = parent;\n\t// Compute attributes and execute state\n\tthis.computeAttributes();\n\tthis.execute();\n\tvar tag = this.parseTreeNode.isBlock ? \"div\" : \"span\";\n\tif(this.tag && $tw.config.htmlUnsafeElements.indexOf(this.tag) === -1) {\n\t\ttag = this.tag;\n\t}\n\t// Create element\n\tvar domNode = this.document.createElement(tag);\n\t// Assign classes\n\tvar classes = (this[\"class\"] || \"\").split(\" \");\n\tclasses.push(\"tc-keyboard\");\n\tdomNode.className = classes.join(\" \");\n\t\n\t\n\t// Add a keyboard event handler\n\tdomNode.addEventListener(\"keydown\",function (event) {\n\t\n\t\tvar key, action, preventDefault;\n\t\tfor(var i=0; i<self.shortcutTiddlers.length; i++) {\n\t\t\tif(self.shortcutParsedList[i] !== undefined && $tw.keyboardManager.checkKeyDescriptors(event,self.shortcutParsedList[i])) {\n\t\t\t\tkey = self.shortcutParsedList[i];\n\t\t\t\taction = self.shortcutActionList[i];\n\t\t\t\tpreventDefault = self.shortcutPreventDefaultList[i];\n\t\t\t}\n\t\t}\n\t\tif(key !== undefined) {\n\t\t\tif(preventDefault) {\n\t\t\t\tevent.preventDefault();\n\t\t\t}\n\t\t\tevent.stopPropagation();\n\t\t\tself.invokeActionString(action,self,event);\n\t\t\treturn true;\n\t\t}\n\t\treturn false;\t\n\t},false);\n\t\n\t// Insert element\n\tparent.insertBefore(domNode,nextSibling);\n\tthis.renderChildren(domNode,null);\n\tthis.domNodes.push(domNode);\t\n}\t\n\t\nKeyboardWidget.prototype.execute = function() {\n\tvar self = this;\n\t// Get attributes\n\tthis.tag = this.getAttribute(\"tag\",\"\");\n\tthis[\"class\"] = this.getAttribute(\"class\",\"\");\n\tthis.shortcutTiddlerTag = this.getAttribute(\"shortcutTag\");\n\t//var keyInfoArray = [];\n\t\n\tthis.shortcutTiddlers = this.wiki.getTiddlersWithTag(this.shortcutTiddlerTag);\n\tthis.shortcutKeysList = [];\n\tthis.shortcutActionList = [];\n\tthis.shortcutParsedList = [];\n\tthis.shortcutPreventDefaultList = [];\n\t\n\tfor(var i=0; i<this.shortcutTiddlers.length; i++) {\n\t\tvar title = this.shortcutTiddlers[i],\n\t\t\ttiddlerFields = this.wiki.getTiddler(title).fields;\n\t\tthis.shortcutKeysList[i] = tiddlerFields.key !== undefined ? tiddlerFields.key : undefined;\n\t\tthis.shortcutActionList[i] = tiddlerFields.text;\n\t\tthis.shortcutPreventDefaultList[i] = tiddlerFields[\"prevent-default\"] && tiddlerFields[\"prevent-default\"] === \"no\" ? false : true;\n\t\tthis.shortcutParsedList[i] = this.shortcutKeysList[i] !== undefined ? $tw.keyboardManager.parseKeyDescriptors(this.shortcutKeysList[i]) : undefined;\n\t}\n\t\n\t// Make child widgets\n\tthis.makeChildWidgets();\n};\n\n/*\nSelectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering\n*/\nKeyboardWidget.prototype.refresh = function(changedTiddlers) {\n\t\n\tvar newList = this.wiki.getTiddlersWithTag(this.shortcutTiddlerTag)\n\tvar hasChanged = $tw.utils.hopArray(changedTiddlers,this.shortcutTiddlers) ? true :\n\t\t($tw.utils.hopArray(changedTiddlers,newList) ? true :\n\t\t($tw.keyboardManager.detectNewShortcuts(changedTiddlers))\n\t);\n\t// Re-cache shortcuts if something changed\n\tif(hasChanged) {\n\t//\tthis.updateShortcutLists(newList);\n\t\tthis.refreshSelf();\n\t\treturn true;\n\t}\n\t\n\tvar changedAttributes = this.computeAttributes();\n\tif(changedAttributes[\"class\"] || changedAttributes.tag) {\n\t\tthis.refreshSelf();\n\t\treturn true;\n\t}\n\n\treturn this.refreshChildren(changedTiddlers);\n};\n\t\nexports[\"keyboard-plus\"] = KeyboardWidget;\n\n})();\t",
+            "type": "application/javascript",
+            "module-type": "widget"
+        },
+        "$:/config/shortcuts-mac/streams-save-and-exit": {
+            "created": "20200930114813014",
+            "title": "$:/config/shortcuts-mac/streams-save-and-exit",
+            "text": "cmd-Enter",
+            "modified": "20200930115012086",
+            "tags": "tiddlyresearch"
+        },
+        "$:/config/shortcuts-mac/streams-focus-lower": {
+            "created": "20200930114758752",
+            "title": "$:/config/shortcuts-mac/streams-focus-lower",
+            "text": "cmd-Down",
+            "modified": "20200930115020227",
+            "tags": "tiddlyresearch"
+        },
+        "$:/config/shortcuts-mac/streams-focus-higher": {
+            "created": "20200930114751540",
+            "title": "$:/config/shortcuts-mac/streams-focus-higher",
+            "text": "cmd-Up",
+            "modified": "20200930115027393",
+            "tags": "tiddlyresearch"
+        },
+        "$:/config/shortcuts-mac/streams-delete": {
+            "created": "20200930114739180",
+            "title": "$:/config/shortcuts-mac/streams-delete",
+            "text": "cmd-Delete",
+            "modified": "20200930115034989",
+            "tags": "tiddlyresearch"
+        }
+    }
+}

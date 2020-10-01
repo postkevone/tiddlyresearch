@@ -1,0 +1,57 @@
+{
+    "author": "Tobias Beer",
+    "core-version": ">=5.1.9",
+    "description": "(tiddlyresearch fork) Create popups, sliders or accordion menus with the appear widget.",
+    "documentation": "https://tobibeer.github.io/tw5-appear",
+    "list": "readme",
+    "plugin-type": "plugin",
+    "source": "https://github.com/tobibeer/tw5-appear",
+    "title": "$:/plugins/tobibeer/appear",
+    "type": "application/json",
+    "version": "0.6.2",
+    "tiddlers": {
+        "$:/plugins/tobibeer/appear/widget.js": {
+            "title": "$:/plugins/tobibeer/appear/widget.js",
+            "text": "/*\\\r\ntitle: $:/plugins/tobibeer/appear/widget.js\r\ntype: application/javascript\r\nmodule-type: widget\r\n\r\nUse the appear widget for popups, sliders, accordion menus\r\n\r\n@preserve\r\n\\*/\n(function(){\"use strict\";var t=require(\"$:/core/modules/widgets/widget.js\").widget,e=function(t,e){this.initialise(t,e)},i={};e.prototype=new t;e.prototype.render=function(t,e){this.parentDomNode=t;this.nextSibling=e;this.computeAttributes();this.execute();var i,s,r,a,h,n,l=[];if(this.handle){this.getHandlerCache(this.handle,1);this.refreshHandler()}else{s={type:\"button\"};s.attributes=this.setAttributes(s,\"button\");i=s.attributes[\"class\"].value.trim();s.attributes[\"class\"].value=i+\" appear-show\"+(this.handler?\" tc-popup-absolute\":\"\");s.children=this.wiki.parseText(\"text/vnd.tiddlywiki\",this.show,{parseAsInline:true}).tree;h={type:\"reveal\",children:this.parseTreeNode.children};h.attributes=this.setAttributes(h,\"reveal\");h.isBlock=!(this.mode&&this.mode===\"inline\");if(h.attributes.type&&h.attributes.type.value===\"popup\"){s.attributes.popup=h.attributes.state;l.push(s);if(!this.handler){l.push(h)}else{s.attributes.handler=this.handler}}else{h.attributes.type={type:\"string\",value:\"match\"};h.attributes.text={type:\"string\",value:this.currentTiddler};s.attributes.set=h.attributes.state;s.attributes.setTo={type:\"string\",value:this.currentTiddler};a={type:\"reveal\",isBlock:this.block,children:[s],attributes:{type:{type:\"string\",value:\"nomatch\"},state:h.attributes.state,text:{type:\"string\",value:this.currentTiddler}}};if(!this.once){r=$tw.utils.deepCopy(s);r.attributes[\"class\"].value=i+\" appear-hide \"+(this.attr.button.selectedClass?this.attr.button.selectedClass:\"\");r.attributes.setTo={type:\"string\",value:\"\"};r.children=this.wiki.parseText(\"text/vnd.tiddlywiki\",this.hide,{parseAsInline:true}).tree}n=$tw.utils.deepCopy(a);n.children=[];if(!this.once){n.children.push(r)}if(!this.handler){n.children.push(h)}n.attributes.type.value=\"match\";l.push(a,n)}this.makeChildWidgets(l);this.renderChildren(this.parentDomNode,e);if(this.handler){this.addToHandlerCache(h)}}};e.prototype.execute=function(){var t=this;this.attr={map:{reveal:{\"class\":1,position:1,retain:1,state:1,style:1,tag:1,type:1},button:{\"button-class\":1,\"button-style\":1,\"button-tag\":1,tooltip:1,selectedClass:1}},rename:{\"button-class\":\"class\",\"button-style\":\"style\",\"button-tag\":\"tag\"},button:{},reveal:{}};$tw.utils.each(this.attributes,function(e,i){var s;$tw.utils.each(t.attr.map,function(r,a){$tw.utils.each(Object.keys(r),function(r){if(r==i){t.attr[a][i]=e;s=false;return false}});return s})});this.currentTiddler=this.getVariable(\"currentTiddler\");this.show=this.getValue(this.attributes.show,\"show\");this.hide=this.getValue(this.attributes.hide,\"hide\");if(!this.hide){this.hide=this.show}this.once=this.attributes.once&&this.attributes.once!==\"false\";this.$state=this.attributes.$state;this.mode=this.getValue(this.attributes.mode,\"mode\");this.handle=this.attributes.handle;this.handler=this.attributes.handler;this.handlerVariables=(this.attributes.variables||\"\")+\" currentTiddler\";this.keep=[\"yes\",\"true\"].indexOf((this.getValue(this.attributes.keep,\"keep\")||\"\").toLocaleLowerCase())>-1;if(!this.attr.reveal.state){this.attr.reveal.state=this.getValue(undefined,\"default-state\")+this.currentTiddler+this.getStateQualifier()+\"/\"+(this.attr.reveal.type?this.attr.reveal.type+\"/\":\"\")+(this.mode?this.mode+\"/\":\"\")+(this.once?\"once/\":\"\")+(this.$state?\"/\"+this.$state:\"\")}};e.prototype.refresh=function(t){var e=this.computeAttributes();if(Object.keys(e).length){this.refreshSelf();return true}if(this.handle){this.refreshHandler()}return this.refreshChildren(t)};e.prototype.getValue=function(t,e){var i,s,r={show:\"»\",\"default-state\":\"$:/temp/appear/\"};if(t===undefined){i=this.wiki.getTiddler(\"$:/plugins/tobibeer/appear/defaults/\"+e);if(i){s=i.getFieldString(\"undefined\");if(!s||s===\"false\"){t=i.getFieldString(\"text\")}}}if(t===undefined){t=r[e]}return t};e.prototype.setAttributes=function(t,e){var i=this,s={};$tw.utils.each(Object.keys(this.attr.map[e]),function(r){var a,h=i.attr.rename[r];if(!h){h=r}a=i.getValue(i.attr[e][r],r);if(h===\"class\"){a=[\"appear\",\"appear-\"+e,e===\"reveal\"&&i.keep?\"tc-popup-keep\":\"\",i.mode?\"appear-\"+i.mode:\"\",i.once?\"appear-once\":\"\",a||\"\"].join(\" \")}if(a!==undefined){if(h===\"tag\"){t.tag=a}else{s[h]={type:\"string\",value:a}}}});return s};e.prototype.getHandlerCache=function(t,e){var s=i[t];if(!s||e){i[t]={handled:{},handle:{}};s=i[t]}return s};e.prototype.refreshHandler=function(){var t=this,e=this.getHandlerCache(this.handle),s=e.handle;if(Object.keys(s).length){$tw.utils.each(s,function(e,i){t.removeChildNode(i);t.children.push(t.makeChildWidget(e));t.children[t.children.length-1].render(t.parentDomNode,t.nextSibling)});i[this.handle].handle={}}};e.prototype.removeChildNode=function(t){var e=this;$tw.utils.each(this.children,function(i,s){if(i.children[0].state===t){i.removeChildDomNodes();e.children.splice(s);return false}})};e.prototype.addToHandlerCache=function(t){var e=this,i=t.attributes.state.value,s=this.getHandlerCache(this.handler),r=s.handled[i],a={type:\"vars\",children:[t],attributes:{}};$tw.utils.each((this.handlerVariables||\"\").split(\" \"),function(t){t=t.trim();if(t){a.attributes[t]={type:\"string\",value:(e.getVariable(t)||\"\").toString()}}});if(a!==r){s.handle[i]=a;this.wiki.setText(\"$:/temp/appear-handler/\"+this.handler,\"text\",undefined,i)}};exports.appear=e})();",
+            "type": "application/javascript",
+            "module-type": "widget"
+        },
+        "$:/plugins/tobibeer/appear/defaults/show": {
+            "title": "$:/plugins/tobibeer/appear/defaults/show",
+            "text": "»"
+        },
+        "$:/plugins/tobibeer/appear/defaults/mode": {
+            "title": "$:/plugins/tobibeer/appear/defaults/mode",
+            "text": "block"
+        },
+        "$:/plugins/tobibeer/appear/defaults/keep": {
+            "title": "$:/plugins/tobibeer/appear/defaults/keep",
+            "text": "yes"
+        },
+        "$:/plugins/tobibeer/appear/defaults/button-class": {
+            "title": "$:/plugins/tobibeer/appear/defaults/button-class",
+            "text": "tc-btn-invisible tc-tiddlylink"
+        },
+        "$:/plugins/tobibeer/appear/defaults/default-state": {
+            "title": "$:/plugins/tobibeer/appear/defaults/default-state",
+            "text": "$:/temp/appear/"
+        },
+        "$:/plugins/tobibeer/appear/popup.js": {
+            "title": "$:/plugins/tobibeer/appear/popup.js",
+            "text": "/*\\\r\ntitle: $:/plugins/tobibeer/appear/popup.js\r\ntype: application/javascript\r\nmodule-type: utils\r\n\r\nAn enhanced version of the core Popup to support:\r\n* absolute popups\r\n* preview popups\r\n* popup z-index\r\n\r\n@preserve\r\n\\*/\n(function(){\"use strict\";var t=require(\"$:/core/modules/utils/dom/popup.js\").Popup,e=require(\"$:/core/modules/widgets/reveal.js\").reveal,s=e.prototype.refresh;t.prototype.show=function(t){var e,s=t.domNode,p=$tw.utils.hasClass(s,\"tc-popup-absolute\"),o=this.popupInfo(s),i=function(t){var e=t,s=0,p=0;do{s+=e.offsetLeft||0;p+=e.offsetTop||0;e=e.offsetParent}while(e);return{left:s,top:p}},l={left:s.offsetLeft,top:s.offsetTop};e=o.popupLevel;if(o.isHandle){e++}this.cancel(e);if(this.findPopup(t.title)===-1){this.popups.push({title:t.title,wiki:t.wiki,domNode:s})}l=p?i(s):l;t.wiki.setTextReference(t.title,\"(\"+l.left+\",\"+l.top+\",\"+s.offsetWidth+\",\"+s.offsetHeight+\")\");if(this.popups.length>0){this.rootElement.addEventListener(\"click\",this,true)}};t.prototype.popupInfo=function(t){var e,s=false,p=t;while(p&&e===undefined){if($tw.utils.hasClass(p,\"tc-popup-handle\")||$tw.utils.hasClass(p,\"tc-popup-keep\")){s=true}if($tw.utils.hasClass(p,\"tc-reveal\")&&($tw.utils.hasClass(p,\"tc-popup\")||$tw.utils.hasClass(p,\"tc-popup-handle\"))){e=parseInt(p.style.zIndex)-1e3}p=p.parentNode}var o={popupLevel:e||0,isHandle:s};return o};t.prototype.handleEvent=function(t){if(t.type===\"click\"){var e=this.popupInfo(t.target),s=e.popupLevel-1;if(e.isHandle){if(s<0){s=1}else{s++}}this.cancel(s)}};e.prototype.refresh=function(){var t,e,p=this.isOpen;e=s.apply(this,arguments);t=this.domNodes[0];if(this.isOpen&&(p!==this.isOpen||!t.style.zIndex)&&t&&(this.type===\"popup\"||$tw.utils.hasClass(t,\"tc-block-dropdown\")&&$tw.utils.hasClass(t,\"tc-reveal\"))){t.style.zIndex=1e3+$tw.popup.popups.length}return e}})();",
+            "type": "application/javascript",
+            "module-type": "utils"
+        },
+        "$:/plugins/tobibeer/appear/readme": {
+            "title": "$:/plugins/tobibeer/appear/readme",
+            "text": "This plugin provides the ''$appear'' widget that can render popups and sliders (inline or block) as well as accordion menus.\n\n!! Attributes\r\n; type\r\n: set to `popup` to have the content appear as a popup\r\n; show\r\n: the button label\r\n; hide\r\n: the hide button label\r\n; mode\r\n: either `block` or `inline`, with respect to the inner content\r\n: any other mode is interpreted as block mode, without the default styles applying, e.g. drop-shadows\r\n; once\r\n: allows to click the button once, then hides it (unless the state is deleted)\r\n; $state\r\n: the widget calculates a state for you, use this to append a simple id\r\n; state\r\n: alternatively, specify a fully qualified state\r\n; keep\r\n: make popups sticky when `yes` or `true`\r\n; handle / handler / variables\r\n: allows to take the popup contents out of the flow and render them elsewhere on the page\r\n: required to properly create popups in table cells and other constained elements\r\n: specify variables to take along\n\n<br>\n\n; documentation / examples / demos...\r\n: http://tobibeer.github.io/tw5-plugins#appear\r\n"
+        },
+        "$:/plugins/tobibeer/appear/styles": {
+            "text": "\\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline html\n\n<pre>.tc-reveal.appear-block,\n.tc-popup.appear {\n\tborder-radius: 10px;\n\tborder: 2px solid <<colour primary-old>>;\n\tbackground: <<colour background>>;\n\t-webkit-box-shadow: 0 0 5px black;\n\tbox-shadow: 0 0 6px black;\n\topacity: 0.95;\n}\n\n.appear-reveal.appear-inline{\nmargin-left:5px;\n}\n.appear-reveal.appear-inline.appear-once{\nmargin-left:0;\n}</pre>",
+            "title": "$:/plugins/tobibeer/appear/styles",
+            "tags": "$:/tags/Stylesheet tiddlyresearch",
+            "modified": "20200913092032576",
+            "created": "20200905040648384"
+        }
+    }
+}

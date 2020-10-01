@@ -1,0 +1,61 @@
+{
+    "description": "sidebar tiddlers",
+    "plugin-type": "plugin",
+    "title": "$:/plugins/kebi/tiddlyresearch-sidebar",
+    "type": "application/json",
+    "version": "1.0.1",
+    "tiddlers": {
+        "$:/plugins/kebi/tiddlyresearch-sidebar/daily-tiddlers": {
+            "created": "20200905043250157",
+            "text": "<div class=\"tc-table-of-contents\">\n<<toc-selective-expandable '.daily-tiddler' !sort[created]>>\n</div>",
+            "title": "$:/plugins/kebi/tiddlyresearch-sidebar/daily-tiddlers",
+            "tags": "$:/plugins/nico/notebook/tags/SidebarSection",
+            "modified": "20200914002034423",
+            "list-before": "$:/plugins/kebi/tiddlyresearch-sidebar/recent",
+            "caption": "Daily Tiddlers"
+        },
+        "$:/plugins/kebi/tiddlyresearch-sidebar/folders": {
+            "created": "20200905043351008",
+            "text": "<div class=\"tc-table-of-contents\">\n<<toc-selective-expandable '.folder' sort[title]>>\n</div>",
+            "tags": "$:/plugins/nico/notebook/tags/SidebarSection",
+            "title": "$:/plugins/kebi/tiddlyresearch-sidebar/folders",
+            "modified": "20200914002016721",
+            "caption": "Folders",
+            "list-before": "$:/plugins/kebi/tiddlyresearch-sidebar/tiddlers"
+        },
+        "$:/plugins/kebi/tiddlyresearch-sidebar/tiddlers": {
+            "created": "20200905043435686",
+            "text": "<div class=\"tc-table-of-contents\">\n<<toc-selective-expandable '.tiddler' !sort[created]>>\n<div>",
+            "tags": "$:/plugins/nico/notebook/tags/SidebarSection",
+            "title": "$:/plugins/kebi/tiddlyresearch-sidebar/tiddlers",
+            "modified": "20200914001956123",
+            "caption": "Tiddlers",
+            "list-before": "$:/plugins/kebi/tiddlyresearch-sidebar/daily-tiddlers"
+        },
+        "$:/plugins/kebi/tiddlyresearch-sidebar/projects": {
+            "created": "20200907122209960",
+            "text": "{{$:/plugins/nico/pm/ui/Dashboard}}",
+            "title": "$:/plugins/kebi/tiddlyresearch-sidebar/projects",
+            "tags": "$:/plugins/nico/notebook/tags/SidebarSection",
+            "modified": "20200907123137840",
+            "list-before": "$:/plugins/kebi/tiddlyresearch-sidebar/recent",
+            "caption": "Projects"
+        },
+        "$:/plugins/kebi/tiddlyresearch-sidebar/recent": {
+            "created": "20200907122116432",
+            "text": "{{$:/core/ui/SideBar/Recent}}",
+            "title": "$:/plugins/kebi/tiddlyresearch-sidebar/recent",
+            "tags": "$:/plugins/nico/notebook/tags/SidebarSection",
+            "modified": "20200907122136344",
+            "caption": "Recent"
+        },
+        "$:/plugins/kebi/tiddlyresearch-sidebar/open": {
+            "created": "20200907122755961",
+            "text": "\\whitespace trim\n\\define lingo-base() $:/language/CloseAll/\n\n\\define drop-actions()\n<$action-listops $tiddler=<<tv-story-list>> $subfilter=\"+[insertbefore:currentTiddler<actionTiddler>]\"/>\n\\end\n\n\\define placeholder()\n<div class=\"tc-droppable-placeholder\"/>\n\\end\n\n\\define droppable-item(button)\n\\whitespace trim\n<$droppable actions=<<drop-actions>> enable=<<tv-allow-drag-and-drop>>>\n<<placeholder>>\n<div>\n$button$\n</div>\n</$droppable>\n\\end\n\n<div class=\"tc-sidebar-tab-open\">\n<$list filter=\"[list<tv-story-list>]\" history=<<tv-history-list>> storyview=\"pop\">\n<div class=\"tc-sidebar-tab-open-item\">\n<$macrocall $name=\"droppable-item\" button=\"\"\"<$button message=\"tm-close-tiddler\" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=\"tc-btn-invisible tc-btn-mini\">{{$:/core/images/close-button}}</$button>&nbsp;<$link to={{!!title}}><$view field=\"title\"/></$link>\"\"\"/>\n</div>\n</$list>\n<$tiddler tiddler=\"\">\n<div>\n<$macrocall $name=\"droppable-item\" button=\"\"\"<$button message=\"tm-close-all-tiddlers\" class=\"tc-btn-invisible tc-btn-mini\"><<lingo Button>></$button>\"\"\"/>\n</div>\n</$tiddler>\n</div>\n",
+            "title": "$:/plugins/kebi/tiddlyresearch-sidebar/open",
+            "caption": "Open",
+            "modified": "20200907122848755",
+            "tags": "$:/plugins/nico/notebook/tags/SidebarSection"
+        }
+    }
+}

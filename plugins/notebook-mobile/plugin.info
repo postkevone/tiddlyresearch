@@ -1,0 +1,20 @@
+{
+    "author": "Nicolas Petton",
+    "description": "JS hooks for the mobile version of the Notebook theme",
+    "name": "Notebook Mobile",
+    "plugin-type": "plugin",
+    "title": "$:/plugins/nico/notebook-mobile",
+    "type": "application/json",
+    "version": "0.0.2",
+    "tiddlers": {
+        "$:/plugins/nico/notebook-mobile/js/notebookSidebarNav.js": {
+            "created": "20200430151329085",
+            "text": "/*\\\ntitle: $:/plugins/nico/notebook/js/notebookSidebarNav.js\ntype: application/javascript\nmodule-type: global\n\nCloses the notebook sidebar on mobile when navigating\n\n\\*/\n(function(){\n\n    /*jslint node: true, browser: true */\n    /*global $tw: false */\n    \"use strict\";\n\n    const isOnMobile = () => {\n\treturn document.querySelector('.nc-bottombar').getClientRects().length > 0;\n    };\n\n    const closeSidebar = () => {\n\t$tw.wiki.setText(\"$:/state/notebook-sidebar\", \"text\", undefined, \"no\");\n    };\n\n    const closeSidebarOnMobile = () => {\n\tif (isOnMobile()) { \n            console.log(\"closing sidebar\");\n\t    closeSidebar();\n\t};\n    };\n\n    const setup = () => {\n\t$tw.hooks.addHook(\"th-navigating\",function(event) {\n\t    closeSidebarOnMobile();\n\t    return event;\n\t});\n    };\n\n    setup();\n\n    exports.closeNotebookSidebar = closeSidebar;\n})();\n",
+            "type": "application/javascript",
+            "title": "$:/plugins/nico/notebook-mobile/js/notebookSidebarNav.js",
+            "tags": "",
+            "module-type": "global",
+            "modified": "20200430160206896"
+        }
+    }
+}

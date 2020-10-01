@@ -1,0 +1,51 @@
+{
+    "description": "reference plugin",
+    "list": "config",
+    "name": "tiddlyresearch-references",
+    "plugin-type": "plugin",
+    "title": "$:/plugins/kebi/tiddlyresearch-references",
+    "type": "application/json",
+    "version": "1.0.2",
+    "tiddlers": {
+        "$:/plugins/kebi/tiddlyresearch-references/macros": {
+            "created": "20200827003844885",
+            "text": "\\define show-references(filtertransclude, filtertag, filterbacklink, filtertitle, filtertext, type:\"ul\", subtype:\"li\")\n\\whitespace trim\n  <$type$ class=\"footer\">\n    <$list filter=\"$filtertransclude$\">\n      <$subtype$ class=\"filtertransclude\">\n        <$link to={{!!title}}>\n          <$transclude field=\"caption\">\n            <$view field=\"title\"/>\n          </$transclude>\n        </$link>\n      </$subtype$>\n    </$list>\n    <$list filter=\"$filtertag$\">\n      <$subtype$ class=\"filtertag\">\n        <$link to={{!!title}}>\n          <$transclude field=\"caption\">\n            <$view field=\"title\"/>\n          </$transclude>\n        </$link>\n      </$subtype$>\n    </$list>\n    <$list filter=\"$filterbacklink$\">\n      <$subtype$ class=\"filterbacklink\">\n        <$link to={{!!title}}>\n          <$transclude field=\"caption\">\n            <$view field=\"title\"/>\n          </$transclude>\n        </$link>\n      </$subtype$>\n    </$list>\n    <$list filter=\"$filtertitle$\">\n      <$subtype$ class=\"filtertitle\">\n        <$link to={{!!title}}>\n          <$transclude field=\"caption\">\n            <$view field=\"title\"/>\n          </$transclude>\n        </$link>\n      </$subtype$>\n    </$list>\n    <$list filter=\"$filtertext$\">\n      <$subtype$ class=\"filtertext\">\n        <$link to={{!!title}}>\n          <$transclude field=\"caption\">\n            <$view field=\"title\"/>\n          </$transclude>\n        </$link>\n      </$subtype$>\n    </$list>\n  </$type$>\n\\end",
+            "title": "$:/plugins/kebi/tiddlyresearch-references/macros",
+            "tags": "$:/tags/Macro",
+            "modified": "20201001025854259"
+        },
+        "$:/plugins/kebi/tiddlyresearch-references/filters": {
+            "created": "20200827003650814",
+            "text": "\\define text-pattern()\n$(currentTiddler)$(?i)\n\\end\n\n\\define text-pattern-transclude()\n\\u007B\\u007B$(currentTiddler)$\\u007D\\u007D\n\\end\n\n\\define text-pattern-transclude-embed()\n\\u007B\\u007B$(currentTiddler)$\\u007C\\u007Cembed\\u007D\\u007D\n\\end\n\n\\define text-pattern-backlink()\n\\u005B\\u005B$(currentTiddler)$\\u005D\\u005D(?i)\n\\end\n\n\\define text-pattern-reference()\nreference=\"$(currentTiddler)$\"\n\\end\n\n<<show-references\nfiltertransclude:\"[regexp:text<text-pattern-transclude>] [regexp:text<text-pattern-transclude-embed>] -[is[current]] -[is[system]] -[all[shadows]]\"\nfiltertag:\"[all[current]tagging[]] -[is[current]] -[is[system]] -[all[shadows]]\"\nfilterbacklink:\"[all[current]backlinks[]] [regexp:text<text-pattern-backlink>] -[is[current]] -[is[system]] -[all[shadows]]\"\nfiltertitle:\"[regexp:title<text-pattern>] -[is[current]] -[is[system]] -[all[shadows]]\"\nfiltertext:\"[regexp:text<text-pattern>] -[is[current]] -[is[system]] -[all[shadows]] -[all[current]backlinks[]] -[regexp:text<text-pattern-backlink>] -[regexp:text<text-pattern-transclude>] -[regexp:text<text-pattern-transclude-embed>] -[regexp:text<text-pattern-reference>]\"\n>>",
+            "title": "$:/plugins/kebi/tiddlyresearch-references/filters",
+            "tags": "$:/tags/ViewTemplate",
+            "modified": "20201001025736898"
+        },
+        "$:/plugins/kebi/tiddlyresearch-references/css": {
+            "created": "20200827004041319",
+            "text": ".footer {\n\tdisplay: -webkit-box;\n\tdisplay: -ms-flexbox;\n\tdisplay: flex;\n\t-webkit-box-orient: horizontal;\n\t-webkit-box-direction: normal;\n\t-ms-flex-direction: row;\n\tflex-direction: row;\n\t-ms-flex-wrap: wrap;\n\tflex-wrap: wrap;\n\tpadding: 0;\n\tmargin: 1em 0;\n}\n\n.stream-node-block p {\n    margin: 0.25em 0;\n}\n\n.footer-node {\n\tmargin: 0;\n}\n\n.filtertransclude,\n.filtertag,\n.filterbacklink,\n.filtertitle,\n.filtertext {\n\tdisplay: -webkit-inline-box;\n\tdisplay: -ms-inline-flexbox;\n\tdisplay: inline-flex;\n\t-webkit-box-orient: horizontal;\n\t-webkit-box-direction: normal;\n\t-ms-flex-direction: row;\n\tflex-direction: row;\n\t-webkit-box-align: center;\n\t-ms-flex-align: center;\n\talign-items: center;\n\tposition: relative;\n\tborder: none;\n\tborder-radius: 3px;\n\t-webkit-box-shadow: none;\n\tbox-shadow: none;\n\tmin-width: 20px;\n\tmax-width: 100%;\n\tmin-height: 20px;\n\tline-height: 16px;\n\tfont-size: 12px;\n\tmargin: 2px;\n\tpadding: 2px 6px;\n}\n\n.filtertransclude {\n\tbackground-color: #eaeaea;\n}\n\n.filtertag {\n\tbackground-color: <<colour tag-background>>;\n}\n\n.filterbacklink {\n\tbackground-color: #137CBD;\n}\n\n.filtertitle{\n\tbackground-color: #E8554E;\n}\n\n.filtertext {\n\tbackground-color: rgba(92, 112, 128, 0.9);\n}\n\n.filtertransclude:hover,\n.filtertag:hover,\n.filterbacklink:hover,\n.filtertitle:hover,\n.filtertext:hover {\n\topacity: 0.8;\n}\n\n.filtertransclude a, .filtertransclude a:hover,\n.filtertag a, .filtertag a:hover,\n.filterbacklink a, .filterbacklink a:hover,\n.filtertitle a, .filtertitle a:hover,\n.filtertext a, .filtertext a:hover {\n\topacity: 1 !important;\n\ttext-decoration: none !important;\n\tline-height: unset;\n\tbackground-color: unset;\n\tborder: none;\n\tpadding: 0;\n}\n\n.filtertransclude a, .filtertransclude a:hover,\n.filtertag a, .filtertag a:hover {\n\tcolor: #444444 !important;\n}\n\n.filterbacklink a, .filterbacklink a:hover,\n.filtertitle a, .filtertitle a:hover {\n\tcolor: #ffffff !important;\n}\n\n.filtertext a, .filtertext a:hover {\n\tcolor: #f5f8fa !important;\n}",
+            "title": "$:/plugins/kebi/tiddlyresearch-references/css",
+            "tags": "$:/tags/Stylesheet",
+            "modified": "20201001005444615"
+        },
+        "$:/plugins/kebi/tiddlyresearch-references/filters-node": {
+            "created": "20201001002304182",
+            "text": "\\define text-pattern-transclude()\n\\u007B\\u007B$(currentTiddler)$\\u007D\\u007D\n\\end\n\n\\define text-pattern-transclude-embed()\n\\u007B\\u007B$(currentTiddler)$\\u007C\\u007Cembed\\u007D\\u007D\n\\end\n\n<$reveal type=\"match\" state=\"$:/plugins/kebi/tiddlyresearch-references/config/filters-node\" text=\"enable\">\n<ul class=\"footer footer-node\">\n\t<$list filter=\"[regexp:text<text-pattern-transclude>] [regexp:text<text-pattern-transclude-embed>] -[is[current]] -[is[system]] -[all[shadows]]\">\n\t\t<li class=\"filtertransclude\">\n\t\t\t<$link to={{!!title}}>\n\t\t\t\t<$transclude field=\"caption\">\n\t\t\t\t\t<$view field=\"title\"/>\n\t\t\t\t</$transclude>\n\t\t\t</$link>\n\t\t</li>\n\t</$list>\n</ul>\n</$reveal>",
+            "title": "$:/plugins/kebi/tiddlyresearch-references/filters-node",
+            "modified": "20201001025530047"
+        },
+        "$:/plugins/kebi/tiddlyresearch-references/config": {
+            "created": "20201001021602822",
+            "text": "|Enable transclude reference blocks for single nodes<br>(your wiki might become slower)|<$checkbox tiddler=\"$:/plugins/kebi/tiddlyresearch-references/config/filters-node\" field=\"text\" checked=\"enable\" unchecked=\"disable\" default=\"disable\"></$checkbox>|",
+            "title": "$:/plugins/kebi/tiddlyresearch-references/config",
+            "modified": "20201001025709098",
+            "caption": "config"
+        },
+        "$:/plugins/kebi/tiddlyresearch-references/config/filters-node": {
+            "created": "20201001023237230",
+            "text": "disable",
+            "title": "$:/plugins/kebi/tiddlyresearch-references/config/filters-node",
+            "modified": "20201001025715123"
+        }
+    }
+}

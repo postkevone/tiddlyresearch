@@ -1,0 +1,521 @@
+{
+    "description": "custom shortcuts",
+    "name": "tiddlyresearch-shortcuts",
+    "plugin-type": "plugin",
+    "title": "$:/plugins/kebi/tiddlyresearch-shortcuts",
+    "type": "application/json",
+    "version": "1.0.2",
+    "tiddlers": {
+        "$:/config/ShortcutInfo/backlink": {
+            "text": "Create a backlink",
+            "title": "$:/config/ShortcutInfo/backlink",
+            "modified": "20200905061235804",
+            "created": "20200816072659005"
+        },
+        "$:/config/ShortcutInfo/highlight": {
+            "created": "20200816070624742",
+            "text": "Highlight text",
+            "title": "$:/config/ShortcutInfo/highlight",
+            "modified": "20200906041338705"
+        },
+        "$:/config/ShortcutInfo/image": {
+            "text": "Insert an image",
+            "title": "$:/config/ShortcutInfo/image",
+            "modified": "20200905061948775",
+            "created": "20200816061356831"
+        },
+        "$:/config/ShortcutInfo/image-html": {
+            "text": "Insert an image (HTML) (Anki compatible)",
+            "title": "$:/config/ShortcutInfo/image-html",
+            "modified": "20200905061942356",
+            "created": "20200815091746791"
+        },
+        "$:/config/ShortcutInfo/transclude": {
+            "text": "Transclude a node",
+            "title": "$:/config/ShortcutInfo/transclude",
+            "modified": "20200905061935896",
+            "created": "20200820044636487"
+        },
+        "$:/config/shortcuts-mac/advanced-search": {
+            "text": "shift-cmd-A",
+            "title": "$:/config/shortcuts-mac/advanced-search",
+            "modified": "20200905061930031",
+            "created": "20200827140018282"
+        },
+        "$:/config/shortcuts-mac/backlink": {
+            "text": "shift-cmd-L",
+            "title": "$:/config/shortcuts-mac/backlink",
+            "modified": "20200905061924555",
+            "created": "20200827140457314"
+        },
+        "$:/config/shortcuts-mac/bold": {
+            "text": "meta-B",
+            "title": "$:/config/shortcuts-mac/bold",
+            "modified": "20200905061229868",
+            "created": "20200830050354363"
+        },
+        "$:/config/shortcuts-mac/heading-1": {
+            "text": "cmd-1",
+            "title": "$:/config/shortcuts-mac/heading-1",
+            "modified": "20200905062106478",
+            "created": "20200827140034971"
+        },
+        "$:/config/shortcuts-mac/heading-2": {
+            "text": "cmd-2",
+            "title": "$:/config/shortcuts-mac/heading-2",
+            "modified": "20200905062100708",
+            "created": "20200827140214824"
+        },
+        "$:/config/shortcuts-mac/heading-3": {
+            "text": "cmd-3",
+            "title": "$:/config/shortcuts-mac/heading-3",
+            "modified": "20200905062054315",
+            "created": "20200827140234744"
+        },
+        "$:/config/shortcuts-mac/heading-4": {
+            "text": "cmd-4",
+            "title": "$:/config/shortcuts-mac/heading-4",
+            "modified": "20200905062047732",
+            "created": "20200827140247140"
+        },
+        "$:/config/shortcuts-mac/heading-5": {
+            "text": "cmd-5",
+            "title": "$:/config/shortcuts-mac/heading-5",
+            "modified": "20200905062302865",
+            "created": "20200827140258568"
+        },
+        "$:/config/shortcuts-mac/heading-6": {
+            "text": "cmd-6",
+            "title": "$:/config/shortcuts-mac/heading-6",
+            "modified": "20200905062029060",
+            "created": "20200827140308471"
+        },
+        "$:/config/shortcuts-mac/highlight": {
+            "text": "shift-cmd-M",
+            "title": "$:/config/shortcuts-mac/highlight",
+            "modified": "20200905062257482",
+            "created": "20200827140513001"
+        },
+        "$:/config/shortcuts-mac/image": {
+            "text": "shift-cmd-I",
+            "title": "$:/config/shortcuts-mac/image",
+            "modified": "20200905062251497",
+            "created": "20200827140529692"
+        },
+        "$:/config/shortcuts-mac/image-html": {
+            "text": "shift-cmd-H",
+            "title": "$:/config/shortcuts-mac/image-html",
+            "modified": "20200905062245482",
+            "created": "20200827140547542"
+        },
+        "$:/config/shortcuts-mac/italic": {
+            "text": "meta-I",
+            "title": "$:/config/shortcuts-mac/italic",
+            "modified": "20200905061222852",
+            "created": "20200830052138431"
+        },
+        "$:/config/shortcuts-mac/new-image": {
+            "text": "",
+            "title": "$:/config/shortcuts-mac/new-image",
+            "modified": "20200905061155452",
+            "created": "20200827135941705"
+        },
+        "$:/config/shortcuts-mac/new-journal": {
+            "text": "",
+            "title": "$:/config/shortcuts-mac/new-journal",
+            "modified": "20200905061148979",
+            "created": "20200827135953332"
+        },
+        "$:/config/shortcuts-mac/new-tiddler": {
+            "text": "",
+            "title": "$:/config/shortcuts-mac/new-tiddler",
+            "modified": "20200905061426820",
+            "created": "20200827140005639"
+        },
+        "$:/config/shortcuts-mac/save-tiddler": {
+            "text": "cmd-Enter",
+            "title": "$:/config/shortcuts-mac/save-tiddler",
+            "modified": "20200905062233370",
+            "created": "20200827140346848"
+        },
+        "$:/config/shortcuts-mac/strikethrough": {
+            "text": "cmd-T",
+            "title": "$:/config/shortcuts-mac/strikethrough",
+            "modified": "20200905062227166",
+            "created": "20200827140421265"
+        },
+        "$:/config/shortcuts-mac/transclude": {
+            "text": "shift-cmd-T",
+            "title": "$:/config/shortcuts-mac/transclude",
+            "modified": "20200905062221143",
+            "created": "20200827140722400"
+        },
+        "$:/config/shortcuts-mac/underline": {
+            "text": "meta-U",
+            "title": "$:/config/shortcuts-mac/underline",
+            "modified": "20200905061216196",
+            "created": "20200830053800558"
+        },
+        "$:/config/shortcuts-not-mac/advanced-search": {
+            "text": "ctrl-shift-A",
+            "title": "$:/config/shortcuts-not-mac/advanced-search",
+            "modified": "20200905062215751",
+            "created": "20200827140023277"
+        },
+        "$:/config/shortcuts-not-mac/backlink": {
+            "text": "ctrl-shift-L",
+            "title": "$:/config/shortcuts-not-mac/backlink",
+            "modified": "20200905062209851",
+            "created": "20200827140502339"
+        },
+        "$:/config/shortcuts-not-mac/bold": {
+            "text": "ctrl-B",
+            "title": "$:/config/shortcuts-not-mac/bold",
+            "modified": "20200905061502365",
+            "created": "20200830050400773"
+        },
+        "$:/config/shortcuts-not-mac/heading-1": {
+            "text": "ctrl-1",
+            "title": "$:/config/shortcuts-not-mac/heading-1",
+            "modified": "20200905062346255",
+            "created": "20200827140039917"
+        },
+        "$:/config/shortcuts-not-mac/heading-2": {
+            "text": "ctrl-2",
+            "title": "$:/config/shortcuts-not-mac/heading-2",
+            "modified": "20200905062352118",
+            "created": "20200827140228666"
+        },
+        "$:/config/shortcuts-not-mac/heading-3": {
+            "text": "ctrl-3",
+            "title": "$:/config/shortcuts-not-mac/heading-3",
+            "modified": "20200905062357711",
+            "created": "20200827140239489"
+        },
+        "$:/config/shortcuts-not-mac/heading-4": {
+            "text": "ctrl-4",
+            "title": "$:/config/shortcuts-not-mac/heading-4",
+            "modified": "20200905062403322",
+            "created": "20200827140252230"
+        },
+        "$:/config/shortcuts-not-mac/heading-5": {
+            "text": "ctrl-5",
+            "title": "$:/config/shortcuts-not-mac/heading-5",
+            "modified": "20200905062035490",
+            "created": "20200827140302259"
+        },
+        "$:/config/shortcuts-not-mac/heading-6": {
+            "text": "ctrl-6",
+            "title": "$:/config/shortcuts-not-mac/heading-6",
+            "modified": "20200905062412049",
+            "created": "20200827140312996"
+        },
+        "$:/config/shortcuts-not-mac/highlight": {
+            "text": "ctrl-shift-M",
+            "title": "$:/config/shortcuts-not-mac/highlight",
+            "modified": "20200905062417959",
+            "created": "20200827140518982"
+        },
+        "$:/config/shortcuts-not-mac/image": {
+            "text": "ctrl-shift-I",
+            "title": "$:/config/shortcuts-not-mac/image",
+            "modified": "20200905062424674",
+            "created": "20200827140535022"
+        },
+        "$:/config/shortcuts-not-mac/image-html": {
+            "text": "ctrl-shift-H",
+            "title": "$:/config/shortcuts-not-mac/image-html",
+            "modified": "20200905062430717",
+            "created": "20200827140553449"
+        },
+        "$:/config/shortcuts-not-mac/italic": {
+            "text": "ctrl-I",
+            "title": "$:/config/shortcuts-not-mac/italic",
+            "modified": "20200905061358661",
+            "created": "20200830052144134"
+        },
+        "$:/config/shortcuts-not-mac/new-image": {
+            "text": "",
+            "title": "$:/config/shortcuts-not-mac/new-image",
+            "modified": "20200905061455429",
+            "created": "20200827135943775"
+        },
+        "$:/config/shortcuts-not-mac/new-journal": {
+            "text": "",
+            "title": "$:/config/shortcuts-not-mac/new-journal",
+            "modified": "20200905061449212",
+            "created": "20200827135955709"
+        },
+        "$:/config/shortcuts-not-mac/new-tiddler": {
+            "text": "",
+            "title": "$:/config/shortcuts-not-mac/new-tiddler",
+            "modified": "20200905061442828",
+            "created": "20200827140007873"
+        },
+        "$:/config/shortcuts-not-mac/save-tiddler": {
+            "text": "ctrl-Enter",
+            "title": "$:/config/shortcuts-not-mac/save-tiddler",
+            "modified": "20200905062437422",
+            "created": "20200827140356012"
+        },
+        "$:/config/shortcuts-not-mac/strikethrough": {
+            "text": "ctrl-T",
+            "title": "$:/config/shortcuts-not-mac/strikethrough",
+            "modified": "20200905062442988",
+            "created": "20200827140427871"
+        },
+        "$:/config/shortcuts-not-mac/transclude": {
+            "text": "ctrl-shift-T",
+            "title": "$:/config/shortcuts-not-mac/transclude",
+            "modified": "20200905062448908",
+            "created": "20200827140727971"
+        },
+        "$:/config/shortcuts-not-mac/underline": {
+            "text": "ctrl-U",
+            "title": "$:/config/shortcuts-not-mac/underline",
+            "modified": "20200905061347692",
+            "created": "20200830053829038"
+        },
+        "$:/config/shortcuts/add-field": {
+            "text": "enter",
+            "title": "$:/config/shortcuts/add-field",
+            "modified": "20200905061548346",
+            "created": "20200830050102002"
+        },
+        "$:/config/shortcuts/advanced-search": {
+            "text": "",
+            "title": "$:/config/shortcuts/advanced-search",
+            "modified": "20200905061540919",
+            "created": "20200827140025826"
+        },
+        "$:/config/shortcuts/cancel-edit-tiddler": {
+            "text": "escape",
+            "title": "$:/config/shortcuts/cancel-edit-tiddler",
+            "modified": "20200905061535127",
+            "created": "20200830050440732"
+        },
+        "$:/config/shortcuts/excise": {
+            "text": "",
+            "title": "$:/config/shortcuts/excise",
+            "modified": "20200905061526205",
+            "created": "20200827135848553"
+        },
+        "$:/config/shortcuts/heading-1": {
+            "text": "",
+            "title": "$:/config/shortcuts/heading-1",
+            "modified": "20200905061646720",
+            "created": "20200827140044423"
+        },
+        "$:/config/shortcuts/heading-2": {
+            "text": "",
+            "title": "$:/config/shortcuts/heading-2",
+            "modified": "20200905061641181",
+            "created": "20200827140152776"
+        },
+        "$:/config/shortcuts/heading-3": {
+            "text": "",
+            "title": "$:/config/shortcuts/heading-3",
+            "modified": "20200905061635019",
+            "created": "20200827140156734"
+        },
+        "$:/config/shortcuts/heading-4": {
+            "text": "",
+            "title": "$:/config/shortcuts/heading-4",
+            "modified": "20200905061629028",
+            "created": "20200827140201029"
+        },
+        "$:/config/shortcuts/heading-5": {
+            "text": "",
+            "title": "$:/config/shortcuts/heading-5",
+            "modified": "20200905061622971",
+            "created": "20200827140204873"
+        },
+        "$:/config/shortcuts/heading-6": {
+            "text": "",
+            "title": "$:/config/shortcuts/heading-6",
+            "modified": "20200905061617392",
+            "created": "20200827140208956"
+        },
+        "$:/config/shortcuts/link": {
+            "text": "",
+            "title": "$:/config/shortcuts/link",
+            "modified": "20200905061612004",
+            "created": "20200827135859500"
+        },
+        "$:/config/shortcuts/list-bullet": {
+            "text": "",
+            "title": "$:/config/shortcuts/list-bullet",
+            "modified": "20200905061741252",
+            "created": "20200827135922869"
+        },
+        "$:/config/shortcuts/list-number": {
+            "text": "",
+            "title": "$:/config/shortcuts/list-number",
+            "modified": "20200905061735100",
+            "created": "20200827135926809"
+        },
+        "$:/config/shortcuts/mono-block": {
+            "text": "",
+            "title": "$:/config/shortcuts/mono-block",
+            "modified": "20200905061728154",
+            "created": "20200827135936490"
+        },
+        "$:/config/shortcuts/mono-line": {
+            "text": "",
+            "title": "$:/config/shortcuts/mono-line",
+            "modified": "20200905061721695",
+            "created": "20200827135932254"
+        },
+        "$:/config/shortcuts/new-journal": {
+            "text": "alt-J",
+            "title": "$:/config/shortcuts/new-journal",
+            "modified": "20200905062455162",
+            "created": "20200827135951318"
+        },
+        "$:/config/shortcuts/new-tiddler": {
+            "text": "alt-N",
+            "title": "$:/config/shortcuts/new-tiddler",
+            "modified": "20200905062501820",
+            "created": "20200827140002916"
+        },
+        "$:/config/shortcuts/picture": {
+            "text": "",
+            "title": "$:/config/shortcuts/picture",
+            "modified": "20200905061715648",
+            "created": "20200827140322956"
+        },
+        "$:/config/shortcuts/preview": {
+            "text": "",
+            "title": "$:/config/shortcuts/preview",
+            "modified": "20200905061709102",
+            "created": "20200827140327299"
+        },
+        "$:/config/shortcuts/quote": {
+            "text": "",
+            "title": "$:/config/shortcuts/quote",
+            "modified": "20200905061815903",
+            "created": "20200827140332017"
+        },
+        "$:/config/shortcuts/save-tiddler": {
+            "text": "",
+            "title": "$:/config/shortcuts/save-tiddler",
+            "modified": "20200905061810167",
+            "created": "20200827140358430"
+        },
+        "$:/config/shortcuts/sidebar-search": {
+            "text": "",
+            "title": "$:/config/shortcuts/sidebar-search",
+            "modified": "20200905061520860",
+            "created": "20200827140404977"
+        },
+        "$:/config/shortcuts/stamp": {
+            "text": "",
+            "title": "$:/config/shortcuts/stamp",
+            "modified": "20200905061802848",
+            "created": "20200827140413135"
+        },
+        "$:/config/shortcuts/strikethrough": {
+            "text": "",
+            "title": "$:/config/shortcuts/strikethrough",
+            "modified": "20200905061754486",
+            "created": "20200827140429683"
+        },
+        "$:/config/shortcuts/subscript": {
+            "text": "",
+            "title": "$:/config/shortcuts/subscript",
+            "modified": "20200905061113628",
+            "created": "20200827140436202"
+        },
+        "$:/config/shortcuts/superscript": {
+            "text": "",
+            "title": "$:/config/shortcuts/superscript",
+            "modified": "20200905061120700",
+            "created": "20200827140440018"
+        },
+        "$:/config/shortcuts/toggle-sidebar": {
+            "text": "",
+            "title": "$:/config/shortcuts/toggle-sidebar",
+            "modified": "20200905061125781",
+            "created": "20200827140445494"
+        },
+        "$:/plugins/kebi/tiddlyresearch-shortcuts/highlight": {
+            "created": "20200816070446037",
+            "text": "<$action-sendmessage\n\t$message=\"tm-edit-text-operation\"\n\t$param=\"wrap-selection\"\n\tprefix=\"<mark>\"\n\tsuffix=\"</mark>\"\n/>",
+            "title": "$:/plugins/kebi/tiddlyresearch-shortcuts/highlight",
+            "tags": "$:/tags/EditorToolbar",
+            "shortcuts": "((highlight))",
+            "modified": "20200912113157320",
+            "icon": "$:/core/images/paint",
+            "description": "Highlight text",
+            "condition": "[<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]",
+            "caption": "Highlight text"
+        },
+        "$:/plugins/kebi/tiddlyresearch-shortcuts/image": {
+            "created": "20200816061305846",
+            "text": "<$action-sendmessage\n\t$message=\"tm-edit-text-operation\"\n\t$param=\"replace-selection\"\n\ttext='<<ibox \"\">>'\n/>",
+            "title": "$:/plugins/kebi/tiddlyresearch-shortcuts/image",
+            "tags": "$:/tags/EditorToolbar",
+            "shortcuts": "((image))",
+            "modified": "20200912113131602",
+            "icon": "$:/core/images/picture",
+            "description": "Quickly add an image",
+            "condition": "[<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]",
+            "caption": "Image Shortcut"
+        },
+        "$:/plugins/kebi/tiddlyresearch-shortcuts/image-html": {
+            "created": "20200815091154411",
+            "text": "<$action-sendmessage\n\t$message=\"tm-edit-text-operation\"\n\t$param=\"replace-selection\"\n\ttext=\"<img src='' width='250px'>\"\n/>",
+            "title": "$:/plugins/kebi/tiddlyresearch-shortcuts/image-html",
+            "tags": "$:/tags/EditorToolbar",
+            "shortcuts": "((image-html))",
+            "modified": "20200930124958104",
+            "icon": "$:/core/images/picture",
+            "description": "Quickly add an image (HTML)",
+            "condition": "[<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]",
+            "caption": "Image Shortcut (HTML)"
+        },
+        "$:/config/shortcuts-not-mac/toggle-sidebar": {
+            "created": "20200907090903523",
+            "title": "$:/config/shortcuts-not-mac/toggle-sidebar",
+            "text": "ctrl-shift-S",
+            "modified": "20200907090903523"
+        },
+        "$:/config/shortcuts-mac/toggle-sidebar": {
+            "created": "20200907090858411",
+            "title": "$:/config/shortcuts-mac/toggle-sidebar",
+            "text": "shift-cmd-S",
+            "modified": "20200907090858411"
+        },
+        "$:/plugins/kebi/tiddlyresearch-shortcuts/current-time": {
+            "text": "<$action-sendmessage\n\t$message=\"tm-edit-text-operation\"\n\t$param=\"replace-selection\"\n\ttext=<<now 'hh:0mm'>>\n/>",
+            "title": "$:/plugins/kebi/tiddlyresearch-shortcuts/current-time",
+            "tags": "$:/tags/EditorToolbar",
+            "shortcuts": "((current-time))",
+            "modified": "20200913141302666",
+            "icon": "$:/core/images/globe",
+            "description": "Quickly add the current time",
+            "created": "20200912112539870",
+            "condition": "[<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]",
+            "caption": "Current Time"
+        },
+        "$:/config/ShortcutInfo/current-time": {
+            "created": "20200912113202735",
+            "text": "Insert current time",
+            "title": "$:/config/ShortcutInfo/current-time",
+            "modified": "20200912113242125",
+            "tags": ""
+        },
+        "$:/config/shortcuts-mac/current-time": {
+            "created": "20200912113447639",
+            "title": "$:/config/shortcuts-mac/current-time",
+            "text": "shift-cmd-K",
+            "modified": "20200912113447639"
+        },
+        "$:/config/shortcuts-not-mac/current-time": {
+            "created": "20200912113514823",
+            "title": "$:/config/shortcuts-not-mac/current-time",
+            "text": "ctrl-shift-K",
+            "modified": "20200912113514823"
+        }
+    }
+}

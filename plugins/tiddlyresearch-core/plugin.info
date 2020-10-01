@@ -1,0 +1,71 @@
+{
+    "description": "core tiddlers",
+    "plugin-priority": "1",
+    "plugin-type": "plugin",
+    "title": "$:/plugins/kebi/tiddlyresearch-core",
+    "type": "application/json",
+    "version": "1.0.1",
+    "tiddlers": {
+        "$:/core/wiki/title": {
+            "created": "20200906031533040",
+            "title": "$:/core/wiki/title",
+            "text": "TiddlyResearch",
+            "modified": "20200906031534685"
+        },
+        "$:/core/ui/EditTemplate/body/editor": {
+            "created": "20200906031604489",
+            "title": "$:/core/ui/EditTemplate/body/editor",
+            "text": "<$edit\n\n  field=\"text\"\n  class=\"tc-edit-texteditor tc-edit-texteditor-body\"\n  placeholder={{$:/language/EditTemplate/Body/Placeholder}}\n  tabindex={{$:/config/EditTabIndex}}\n  focus={{{ [{$:/config/AutoFocus}match[text]then[true]] ~[[false]] }}}\n\n><$set\n\n  name=\"targetTiddler\"\n  value=<<currentTiddler>>\n\n><$list\n\n  filter=\"[all[shadows+tiddlers]tag[$:/tags/EditorToolbar]!has[draft.of]]\"\n\n><$reveal\n\n  type=\"nomatch\"\n  state=<<config-visibility-title>>\n  text=\"hide\"\n  class=\"tc-text-editor-toolbar-item-wrapper\"\n\n><$transclude\n\n  tiddler=\"$:/core/ui/EditTemplate/body/toolbar/button\"\n  mode=\"inline\"\n\n/></$reveal></$list></$set></$edit>\n\n<$list filter=\"\"\"[all[current]subfilter{$:/config/sq/streams/stream-enable-filter}]\"\"\">\n{{||$:/plugins/sq/streams/nodes-list-template}}\n</$list>",
+            "modified": "20200906031605092"
+        },
+        "$:/plugins/kebi/tiddlyresearch-core/navigator-delete-tiddler.js": {
+            "created": "20200905044925193",
+            "text": "/*\\\ntitle: $:/plugins/kebi/tiddlyresearch-core/modules/widgets/navigator.js\ntype: application/javascript\nmodule-type: startup\n\\*/\n\nvar NavigatorWidget = require(\"$:/core/modules/widgets/navigator.js\").navigator;\n\n// Delete a tiddler\nNavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {\n    // Get the tiddler we're deleting\n    var title = event.param || event.tiddlerTitle,\n        tiddler = this.wiki.getTiddler(title),\n        storyList = this.getStoryList(),\n        originalTitle = tiddler ? tiddler.fields[\"draft.of\"] : \"\",\n        originalTiddler = originalTitle ? this.wiki.getTiddler(originalTitle) : undefined,\n        confirmationTitle;\n    if(!tiddler) {\n        return false;\n    }\n    // Check if the tiddler we're deleting is in draft mode\n    if(originalTitle) {\n        // If so, we'll prompt for confirmation referencing the original tiddler\n        confirmationTitle = originalTitle;\n    } else {\n        // If not a draft, then prompt for confirmation referencing the specified tiddler\n        confirmationTitle = title;\n    }\n    // Seek confirmation || (tiddler.fields.text || \"\") -tiddlyresearch\n    if((this.wiki.getTiddler(originalTitle) !== \"\") && !confirm($tw.language.getString(\n                \"ConfirmDeleteTiddler\",\n                {variables:\n                    {title: confirmationTitle}\n                }\n            ))) {\n        return false;\n    }\n    // Delete the original tiddler\n    if(originalTitle) {\n        if(originalTiddler) {\n            $tw.hooks.invokeHook(\"th-deleting-tiddler\",originalTiddler);\n        }\n        this.wiki.deleteTiddler(originalTitle);\n        this.removeTitleFromStory(storyList,originalTitle);\n    }\n    // Invoke the hook function and delete this tiddler\n    $tw.hooks.invokeHook(\"th-deleting-tiddler\",tiddler);\n    this.wiki.deleteTiddler(title);\n    // Remove the closed tiddler from the story\n    this.removeTitleFromStory(storyList,title);\n    this.saveStoryList(storyList);\n    // Trigger an autosave\n    $tw.rootWidget.dispatchEvent({type: \"tm-auto-save-wiki\"});\n    return false;\n};",
+            "type": "application/javascript",
+            "title": "$:/plugins/kebi/tiddlyresearch-core/navigator-delete-tiddler.js",
+            "module-type": "startup",
+            "modified": "20200906032042559"
+        },
+        "$:/plugins/kebi/tiddlyresearch-core/droppable-alt-key.js": {
+            "created": "20200906032525618",
+            "text": "/*\\\ntitle: $:/plugins/kebi/tiddlyresearch-core/droppable-alt-key.js\ntype: application/javascript\nmodule-type: startup\n\\*/\n\nvar DroppableWidget = require(\"$:/core/modules/widgets/droppable.js\").droppable;\n\nDroppableWidget.prototype.performActions = function(title,event) {\n    if(this.droppableActions) {\n        var modifierKey =\n            event.ctrlKey && !event.shiftKey || event.altKey && !event.shiftKey ? \"ctrl\" :\n            event.shiftKey && !event.ctrlKey  || event.shiftKey && !event.altKey ? \"shift\" :\n            event.ctrlKey && event.shiftKey || event.altKey && event.shiftKey ? \"ctrl-shift\" :\n            \"normal\" ;\n        this.invokeActionString(this.droppableActions,this,event,{actionTiddler: title, modifier: modifierKey});\n    }\n};",
+            "title": "$:/plugins/kebi/tiddlyresearch-core/droppable-alt-key.js",
+            "modified": "20200906032557034",
+            "type": "application/javascript",
+            "module-type": "startup"
+        },
+        "$:/core/ui/AdvancedSearch/Standard": {
+            "created": "20200906033339914",
+            "title": "$:/core/ui/AdvancedSearch/Standard",
+            "tags": "$:/tags/AdvancedSearch",
+            "caption": "{{$:/language/Search/Standard/Caption}}",
+            "text": "<$linkcatcher to=\"$:/temp/advancedsearch\">\n\n<div class=\"tc-search\">\n<$edit-text tiddler=\"$:/temp/advancedsearch\" type=\"search\" tag=\"input\" focus={{$:/config/Search/AutoFocus}}/>\n<$reveal state=\"$:/temp/advancedsearch\" type=\"nomatch\" text=\"\">\n<$button class=\"tc-btn-invisible\">\n<$action-setfield $tiddler=\"$:/temp/advancedsearch\" $field=\"text\" $value=\"\"/>\n{{$:/core/images/close-button}}\n</$button>\n</$reveal>\n</div>\n\n</$linkcatcher>\n\n{{$:/plugins/danielo515/ContextPlugin/visualizer}}",
+            "modified": "20200906040928264"
+        },
+        "$:/core/ui/EditorToolbar/linkify": {
+            "created": "20200906045749947",
+            "title": "$:/core/ui/EditorToolbar/linkify",
+            "caption": "{{$:/language/Buttons/Linkify/Caption}}",
+            "condition": "[<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]",
+            "description": "{{$:/language/Buttons/Linkify/Hint}}",
+            "icon": "$:/core/images/linkify",
+            "list-before": "$:/core/ui/EditorToolbar/mono-block",
+            "shortcuts": "((backlink))",
+            "tags": "$:/tags/EditorToolbar",
+            "text": "<$action-sendmessage\n\t$message=\"tm-edit-text-operation\"\n\t$param=\"wrap-selection\"\n\tprefix=\"[[\"\n\tsuffix=\"]]\"\n/>\n",
+            "modified": "20200906045753624"
+        },
+        "$:/core/ui/EditorToolbar/transcludify": {
+            "text": "<$action-sendmessage\n\t$message=\"tm-edit-text-operation\"\n\t$param=\"wrap-selection\"\n\tprefix=\"{{\"\n\tsuffix=\"||embed}}\"\n/>\n",
+            "title": "$:/core/ui/EditorToolbar/transcludify",
+            "tags": "$:/tags/EditorToolbar",
+            "shortcuts": "((transclude))",
+            "modified": "20200913055355385",
+            "icon": "$:/core/images/transcludify",
+            "description": "{{$:/language/Buttons/Transcludify/Hint}}",
+            "created": "20200906045848467",
+            "condition": "[<targetTiddler>!has[type]] [<targetTiddler>type[text/vnd.tiddlywiki]]",
+            "caption": "{{$:/language/Buttons/Transcludify/Caption}}"
+        }
+    }
+}

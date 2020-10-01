@@ -1,0 +1,219 @@
+{
+    "dependents": "$:/plugins/kixam/moment $:/plugins/kixam/datepicker $:/plugins/flibbles/relink",
+    "description": "(tiddlyresearch fork) Simple project management for TiddlyWiki",
+    "list": "installation usage",
+    "name": "Project Manager",
+    "plugin-type": "plugin",
+    "title": "$:/plugins/nico/pm",
+    "type": "application/json",
+    "version": "0.0.45",
+    "tiddlers": {
+        "$:/plugins/nico/pm/images/calendar-check": {
+            "created": "20200423195159541",
+            "text": "<svg width=\"18\" height=\"18\" version=\"1.1\" viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\">\n <path d=\"m16.379 5.7482h-14.758c-0.23066 0-0.41768-0.18701-0.41768-0.41768v-1.253c0-0.92271 0.74799-1.6707 1.6707-1.6707h1.6707v-1.8099c0-0.23066 0.18701-0.41768 0.41768-0.41768h1.3923c0.23066 0 0.41768 0.18701 0.41768 0.41768v1.8099h4.4552v-1.8099c0-0.23066 0.18702-0.41768 0.41768-0.41768h1.3923c0.23066 0 0.41768 0.18701 0.41768 0.41768v1.8099h1.6707c0.92271 0 1.6707 0.74799 1.6707 1.6707v1.253c0 0.23066-0.18701 0.41768-0.41768 0.41768zm-14.758 1.1138h14.758c0.23066 0 0.41768 0.18701 0.41768 0.41768v9.0496c0 0.92272-0.74799 1.6707-1.6707 1.6707h-12.252c-0.92271 0-1.6707-0.74799-1.6707-1.6707v-9.0496c0-0.23066 0.18701-0.41768 0.41768-0.41768zm11.601 3.3396-0.98046-0.98843c-0.16244-0.16376-0.4269-0.16484-0.59066-0.0023667l-3.6908 3.6611-1.6004-1.6133c-0.16244-0.16376-0.42693-0.16484-0.5907-0.002412l-0.98839 0.98049c-0.16376 0.16244-0.16484 0.4269-0.00237 0.59066l2.875 2.8983c0.16244 0.16376 0.4269 0.16484 0.59066 0.0024l4.9757-4.9357c0.16376-0.16244 0.16484-0.4269 0.0024-0.59066z\" stroke-width=\".034806\"/>\n</svg>\n",
+            "type": "",
+            "title": "$:/plugins/nico/pm/images/calendar-check",
+            "tags": "$:/tags/Image",
+            "modified": "20200425210042911"
+        },
+        "$:/plugins/nico/pm/images/target": {
+            "created": "20200425202748433",
+            "title": "$:/plugins/nico/pm/images/target",
+            "text": "<svg width=\"18\" height=\"18\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 496 512\"><path d=\"M248 8C111.03 8 0 119.03 0 256s111.03 248 248 248 248-111.03 248-248S384.97 8 248 8zm0 432c-101.69 0-184-82.29-184-184 0-101.69 82.29-184 184-184 101.69 0 184 82.29 184 184 0 101.69-82.29 184-184 184zm0-312c-70.69 0-128 57.31-128 128s57.31 128 128 128 128-57.31 128-128-57.31-128-128-128zm0 192c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64z\"/></svg>",
+            "modified": "20200425210120397",
+            "tags": "$:/tags/Image"
+        },
+        "$:/plugins/nico/pm/images/tasks": {
+            "created": "20200424203654397",
+            "text": "<svg width=\"18\" height=\"18\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><path d=\"M400 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zm0 400H48V80h352v352zm-35.864-241.724L191.547 361.48c-4.705 4.667-12.303 4.637-16.97-.068l-90.781-91.516c-4.667-4.705-4.637-12.303.069-16.971l22.719-22.536c4.705-4.667 12.303-4.637 16.97.069l59.792 60.277 141.352-140.216c4.705-4.667 12.303-4.637 16.97.068l22.536 22.718c4.667 4.706 4.637 12.304-.068 16.971z\"/></svg>",
+            "title": "$:/plugins/nico/pm/images/tasks",
+            "tags": "$:/tags/Image",
+            "modified": "20200425210145182"
+        },
+        "$:/plugins/nico/pm/macros/project": {
+            "created": "20200422200514984",
+            "text": "\\define archive-project()\n  <$fieldmangler>\n    <$button class=\"pm-btn btn-danger nc-archive-project\">\n      <$action-sendmessage $message=\"tm-add-tag\" $param=\"Archived\"/>\n        {{$:/core/images/delete-button}} Archive project\n    </$button>\n  </$fieldmangler>\n\\end\n\n\\define restore-project()\n  <$fieldmangler>\n    <$button class=\"tc-btn-invisible\">\n      <$action-sendmessage $message=\"tm-remove-tag\" $param=\"Archived\"/>\n        Restore project\n    </$button>\n  </$fieldmangler>\n\\end\n\n\\define todo-list(tag emptyMessage:\"''🙌 All done!''\")\n  <<list-tagged-draggable tag:\"$tag$\" subFilter:\"!has[draft.of]!tag[done]\" itemTemplate:\"$:/plugins/nico/pm/ui/TodoTemplate\" emptyMessage:\"$emptyMessage$\">>\n\\end\n\n\\define todo-list-completed(tag)\n  <$list filter=\"[!has[draft.of]tag[$tag$]tag[done]sort[created]]\" template=\"$:/plugins/nico/pm/ui/CompletedTodoTemplate\"/>\n\\end\n\n\\define new-todo-button(tag label)\n  <$button class=\"pm-btn\">\n    <$action-sendmessage $message=\"tm-new-tiddler\" tags=\"[[$tag$]] todo\"/>\n    {{$:/core/images/list-bullet}}\n    $label$\n  </$button>\n\\end\n\n\\define todo-count(tag)\n  <span class=\"pm-todo-count\">\n    <$list filter=\"[tag[$tag$]!has[draft.of]tag[done]count[]]\">{{!!title}}</$list> \n    / \n    <$list filter=\"[tag[$tag$]!has[draft.of]count[]]\">{{!!title}}</$list>\n  </span>\n\\end\n\n\\define project-with-tag(tag newTodoLabel:\"Add a todo\")\n  <$list filter=\"[is[current]tag[Archived]]\">\n    <div class=\"pm-banner\">\n      This project is archived. <$macrocall $name=\"restore-project\"/>\n    </div>\n  </$list>\n\n  <h2>Todos \n    <$macrocall $name=\"todo-count\" tag=\"$tag$\"/>\n  </h2>\n  \n  <$macrocall $name=\"todo-list\" tag=\"$tag$\"/>\n  <$macrocall $name=\"new-todo-button\" tag=\"$tag$\" label=\"$newTodoLabel$\"/>\n  <$list filter=\"[is[current]!tag[Archived]]\">\n    or <$macrocall $name=\"archive-project\"/>\n  </$list>\n  \n  <h2>Completed</h2>\n\n  <$macrocall $name=\"todo-list-completed\" tag=\"$tag$\"/>\n\\end\n\n\\define project()\n  <$macrocall $name=\"project-with-tag\" tag={{!!title}}/>\n\\end",
+            "title": "$:/plugins/nico/pm/macros/project",
+            "tags": "$:/tags/Macro",
+            "modified": "20200427163705930"
+        },
+        "$:/plugins/nico/pm/ui/CompletedTodoTemplate": {
+            "created": "20200425151042805",
+            "text": "<div class=\"pm-todo pm-completed\">\n  <$checkbox tag=\"done\">\n    {{||$:/plugins/nico/pm/ui/CheckboxTemplate}}\n    <$link to={{!!title}}>~~<$view field=\"title\"/>~~</$link>\n  </$checkbox>\n</div>",
+            "title": "$:/plugins/nico/pm/ui/CompletedTodoTemplate",
+            "tags": "",
+            "modified": "20200428152746736"
+        },
+        "$:/plugins/nico/pm/ui/Dashboard": {
+            "created": "20200424192751342",
+            "text": "<<tabs \"[all[tiddlers+shadows]tag[$:/plugins/nico/pm/tags/dashboard]]\" \"$:/plugins/nico/pm/ui/InboxAndProjects\" \"$:/state/projects-and-schedule\"  \"pm-tabs\">>",
+            "title": "$:/plugins/nico/pm/ui/Dashboard",
+            "tags": "",
+            "modified": "20200426195523518"
+        },
+        "$:/plugins/nico/pm/ui/Inbox": {
+            "created": "20200425193337699",
+            "text": "\\define inbox-count()\n  <span class=\"pm-count\">\n    <$list filter=\"[tag[Inbox]!has[draft.of]!tag[done]count[]]\">{{!!title}}</$list> \n  </span>\n\\end\n\n<h2>Inbox <$macrocall $name=\"inbox-count\"/></h2>\n\n<$keyboard key=\"enter\">\n  <$action-setfield $tiddler={{$:/state/Inbox!!todo_name}} tags=\"Inbox todo\"/>\n  <$action-setfield $tiddler=\"$:/state/Inbox\" todo_name=\"\"/>\n  <$edit-text class=\"pm-input\" tiddler=\"$:/state/Inbox\" field=\"todo_name\" placeholder=\"Add to inbox...\"/>\n</$keyboard>\n\n<$macrocall class=\"nc-inbox-input\" $name=\"todo-list\" tag=\"Inbox\" emptyMessage=\"🌞 You're all done! Have a good day.\"/>",
+            "tags": "",
+            "title": "$:/plugins/nico/pm/ui/Inbox",
+            "modified": "20200427142337684",
+            "caption": "{{$:/plugins/nico/pm/images/inbox}} Inbox"
+        },
+        "$:/plugins/nico/pm/ui/InboxAndProjects": {
+            "text": "{{$:/plugins/nico/pm/ui/Inbox}}\n{{$:/plugins/nico/pm/ui/Projects}}",
+            "title": "$:/plugins/nico/pm/ui/InboxAndProjects",
+            "tags": "$:/plugins/nico/pm/tags/dashboard",
+            "modified": "20200425221954056",
+            "created": "20200425193559847",
+            "caption": "{{$:/plugins/nico/pm/images/tasks}} Projects"
+        },
+        "$:/plugins/nico/pm/ui/NextActions": {
+            "created": "20200425195221581",
+            "text": "<dl>\n  <$list filter=\"[tag[Project]!tag[Archived]]\" template=\"$:/plugins/nico/pm/ui/ProjectNextActionTemplate\"/>\n  </dl>",
+            "title": "$:/plugins/nico/pm/ui/NextActions",
+            "tags": "$:/plugins/nico/pm/tags/dashboard",
+            "modified": "20200428193415536",
+            "list-after": "$:/plugins/nico/pm/ui/Schedule",
+            "caption": "{{$:/plugins/nico/pm/images/target}} Next"
+        },
+        "$:/plugins/nico/pm/ui/ProjectNextActionTemplate": {
+            "created": "20200425201356996",
+            "text": "<dt>\n  {{!!title}} <$macrocall $name=\"todo-count\" tag={{!!title}}/>\n</dt>\n<dd>\n  <$list filter=\"[!has[daft.of]tag{!!title}tag[todo]!tag[done]limit[1]]\" template=\"$:/plugins/nico/pm/ui/TodoTemplate\"></$list>\n</dd>",
+            "tags": "",
+            "title": "$:/plugins/nico/pm/ui/ProjectNextActionTemplate",
+            "modified": "20200428193910490"
+        },
+        "$:/plugins/nico/pm/ui/Projects": {
+            "created": "20200424193106051",
+            "text": "\\define refile-inbox-actions()\n  <$fieldmangler tiddler=<<actionTiddler>>>\n    <$action-sendmessage $message=\"tm-add-tag\" $param=<<currentTiddler>>/>\n    <$action-sendmessage $message=\"tm-remove-tag\" $param=\"Inbox\"/>\n  </$fieldmangler>\n\\end\n\n<h2>Projects</h2>\n\n<ul class=\"pm-projects\">\n  <$list filter=\"[tag[Project]!title[Inbox]!tag[Archived]]\">\n      <$droppable actions=<<refile-inbox-actions>>>\n        <li><$link to={{!!title}}><$view field=\"title\"/></$link> <$macrocall $name=\"todo-count\" tag={{!!title}}/></li>\n      </$droppable>\n  </$list>\n</ul>\n\n<$button class=\"pm-btn btn-primary\">\n  <$action-sendmessage $message=\"tm-new-tiddler\" tags=\"Project\" text=\"<<project>>\"/>\n  {{$:/core/images/edit-button}}\n  New project\n</$button> \nor\n<$reveal type=\"match\" state=\"$:/state/pm-show-archived\" text=\"\">\n  <$button class=\"tc-btn-invisible tc-tiddlylink\" set=\"$:/state/pm-show-archived\" setTo=\"show\">\n    Show archived\n  </$button>\n</$reveal>\n<$reveal type=\"match\" state=\"$:/state/pm-show-archived\" text=\"show\">\n  <$button class=\"tc-btn-invisible tc-tiddlylink\" set=\"$:/state/pm-show-archived\" setTo=\"\">\n    Hide archived\n  </$button>\n\n  <h2>Archive</h2>\n\n  <ul>\n    <$list filter=\"[tag[Project]!title[Inbox]tag[Archived]]\" emptyMessage=\"No archived project yet.\">\n      <li><$link to={{!!title}}><$view field=\"title\"/></$link> <$macrocall $name=\"todo-count\" tag={{!!title}}/></li>\n    </$list>\n  </ul>\n  \n</$reveal>\n",
+            "title": "$:/plugins/nico/pm/ui/Projects",
+            "modified": "20200428113631277",
+            "caption": "{{$:/plugins/nico/pm/images/tasks}} Projects",
+            "tags": "$:/plugins/nico/pm/ui/Projects"
+        },
+        "$:/plugins/nico/pm/ui/Schedule": {
+            "created": "20200424193230404",
+            "text": "\\define schedule-today()\n  <$list filter=\"[!has[draft.of]!tag[done]tag[todo]days:due[0]]\" template=\"$:/plugins/nico/pm/ui/TodoTemplate\" emptyMessage=\"🌞 All clear!\"/>\n\\end\n\n\\define schedule-range(start end)\n  <$list filter=\"[!has[draft.of]!tag[done]tag[todo]!days:due[$start$]days:due[$end$]sort[due]]\" template=\"$:/plugins/nico/pm/ui/TodoTemplate\" emptyMessage=\"🌞 All clear!\"/>\n\\end\n\n\\define schedule-overdue()\n  <$list filter=\"[!has[draft.of]!tag[done]tag[todo]!days:due[-1]sort[due]]\" template=\"$:/plugins/nico/pm/ui/TodoTemplate\"/>\n\\end\n\n<$list filter=\"[!has[draft.of]!tag[done]tag[todo]!days:due[-1]limit[1]]\">\n\n  !! Overdue\n\n  <<schedule-overdue>>\n\n</$list>\n\n!! Today\n\n<<schedule-today>>\n\n!! Next 7 days\n\n<<schedule-range 1 7>>\n\n!! Next 30 days\n\n<<schedule-range 7 30>>",
+            "title": "$:/plugins/nico/pm/ui/Schedule",
+            "tags": "$:/plugins/nico/pm/tags/dashboard",
+            "modified": "20200428120734010",
+            "list-after": "$:/plugins/nico/pm/ui/InboxAndProjects",
+            "caption": "{{$:/plugins/nico/pm/images/calendar-check}} Schedule"
+        },
+        "$:/plugins/nico/pm/ui/TiddlerDueDateTemplate": {
+            "created": "20200420105800700",
+            "text": "<$list filter=\"[all[current]tag[todo]]\">\n  <div class=\"pm-tiddler-due-date\">\n    {{||$:/plugins/nico/pm/ui/TodoDueDateTemplate}}\n  </div>\n</$list>",
+            "type": "text/vnd.tiddlywiki",
+            "title": "$:/plugins/nico/pm/ui/TiddlerDueDateTemplate",
+            "tags": "$:/tags/ViewTemplate",
+            "revision": "0",
+            "modified": "20200426193312979",
+            "list-after": "$:/core/ui/ViewTemplate/tags",
+            "bag": "default"
+        },
+        "$:/plugins/nico/pm/ui/TodoDueDateTemplate": {
+            "created": "20200424135048294",
+            "text": "<$reveal type=\"nomatch\" state=\"!!due\" text=\"\">\n  <span class=\"pm-due-date\">\n    <$edit-date tag=\"span\" field=\"due\" icon=\"$:/plugins/nico/pm/images/calendar-check\" />\n    Due <$view field=\"due\" format=\"date\" template=\"DDth mmm\"/>.\n\n    <$button tag=\"a\"><$action-deletefield $field=\"due\" />Clear</$button>\n\n    <$list filter=\"[all[current]!has[draft.of]!tag[done]!days:due[-1]]\">\n      <span class=\"pm-count\">\n        <$view field=\"due\" format=\"relativedate\"/>\n      </span>\n    </$list>\n\n  </span>\n</$reveal>\n\n<$reveal type=\"match\" state=\"!!due\" text=\"\">\n  <span class=\"pm-due-date no-due-date\">\n    <$edit-date tag=\"span\" field=\"due\" icon=\"$:/plugins/nico/pm/images/calendar-check\" />\n    Schedule\n  </span>\n</$reveal>",
+            "title": "$:/plugins/nico/pm/ui/TodoDueDateTemplate",
+            "tags": "",
+            "modified": "20200428195812946"
+        },
+        "$:/plugins/nico/pm/ui/TodoTemplate": {
+            "text": "<div class=\"pm-todo\">\n  <$checkbox tag=\"done\">\n    {{||$:/plugins/nico/pm/ui/CheckboxTemplate}}\n    <$link to={{!!title}}><$view field=\"title\"/></$link>\n  </$checkbox> {{||$:/plugins/nico/pm/ui/TodoDueDateTemplate}}\n</div>",
+            "title": "$:/plugins/nico/pm/ui/TodoTemplate",
+            "tags": "",
+            "modified": "20200428152140296",
+            "created": "20200422200123438"
+        },
+        "$:/plugins/nico/pm/stylesheet": {
+            "text": "\\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline\n\n.pm-btn {\n  border-radius: 1.5em;\n  border: 1px solid #ccc;\n  background: white;\n  padding: .3em 1em;\n  cursor: pointer;\n}\n\n.pm-btn.btn-primary {\n  background-color: #2da562;\n  border-color: #2da562;\n  color: white;\n  fill: white;\n}\n\n.pm-btn.btn-danger {\n  background-color: #ffefef;\n  border-color: #c63636;\n  color: #c63636;\n  fill: #c63636;\n}\n\ninput.pm-input {\n  transition: box-shadow 0.15s ease-in-out;\n  border: 1px solid #d9d9d9;\n  padding: 0.3em;\n  border-radius: 4px;\n}\n\ninput.pm-input:focus {\n  border-color: <<colour primary>>;\n}\n\ninput.pm-input.input-large {\n  width: 100%;\n  padding: .5em 1em;\n  font-size: 1.1em;\n}\n\n.pm-todo input[type=\"checkbox\"] {\n  display: none;\n}\n\n.pm-checkbox {\n  fill: <<colour muted-foreground>>;\n  cursor: pointer;\n  transition: all ease-in .2s;\n  margin-right: 3px;\n}\n\n.pm-checkbox .todo-hover {\n  display: none;\n}\n\n.pm-checkbox:hover .todo-hover {\n  display: initial;\n}\n\n.pm-checkbox:hover .todo {\n  display: none;\n}\n\n.pm-checkbox:hover {\n  fill: #2da562;\n}\n\n.pm-checkbox .done {\n  fill: #2da562;\n}\n\n.pm-label {\n  display: block;\n  text-align: right;\n  font-size: .8em;\n  opacity: .6;\n}\n\n.pm-todo {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.pm-todo-count {\n  background: #2da562;\n  border-radius: 1em;\n  font-size: .6em;\n  font-weight: bold;\n  padding: .1em .5em;\n  color: white;\n  vertical-align: middle;\n}\n\n.pm-count {\n  background: #df3f3f;\n  color: white;\n  font-weight: bold;\n  padding: .2em .7em;\n  border-radius: 1em;\n  font-size: 12px;\n  vertical-align: middle;\n}\n\n.pm-tiddler-due-date {\n  margin-top: 5px;\n}\n\n.pm-due-date {\n  color: #753e2d;\n  fill: #753e2d;\n  white-space: nowrap;\n}\n\n.pm-due-date svg {\n  cursor: pointer;\n}\n\n.pm-due-date a {\n  text-decoration: underline;\n  cursor: pointer;\n}\n\n.pm-todo .pm-due-date {\n  padding-left: 14px;\n  font-size: .8em;\n  transition: opacity ease-in-out .15s;\n}\n\n.pm-todo .pm-due-date.no-due-date {\n  opacity: 0;\n}\n\n@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {\n  .pm-todo .pm-due-date {\n    display: block;\n    margin-left: 6px;\n  }\n  \n  .pm-todo .pm-due-date.no-due-date {\n    display: none;\n  }\n}\n\n.pm-todo:hover .pm-due-date.no-due-date {\n  opacity: 1;\n}\n\n.pm-projects .tc-droppable.tc-dragover {\n  background: #ffd;\n  display: block;\n}\n\n.pm-tabs.tc-tab-buttons button {\n  font-weight: bold;\n  font-size: 1.3em;\n  border: 0;\n  padding: 5px 10px;\n  background: transparent;\n  cursor: pointer;\n  color: <<colour tiddler-title-foreground>>;\n}\n\n.pm-tabs.tc-tab-buttons button.tc-tab-selected {\n  border: 0;\n  border-bottom: 4px solid <<colour primary>>;\n  color: <<colour tiddler-title-foreground>>;\n}\n\n.pm-banner {\n  padding: 10px 20px;\n  background: #f9f9d5;\n  border: 1px solid #dbdba8;\n  color: #626235;\n  margin: 10px 0;\n  border-radius: 3px;\n}\n\n.pm-banner button {\n  color: #554535;\n  fill: #554535;\n  text-decoration: underline;\n}",
+            "title": "$:/plugins/nico/pm/stylesheet",
+            "tags": "$:/tags/Stylesheet",
+            "modified": "20200428155151225",
+            "created": "20200426194806637"
+        },
+        "$:/plugins/nico/pm/images/inbox": {
+            "created": "20200427142105097",
+            "title": "$:/plugins/nico/pm/images/inbox",
+            "text": "<svg width=\"18\" height=\"18\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 576 512\"><path d=\"M567.938 243.908L462.25 85.374A48.003 48.003 0 0 0 422.311 64H153.689a48 48 0 0 0-39.938 21.374L8.062 243.908A47.994 47.994 0 0 0 0 270.533V400c0 26.51 21.49 48 48 48h480c26.51 0 48-21.49 48-48V270.533a47.994 47.994 0 0 0-8.062-26.625zM162.252 128h251.497l85.333 128H376l-32 64H232l-32-64H76.918l85.334-128z\"/></svg>",
+            "modified": "20200427142130500"
+        },
+        "$:/plugins/nico/pm/usage": {
+            "created": "20200427133943777",
+            "text": "! How to display the project dashboard\n\nThe main entry point to the Project Manager plugin is the dashboard.\nThe dashboard can be embedded ([[transcluded|https://tiddlywiki.com/#Transclusion]]) in any tiddler using the following:\n\n```\n{{$:/plugins/nico/pm/ui/Dashboard}}\n```\n<$reveal type=\"match\" state=\"$:/state/pm-usage-show-dashboard\" text=\"show\">\n  <$button class=\"pm-btn btn-primary\" set=\"$:/state/pm-usage-show-dashboard\" setTo=\"\">Hide</$button>\n  <hr/>\n  {{$:/plugins/nico/pm/ui/Dashboard}}\n  <hr/>\n</$reveal>\n\n<$reveal type=\"nomatch\" state=\"$:/state/pm-usage-show-dashboard\" text=\"show\">\n  <$button class=\"pm-btn btn-primary\" set=\"$:/state/pm-usage-show-dashboard\" setTo=\"show\">Show result</$button>\n</$reveal>\n\n! How to add extra tabs to the Dashboard\n\nAny tiddler with the tag <<tag $:/plugins/nico/pm/tags/dashboard>> will be displayed as a tab in the dashboard.\n\n! What if I want to display the Inbox in a separate tab?\n\nYou can build your own Dashboard using the following:\n\n```\n<<tabs \"$:/plugins/nico/pm/ui/Inbox $:/plugins/nico/pm/ui/Projects $:/plugins/nico/pm/ui/Schedule\" \"$:/plugins/nico/pm/ui/Inbox\" \"$:/state/pm-custom-dashboard\"  \"pm-tabs\">>\n```\n<$reveal type=\"match\" state=\"$:/state/pm-usage-custom-dashboard\" text=\"show\">\n  <$button class=\"pm-btn btn-primary\" set=\"$:/state/pm-usage-custom-dashboard\" setTo=\"\">Hide</$button>\n  <hr/>\n  <<tabs \"$:/plugins/nico/pm/ui/Inbox $:/plugins/nico/pm/ui/Projects $:/plugins/nico/pm/ui/Schedule\" \"$:/plugins/nico/pm/ui/Inbox\" \"$:/state/pm-custom-dashboard\"  \"pm-tabs\">>\n  <hr/>\n</$reveal>\n\n<$reveal type=\"nomatch\" state=\"$:/state/pm-usage-custom-dashboard\" text=\"show\">\n  <$button class=\"pm-btn btn-primary\" set=\"$:/state/pm-usage-custom-dashboard\" setTo=\"show\">Show result</$button>\n</$reveal>\n\n! Can I make sub-projects?\n\nYes, any todo (or tiddler, for that matter) can be used as a project using the `<<project>>` macro.\nThis means that you can effectively make any todo a sub-project of another project, and go as deep as you wish!\n\nNote that only tiddlers with the <<tag Project>> tag will be listed in the Dashboard.\n\n```\n<<project>>\n```\n<$reveal type=\"match\" state=\"$:/state/pm-usage-subproject\" text=\"show\">\n  <$button class=\"pm-btn btn-primary\" set=\"$:/state/pm-usage-subproject\" setTo=\"\">Hide</$button>\n  <hr/>\n  <<project>>\n  <hr/>\n</$reveal>\n\n<$reveal type=\"nomatch\" state=\"$:/state/pm-usage-subproject\" text=\"show\">\n  <$button class=\"pm-btn btn-primary\" set=\"$:/state/pm-usage-subproject\" setTo=\"show\">Show result</$button>\n</$reveal>\n\n! Can I quickly capture todos to my inbox?\n\n''Yes!'' The default shortcut is {{$:/config/shortcuts/pm-quick-capture}}, but you can change it in the [[Keyboard section of the Control Panel|$:/core/ui/ControlPanel/KeyboardShortcuts]].\n\n! Can I easily move todos out of the inbox?\n\nYes, just drag a todo from the inbox into one of the projects.",
+            "tags": "",
+            "title": "$:/plugins/nico/pm/usage",
+            "modified": "20200428112415184",
+            "caption": "Usage & Help"
+        },
+        "$:/plugins/nico/pm/installation": {
+            "created": "20200427152938733",
+            "text": "! Dependencies\n\nProject-Manager depends on the following plugins:\n\n* [[$:/plugins/kixam/moment]]\n* [[$:/plugins/kixam/datepicker]]\n\nInstall these plugins by dragging the above links to your wiki.\n\nWhile not strictly required, we strongly recommand installing the [[Relink|$:/plugins/flibbles/relink]] plugin as well, as it makes renaming projects much more convenient.\n\n* [[$:/plugins/flibbles/relink]]\n\n! Plugin\n\nDrag&drop the following link into your wiki\n\n* [[$:/plugins/nico/pm]]\n\nThen save & reload your wiki.\n\n! Getting started\n\nTransclude the Dashboard tiddler into another tiddler like the following:\n\n```\n{{$:/plugins/nico/pm/ui/Dashboard}}\n```\n\nSee [[Usage|$:/plugins/nico/pm/usage]] for more information.",
+            "tags": "",
+            "title": "$:/plugins/nico/pm/installation",
+            "modified": "20200427202405183"
+        },
+        "$:/plugins/nico/pm/images/quick-capture": {
+            "created": "20200427142105097",
+            "title": "$:/plugins/nico/pm/images/quick-capture",
+            "text": "<svg width=\"22\" height=\"22\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 576 512\"><path d=\"M567.938 243.908L462.25 85.374A48.003 48.003 0 0 0 422.311 64H153.689a48 48 0 0 0-39.938 21.374L8.062 243.908A47.994 47.994 0 0 0 0 270.533V400c0 26.51 21.49 48 48 48h480c26.51 0 48-21.49 48-48V270.533a47.994 47.994 0 0 0-8.062-26.625zM162.252 128h251.497l85.333 128H376l-32 64H232l-32-64H76.918l85.334-128z\"/></svg>",
+            "modified": "20200427194028910"
+        },
+        "$:/plugins/nico/pm/quick-capture": {
+            "created": "20200427182745230",
+            "text": "<$navigator story=\"$:/StoryList\" history=\"$:/HistoryList\">\n  <$action-navigate $to=\"$:/plugins/nico/pm/ui/QuickCapture\"/>\n</$navigator>\n",
+            "tags": "$:/tags/KeyboardShortcut",
+            "title": "$:/plugins/nico/pm/quick-capture",
+            "modified": "20200427183238838",
+            "key": "((pm-quick-capture))"
+        },
+        "$:/plugins/nico/pm/ui/QuickCapture": {
+            "created": "20200427182956318",
+            "text": "!! {{$:/plugins/nico/pm/images/tasks}} Quick add todo\n\n<$keyboard key=\"enter\">\n  <$action-setfield $tiddler={{$:/state/Inbox!!todo_name}} tags=\"Inbox todo\"/>\n  <$action-setfield $tiddler=\"$:/state/Inbox\" todo_name=\"\"/>\n  <$action-sendmessage $message=\"tm-close-tiddler\"/>\n  <$edit-text class=\"pm-input input-large\" tiddler=\"$:/state/Inbox\" field=\"todo_name\" placeholder=\"Add to inbox...\" focus=\"true\"/> \n  <label class=\"pm-label\">Press ⏎ to capture</label>\n</$keyboard>",
+            "tags": "",
+            "title": "$:/plugins/nico/pm/ui/QuickCapture",
+            "modified": "20200427194203442",
+            "icon": "$:/plugins/nico/pm/images/quick-capture",
+            "color": "#0088cc"
+        },
+        "$:/config/ShortcutInfo/pm-quick-capture": {
+            "created": "20200427182541625",
+            "text": "Trigger a quick capture to add a todo to the inbox.",
+            "tags": "",
+            "title": "$:/config/ShortcutInfo/pm-quick-capture",
+            "modified": "20200427194808907"
+        },
+        "$:/config/shortcuts/pm-quick-capture": {
+            "created": "20200427182712912",
+            "text": "alt+c",
+            "tags": "",
+            "title": "$:/config/shortcuts/pm-quick-capture",
+            "modified": "20200427182722819"
+        },
+        "$:/plugins/nico/pm/images/check-circle": {
+            "text": "<svg width=\"18\" height=\"18\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><path d=\"M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z\"/></svg>",
+            "title": "$:/plugins/nico/pm/images/check-circle",
+            "modified": "20200428152003974",
+            "created": "20200428151952093"
+        },
+        "$:/plugins/nico/pm/images/check-circle-light": {
+            "created": "20200428152931864",
+            "title": "$:/plugins/nico/pm/images/check-circle-light",
+            "text": "<svg width=\"18px\" height=\"18px\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><path d=\"M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z\"/></svg>",
+            "modified": "20200428153209573"
+        },
+        "$:/plugins/nico/pm/images/circle": {
+            "text": "<svg width=\"18\" height=\"18\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><path d=\"M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z\"/></svg>",
+            "title": "$:/plugins/nico/pm/images/circle",
+            "modified": "20200428151935151",
+            "created": "20200428151856963"
+        },
+        "$:/plugins/nico/pm/ui/CheckboxTemplate": {
+            "created": "20200428151242242",
+            "text": "<span class=\"pm-checkbox\">\n  <$list filter=\"[is[current]!tag[done]]\">\n    <span class=\"todo\"> {{$:/plugins/nico/pm/images/circle}}</span>\n    <span class=\"todo-hover\"> {{$:/plugins/nico/pm/images/check-circle-light}}</span>\n  </$list>\n  <$list filter=\"[is[current]tag[done]]\">\n    <span class=\"done\"> {{$:/plugins/nico/pm/images/check-circle}}</span>\n  </$list>\n</span>",
+            "title": "$:/plugins/nico/pm/ui/CheckboxTemplate",
+            "tags": "",
+            "modified": "20200428153225673"
+        }
+    }
+}

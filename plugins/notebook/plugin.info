@@ -1,0 +1,141 @@
+{
+    "author": "Nicolas Petton",
+    "core-version": ">=5.0.0",
+    "dependents": "$:/themes/tiddlywiki/vanilla",
+    "description": "(tiddlyresearch fork) A clean, uncluttered theme",
+    "name": "Notebook",
+    "plugin-priority": "0",
+    "plugin-type": "theme",
+    "title": "$:/plugins/nico/notebook",
+    "type": "application/json",
+    "version": "0.2.23",
+    "tiddlers": {
+        "$:/core/ui/KeyboardShortcut/toggle-sidebar": {
+            "created": "20200430072238390",
+            "text": "<$list filter=\"[[$:/state/notebook-sidebar]is[missing]] [{$:/state/notebook-sidebar}removeprefix[yes]]\" emptyMessage=\"\"\"\n<$action-setfield $tiddler=\"$:/state/notebook-sidebar\" text=\"yes\"/>\n\"\"\">\n<$action-setfield $tiddler=\"$:/state/notebook-sidebar\" text=\"no\"/>\n</$list>\n",
+            "title": "$:/core/ui/KeyboardShortcut/toggle-sidebar",
+            "tags": "$:/tags/KeyboardShortcut",
+            "modified": "20200430080803735",
+            "key": "((toggle-sidebar))"
+        },
+        "$:/core/ui/PageTemplate/sidebar": {
+            "text": "\\whitespace trim\n\\define config-title()\n$:/config/SideBarSegments/Visibility/$(listItem)$\n\\end\n\n<$scrollable fallthrough=\"no\" class=\"tc-sidebar-scrollable\">\n\n<div class=\"tc-sidebar-header\">\n\n<$reveal state=\"$:/state/sidebar\" type=\"match\" text=\"yes\" default=\"yes\" retain=\"yes\" animate=\"yes\">\n\n<$list filter=\"[all[shadows+tiddlers]tag[$:/tags/SideBarSegment]!has[draft.of]]\" variable=\"listItem\">\n\n<$reveal type=\"nomatch\" state=<<config-title>> text=\"hide\"  tag=\"div\">\n\n<$transclude tiddler=<<listItem>> mode=\"block\"/>\n\n</$reveal>\n\n</$list>\n\n</$reveal>\n\n</div>\n\n</$scrollable>\n",
+            "title": "$:/core/ui/PageTemplate/sidebar",
+            "modified": "20200430072116835",
+            "created": "20200430072116835"
+        },
+        "$:/plugins/nico/notebook/images/bars": {
+            "text": "<svg class=\"bars\" height=\"21pt\" viewBox=\"0 0 42 42\" enable-background=\"new 0 0 32 22.5\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n  <g class=\"svg-menu-toggle\" sketch:type=\"MSLayerGroup\">\n    <rect class=\"bar\" x=\"8\" y=\"28\" width=\"26\" height=\"4\"></rect>\n    <rect class=\"bar\" x=\"8\" y=\"19\" width=\"26\" height=\"4\"></rect>\n    <rect class=\"bar\" x=\"8\" y=\"10\" width=\"26\" height=\"4\"></rect>\n  </g>\n</svg>",
+            "title": "$:/plugins/nico/notebook/images/bars",
+            "modified": "20200430081243069",
+            "created": "20200428212322206"
+        },
+        "$:/plugins/nico/notebook/images/caret-down": {
+            "text": "<svg width=\"6pt\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 512\"><path d=\"M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z\"/></svg>",
+            "title": "$:/plugins/nico/notebook/images/caret-down",
+            "modified": "20200430081300350",
+            "created": "20200429194348688"
+        },
+        "$:/plugins/nico/notebook/images/caret-right": {
+            "text": "<svg width=\"4pt\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 192 512\"><path d=\"M0 384.662V127.338c0-17.818 21.543-26.741 34.142-14.142l128.662 128.662c7.81 7.81 7.81 20.474 0 28.284L34.142 398.804C21.543 411.404 0 402.48 0 384.662z\"/></svg>",
+            "title": "$:/plugins/nico/notebook/images/caret-right",
+            "modified": "20200430081309070",
+            "created": "20200429194305719"
+        },
+        "$:/plugins/nico/notebook/metrics/sidebar-width": {
+            "text": "330px",
+            "title": "$:/plugins/nico/notebook/metrics/sidebar-width",
+            "tags": "",
+            "modified": "20200905072624944",
+            "created": "20200429144554294"
+        },
+        "$:/plugins/nico/notebook/metrics/topbar-height": {
+            "text": "48px",
+            "title": "$:/plugins/nico/notebook/metrics/topbar-height",
+            "tags": "",
+            "modified": "20200430081509176",
+            "created": "20200428203454207"
+        },
+        "$:/plugins/nico/notebook/Sidebar/Sections": {
+            "text": "<$list filter=\"[all[shadows+tiddlers]!has[daft.of]tag[$:/plugins/nico/notebook/tags/SidebarSection]]\" >\n  {{||$:/plugins/nico/notebook/ui/Sidebar/SectionTemplate}}\n</$list>",
+            "title": "$:/plugins/nico/notebook/Sidebar/Sections",
+            "tags": "$:/plugins/nico/notebook/tags/Sidebar",
+            "modified": "20200430081428800",
+            "created": "20200429163239707"
+        },
+        "$:/plugins/nico/notebook/tags/Sidebar": {
+            "created": "20200429164516951",
+            "text": "",
+            "title": "$:/plugins/nico/notebook/tags/Sidebar",
+            "modified": "20200430081805133",
+            "list": "$:/plugins/nico/notebook/ui/Sidebar/Headings $:/plugins/nico/notebook/ui/Sidebar/Search $:/plugins/nico/notebook/Sidebar/Sections"
+        },
+        "$:/plugins/nico/notebook/tags/SidebarSection": {
+            "created": "20200429201017275",
+            "text": "",
+            "title": "$:/plugins/nico/notebook/tags/SidebarSection",
+            "modified": "20200430081719095",
+            "list": "$:/plugins/nico/notebook/Sidebar/Open $:/plugins/nico/notebook/Sidebar/Recent $:/plugins/nico/notebook/Sidebar/Tools $:/plugins/nico/notebook/Sidebar/More"
+        },
+        "$:/plugins/nico/notebook/ui/Bottombar": {
+            "text": "<$reveal state=\"$:/state/notebook-bottombar\" type=\"match\" text=\"yes\" default=\"yes\" retain=\"yes\" animate=\"yes\">\n  <div class=\"nc-bar nc-bottombar\">\n    <$list filter=\"[all[shadows+tiddlers]tag[$:/tags/NotebookTopbar]!has[draft.of]]\" variable=\"listItem\">\n      <$reveal type=\"nomatch\" state=<<config-title>> text=\"hide\"  tag=\"div\">\n        <$transclude tiddler=<<listItem>> mode=\"block\"/>\n      </$reveal>\n    </$list>\n    <div class=\"left\">\n      {{$:/plugins/nico/notebook/ui/Buttons/menu}}\n    </div>\n    <div class=\"right\">\n      {{$:/core/ui/SideBarSegments/page-controls}}\n    </div>\n  </div>\n</$reveal>\n\n",
+            "title": "$:/plugins/nico/notebook/ui/Bottombar",
+            "tags": "$:/tags/PageTemplate",
+            "modified": "20200430081406215",
+            "created": "20200429113453340"
+        },
+        "$:/plugins/nico/notebook/ui/Buttons/menu": {
+            "text": "<$list filter=\"[[$:/state/notebook-sidebar]get[text]] +[else[yes]!match[no]]\" variable=\"ignore\">\n  <$button set=\"$:/state/notebook-sidebar\" setTo=\"no\" tooltip=\"Toggle menu\" class=\"tc-btn-invisible open\">\n    {{$:/plugins/nico/notebook/images/bars}}\n  </$button>\n</$list>\n\n<$list filter=\"[[$:/state/notebook-sidebar]get[text]] +[else[yes]match[no]]\" variable=\"ignore\">\n  <$button set=\"$:/state/notebook-sidebar\" setTo=\"yes\" tooltip=\"Toggle menu\" class=\"tc-btn-invisible\">\n    {{$:/plugins/nico/notebook/images/bars}}\n  </$button>\n</$list>\n",
+            "title": "$:/plugins/nico/notebook/ui/Buttons/menu",
+            "tags": "",
+            "modified": "20200430081356447",
+            "created": "20200429115248943"
+        },
+        "$:/plugins/nico/notebook/ui/Sidebar": {
+            "created": "20200428201218885",
+            "text": "\\whitespace trim\n\\define config-title()\n$:/config/SideBarSegments/Visibility/$(listItem)$\n\\end\n\n<$reveal state=\"$:/state/notebook-sidebar\" type=\"match\" text=\"yes\" default=\"yes\" retain=\"yes\" animate=\"no\">\n    <$scrollable fallthrough=\"no\">\n    <div class=\"nc-sidebar\">\n      <$list filter=\"[all[shadows+tiddlers]tag[$:/plugins/nico/notebook/tags/Sidebar]!has[draft.of]]\" variable=\"listItem\">\n        <$reveal type=\"nomatch\" state=<<config-title>> text=\"hide\"  tag=\"div\">\n          <$transclude tiddler=<<listItem>> mode=\"inline\"/>\n        </$reveal>\n      </$list>\n    </div>\n    </$scrollable>\n</$reveal>\n\n",
+            "title": "$:/plugins/nico/notebook/ui/Sidebar",
+            "tags": "$:/tags/PageTemplate",
+            "modified": "20200430120910774"
+        },
+        "$:/plugins/nico/notebook/ui/Sidebar/Headings": {
+            "text": "<div class=\"segment\">\n  <div class=\"content\">\n    <h1 class=\"tc-site-title\">\n      {{$:/SiteTitle}}\n    </h1>\n    <div class=\"tc-site-subtitle\">\n      {{$:/SiteSubtitle}}\n    </div>\n  </div>\n</div>\n",
+            "title": "$:/plugins/nico/notebook/ui/Sidebar/Headings",
+            "tags": "$:/plugins/nico/notebook/tags/Sidebar",
+            "modified": "20200430125446151",
+            "created": "20200429160014174"
+        },
+        "$:/plugins/nico/notebook/ui/Sidebar/Search": {
+            "text": "<$set name=\"searchTiddler\" value=\"$:/temp/advancedsearch\">\n\n<div class=\"segment mobile-only\">\n  <div class=\"content search\">\n\n    <$edit-text tiddler=<<searchTiddler>> tag=\"input\" type=\"search\" focusPopup=\"$:/state/popup/notebook-search\" class=\"tc-popup-handle tr-searchbar\" placeholder=\"Search...\" default=\"\"/>\n    <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class=\"tc-btn-invisible tc-page-controls\">\n      <$action-navigate $to=\"$:/AdvancedSearch\"/>\n      {{$:/core/images/advanced-search-button}}\n    </$button>\n\n    <$reveal tag=\"div\" class=\"tc-block-dropdown-wrapper\" state=\"$:/state/popup/notebook-search\" type=\"nomatch\" text=\"\" default=\"\">\n      <$list filter=\"[<searchTiddler>get[text]minlength{$:/config/Search/MinLength}limit[1]]\" emptyMessage=\"\" variable=\"listItem\">\n        <div class=\"tc-block-dropdown tc-search-drop-down\">\n          {{$:/plugins/danielo515/ContextPlugin/visualizer}}\n        </div>\n      </$list>\n    </$reveal>\n  </div>\n</div>\n\n</$set>\n",
+            "title": "$:/plugins/nico/notebook/ui/Sidebar/Search",
+            "tags": "tiddlyresearch",
+            "modified": "20200913091022144",
+            "created": "20200429191943257"
+        },
+        "$:/plugins/nico/notebook/ui/Sidebar/SectionTemplate": {
+            "text": "<$reveal state=\"$:/state/notebook-sidebar-section\" type=\"match\" text=<<currentTiddler>> default=\"no\" animate=\"no\">\n  <div class=\"segment section open\">\n    <$button set=\"$:/state/notebook-sidebar-section\" setTo=\"\" class=\"tc-btn-invisible label\">\n      <$view field=\"caption\"/>\n      <span class=\"caret\">{{$:/plugins/nico/notebook/images/caret-down}}</span>\n    </$button>\n    <div class=\"content\">\n      {{!!text}}\n    </div>\n  </div>\n</$reveal>\n<$reveal state=\"$:/state/notebook-sidebar-section\" type=\"nomatch\" text=<<currentTiddler>> default=\"yes\" animate=\"no\">\n  <div class=\"segment section\">\n    <$button set=\"$:/state/notebook-sidebar-section\" setTo=<<currentTiddler>> class=\"tc-btn-invisible label\">\n      <$view field=\"caption\"/>\n      <span class=\"caret\">{{$:/plugins/nico/notebook/images/caret-right}}</span>\n    </$button>\n  </div>\n</$reveal>",
+            "title": "$:/plugins/nico/notebook/ui/Sidebar/SectionTemplate",
+            "modified": "20200430125148040",
+            "created": "20200429161226897"
+        },
+        "$:/plugins/nico/notebook/ui/Topbar": {
+            "text": "<$reveal state=\"$:/state/notebook-topbar\" type=\"match\" text=\"yes\" default=\"yes\" retain=\"yes\" animate=\"yes\">\n  <div class=\"nc-bar nc-topbar\">\n    <$list filter=\"[all[shadows+tiddlers]tag[$:/tags/NotebookTopbar]!has[draft.of]]\" variable=\"listItem\">\n      <$reveal type=\"nomatch\" state=<<config-title>> text=\"hide\"  tag=\"div\">\n        <$transclude tiddler=<<listItem>> mode=\"block\"/>\n      </$reveal>\n    </$list>\n    <div class=\"left\">\n      {{$:/plugins/nico/notebook/ui/Buttons/menu}}\n    </div>\n    <div class=\"center\">\n      <!-- <input type=\"search\" placeholder=\"Search...\"/> -->\n      {{$:/plugins/nico/notebook/ui/Sidebar/Search}}\n    </div>\n    <div class=\"right\">\n      {{$:/core/ui/SideBarSegments/page-controls}}\n    </div>\n  </div>\n</$reveal>\n\n",
+            "title": "$:/plugins/nico/notebook/ui/Topbar",
+            "tags": "$:/tags/PageTemplate",
+            "modified": "20200430140745651",
+            "created": "20200428203101797"
+        },
+        "$:/state/notebook-sidebar": {
+            "created": "20200429142736872",
+            "text": "no",
+            "title": "$:/state/notebook-sidebar",
+            "modified": "20200913093634319"
+        },
+        "$:/state/notebook-sidebar-section": {
+            "text": "$:/plugins/kebi/tiddlyresearch-sidebar/folders",
+            "title": "$:/state/notebook-sidebar-section",
+            "modified": "20200913091511204",
+            "created": "20200429194630535"
+        }
+    }
+}

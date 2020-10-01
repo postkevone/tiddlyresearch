@@ -1,0 +1,81 @@
+{
+    "description": "config tiddlers",
+    "plugin-type": "plugin",
+    "title": "$:/plugins/kebi/tiddlyresearch-config",
+    "type": "application/json",
+    "version": "1.0.1",
+    "tiddlers": {
+        "$:/config/Navigation/openLinkFromInsideRiver": {
+            "created": "20200905043924620",
+            "title": "$:/config/Navigation/openLinkFromInsideRiver",
+            "text": "top",
+            "modified": "20200905043924620"
+        },
+        "$:/config/NewJournal/Tags": {
+            "created": "20200905060203897",
+            "title": "$:/config/NewJournal/Tags",
+            "modified": "20200914001614166",
+            "tags": ".daily-tiddler",
+            "caption": ""
+        },
+        "$:/config/NewJournal/Title": {
+            "created": "20200905044006486",
+            "title": "$:/config/NewJournal/Title",
+            "text": "MMM DDth, YYYY",
+            "modified": "20200905044006486"
+        },
+        "$:/config/NewTiddler/Tags": {
+            "created": "20200905060151953",
+            "title": "$:/config/NewTiddler/Tags",
+            "modified": "20200914001602918",
+            "caption": "",
+            "tags": ".tiddler"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/close-all": {
+            "created": "20200905044134949",
+            "text": "show",
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/close-all",
+            "modified": "20200905044134949"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/export-page": {
+            "created": "20200905044138333",
+            "text": "show",
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/export-page",
+            "modified": "20200905044138333"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-journal": {
+            "created": "20200905044142365",
+            "text": "show",
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/new-journal",
+            "modified": "20200905044142365"
+        },
+        "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/refresh": {
+            "text": "show",
+            "title": "$:/config/PageControlButtons/Visibility/$:/core/ui/Buttons/refresh",
+            "modified": "20200905042444783",
+            "created": "20200905042444783"
+        },
+        "$:/config/Search/MinLength": {
+            "created": "20200905044058347",
+            "title": "$:/config/Search/MinLength",
+            "text": "0",
+            "modified": "20200905044110248"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/delete": {
+            "created": "20200905044209501",
+            "text": "show",
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/delete",
+            "modified": "20200905044209501"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/more-tiddler-actions": {
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/more-tiddler-actions",
+            "text": "show"
+        },
+        "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/new-here": {
+            "created": "20200905044210965",
+            "text": "show",
+            "title": "$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/new-here",
+            "modified": "20200905044210965"
+        }
+    }
+}

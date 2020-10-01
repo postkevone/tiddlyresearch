@@ -1,0 +1,114 @@
+{
+    "author": "Tobias Beer",
+    "core-version": ">=5.1.9",
+    "description": "(tiddlyresearch fork) Shows a tiddler preview when hovering internal links",
+    "documentation": "https://tobibeer.github.io/tw5-preview",
+    "list": "readme config",
+    "plugin-type": "plugin",
+    "requires": "[[tobibeer/appear|http://tobibeer.github.io/tw5-plugins/#appear]]",
+    "source": "https://github.com/tobibeer/tw5-preview",
+    "title": "$:/plugins/tobibeer/preview",
+    "type": "application/json",
+    "version": "0.5.6",
+    "tiddlers": {
+        "$:/plugins/tobibeer/preview/config": {
+            "title": "$:/plugins/tobibeer/preview/config",
+            "text": "\\define default()\r\n<dt>$(defaults)$$(option)$</dt>\r\n<dd>\r\n//{{$:/plugins/tobibeer/preview/lingo/$(option)$}}<$list\r\nfilter=\"[[$(option)$]prefix[template]]\">\r\n{{$(defaults)$$(option)$}}</$list>://<br>\r\n<$edit-text tag=input tiddler=\"$(defaults)$$(option)$\"/>\r\n</dd>\r\n\\end\n\n<dl class=\"preview-defaults\">\r\n<$vars defaults=\"$:/plugins/tobibeer/preview/defaults/\">\r\n<$list filter=\"[all[tiddlers+shadows]removeprefix<defaults>sort[title]]\" variable=\"option\">\r\n<<default>>\r\n</$list>\r\n</$vars>\r\n</dl>\r\n<style>.preview-defaults input {width:90%;}</style>"
+        },
+        "$:/plugins/tobibeer/preview/lingo/keys": {
+            "title": "$:/plugins/tobibeer/preview/lingo/keys",
+            "text": "modifier keys to trigger popup directly on-hover (ctrl, alt+shift, meta, etc...)"
+        },
+        "$:/plugins/tobibeer/preview/defaults/keys": {
+            "created": "20200905063444172",
+            "title": "$:/plugins/tobibeer/preview/defaults/keys",
+            "text": "SHIFT",
+            "modified": "20200905063444725"
+        },
+        "$:/plugins/tobibeer/preview/lingo/delay": {
+            "title": "$:/plugins/tobibeer/preview/lingo/delay",
+            "text": "delay popup for this many milliseconds"
+        },
+        "$:/plugins/tobibeer/preview/defaults/delay": {
+            "created": "20200905063437442",
+            "title": "$:/plugins/tobibeer/preview/defaults/delay",
+            "text": "999999999",
+            "modified": "20200905063615210"
+        },
+        "$:/plugins/tobibeer/preview/lingo/class": {
+            "title": "$:/plugins/tobibeer/preview/lingo/class",
+            "text": "css classes applied to the popup"
+        },
+        "$:/plugins/tobibeer/preview/defaults/class": {
+            "title": "$:/plugins/tobibeer/preview/defaults/class",
+            "text": "tc-popup-keep"
+        },
+        "$:/plugins/tobibeer/preview/lingo/not": {
+            "title": "$:/plugins/tobibeer/preview/lingo/not",
+            "text": "no preview for links inside elements with these classes"
+        },
+        "$:/plugins/tobibeer/preview/defaults/not": {
+            "text": "nc-topbar appear",
+            "title": "$:/plugins/tobibeer/preview/defaults/not",
+            "modified": "20200913055127303",
+            "created": "20200906005327435"
+        },
+        "$:/plugins/tobibeer/preview/lingo/exclude": {
+            "title": "$:/plugins/tobibeer/preview/lingo/exclude",
+            "text": "no preview for links to tiddlers matching this filter"
+        },
+        "$:/plugins/tobibeer/preview/defaults/exclude": {
+            "created": "20200906005220328",
+            "text": "",
+            "title": "$:/plugins/tobibeer/preview/defaults/exclude",
+            "modified": "20200906081934220"
+        },
+        "$:/plugins/tobibeer/preview/lingo/template": {
+            "title": "$:/plugins/tobibeer/preview/lingo/template",
+            "text": "the preview template"
+        },
+        "$:/plugins/tobibeer/preview/defaults/template": {
+            "title": "$:/plugins/tobibeer/preview/defaults/template",
+            "text": "$:/plugins/tobibeer/preview/template"
+        },
+        "$:/plugins/tobibeer/preview/lingo/open": {
+            "title": "$:/plugins/tobibeer/preview/lingo/open",
+            "text": "view at ''<<WIKI>>''"
+        },
+        "$:/plugins/tobibeer/preview/keyboard.js": {
+            "title": "$:/plugins/tobibeer/preview/keyboard.js",
+            "text": "/*\\\r\ntitle: $:/plugins/tobibeer/preview/keyboard.js\r\ntype: application/javascript\r\nmodule-type: utils\r\n\r\nFixes $:/core/modules/utils/dom/keyboard.js by providing an alternative.\r\nDo not use as an API, let's fix the core.\r\n\r\n@preserve\r\n\\*/\n(function(){\"use strict\";var e={BACKSPACE:8,TAB:9,ENTER:13,ESCAPE:27,PAGEUP:33,PAGEDOWN:34,END:35,HOME:36,LEFT:37,UP:38,RIGHT:39,DOWN:40,INSERT:45,DELETE:46};exports.parseKeyDescriptorTB=function(t){var l,r,y,s=t.toUpperCase().split(\"+\"),K={keyCode:null,shiftKey:false,altKey:false,ctrlKey:false};for(y=0;y<s.length;y++){l=false;r=s[y];if(r.substr(0,1)===\"!\"){l=true;r=r.substr(1)}if(r===\"CTRL\"){K.ctrlKey=l?null:true}else if(r===\"SHIFT\"){K.shiftKey=l?null:true}else if(r===\"ALT\"){K.altKey=l?null:true}else if(r===\"META\"){K.metaKey=l?null:true}else if(e[r]){K.keyCode=e[r]}else{K.keyCode=r.charCodeAt(0)}}return K};exports.checkKeyDescriptorTB=function(e,t){var l=!!t.metaKey;return(t.keyCode===null||e.keyCode===t.keyCode)&&(t.shiftKey===null?!e.shiftKey:e.shiftKey===t.shiftKey)&&(t.altKey===null?!e.altKey:e.altKey===t.altKey)&&(t.ctrlKey===null?!e.ctrlKey:e.ctrlKey===t.ctrlKey)&&(t.metaKey===null?!e.metaKey:e.metaKey===l)}})();",
+            "type": "application/javascript",
+            "module-type": "utils"
+        },
+        "$:/plugins/tobibeer/preview/link.js": {
+            "title": "$:/plugins/tobibeer/preview/link.js",
+            "text": "/*\\\r\ntitle: $:/plugins/tobibeer/preview/link.js\r\ntype: application/javascript\r\nmodule-type: startup\r\n\r\nEnhances the link widget for on-hover previews\r\n\r\n@preserve\r\n\\*/\n(function(){var e,t=require(\"$:/core/modules/widgets/link.js\").link,i=t.prototype.render,o=t.prototype.handleClickEvent;t.prototype.render=function(){i.apply(this,arguments);var t=this,o=this.wiki,p=this.domNodes[0],r=o.getTiddler(t.to),n=\"$:/plugins/tobibeer/preview/defaults/\",u=\"$:/temp/tobibeer/preview-\",l=$tw.utils.parseKeyDescriptorTB(o.getTextReference(n+\"keys\",\"\").toUpperCase()),s=o.getTextReference(n+\"delay\").toUpperCase(),a=function(e){var i=$tw.popup.popupInfo(e),p=i.popupLevel;return o.getTextReference(u+p)&&o.getTextReference(u+p+\"-tiddler\")===t.to?null:i},f=function(){var i,r=a(p);if(r){i=r.popupLevel;clearTimeout(t.previewTimeout);$tw.popup.cancel(i);i++;o.setText(u+i+\"-tiddler\",\"text\",null,t.to);if($tw.popup.findPopup(u+i)===-1){setTimeout(function(){$tw.popup.triggerPopup({domNode:p,title:u+i,wiki:o});e=0},50)}}},d=function(){var e,i,r=1,u=o.getTextReference(n+\"not\",\"\");if(u){$tw.utils.each(u.split(\" \"),function(e){var t=p;while(t&&r){if($tw.utils.hasClass(t,e)){r=0;return false}t=t.parentNode}})}if(r){i=o.getTextReference(n+\"exclude\",\"\");e=i?o.filterTiddlers(i):[];if(e.indexOf(t.to)>=0){r=0}}return r};s=s!==undefined?parseInt(s):null;if(s!==null&&isNaN(s)){s=0}if(r){$tw.utils.addClass(p,\"tc-popup-handle\");$tw.utils.addClass(p,\"tc-popup-absolute\");[\"mouseover\",\"mouseout\"].forEach(function(i){p.addEventListener(i,function(o){var p=o||window.event;if(i===\"mouseover\"){if(d()){if(!p.keyCode){p.keyCode=0}if($tw.utils.checkKeyDescriptorTB(p,l)){if(!e){e=1;f()}}else if(s!==null){e=0;t.previewTimeout=setTimeout(f,s)}}}else{e=0;clearTimeout(t.previewTimeout)}})})}};t.prototype.handleClickEvent=function(){o.apply(this,arguments);clearTimeout(this.previewTimeout);$tw.popup.cancel(Math.max(0,$tw.popup.popupInfo(this.domNodes[0]).popupLevel))}})();",
+            "type": "application/javascript",
+            "module-type": "startup"
+        },
+        "$:/plugins/tobibeer/preview/popups": {
+            "title": "$:/plugins/tobibeer/preview/popups",
+            "tags": "$:/tags/PageTemplate",
+            "text": "\\define state(num)\n$:/temp/tobibeer/preview-$num$\n\\end\n\n\\define classes(num)\ntc-popup appear appear-block appear-reveal tc-preview-tiddler tc-preview-tiddler-$num$ $(default-classes)$\n\\end\n\n\\define level(num)\n<$reveal tag=\"div\" type=\"popup\" state=<<state $num$>> class=<<classes $num$>>>\n<$tiddler tiddler={{$:/temp/tobibeer/preview-$num$-tiddler}}>\n<$transclude tiddler={{$:/plugins/tobibeer/preview/defaults/template}} mode=\"block\"/>\n</$tiddler>\n</$reveal>\n\\end\n\n<$vars default-classes={{$:/plugins/tobibeer/preview/defaults/class}}>\n<$list filter=\"1 2 3 4 5 6 7 8 9\">\n<$macrocall $name=\"level\" num={{!!title}}/>\n</$list>\n</$vars>"
+        },
+        "$:/plugins/tobibeer/preview/readme": {
+            "title": "$:/plugins/tobibeer/preview/readme",
+            "text": "The plugin $:/plugins/tobibeer/preview enhances the core <<x LinkWidget>> to display a preview of tiddlers when hovering an internal link.\n\n<br>\n\n; documentation / examples / demos...\r\n: http://tobibeer.github.io/tw5-plugins#preview"
+        },
+        "$:/plugins/tobibeer/preview/template": {
+            "text": "<div style=\"overflow-y:auto; height: 500px !important; font-size: 12.5px;\">\n\n!!! <$link>{{!!title}}</$link>\n{{||$:/core/ui/ViewTemplate/tags}}\n{{||$:/plugins/sq/streams/breadcrumbs-view-template}}\n\n{{!!text}}\n{{||$:/plugins/sq/streams/stream-view-template}}\n{{||$:/plugins/kebi/tiddlyresearch-references/filters}}\n</div>",
+            "title": "$:/plugins/tobibeer/preview/template",
+            "tags": "tiddlyresearch",
+            "modified": "20200913100547565",
+            "created": "20200905041232883"
+        },
+        "$:/plugins/tobibeer/preview/styles": {
+            "text": "@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}} ) {\n.tc-popup.tc-preview-tiddler {display:none;}\n}\n\n.tc-popup.tc-preview-tiddler{\n\tposition: fixed !important;\n\twidth: 400px !important;\n\tpadding: 0 1em !important;\n\tleft: 50% !important;\n\tmargin-left: -200px !important;\n\ttop: 40% !important;\n\tmargin-top: -200px !important;\n\tbackground-color: <<colour primary-old>>;\n}",
+            "title": "$:/plugins/tobibeer/preview/styles",
+            "tags": "$:/tags/Stylesheet tiddlyresearch",
+            "modified": "20200913092052105",
+            "created": "20200905041300248"
+        }
+    }
+}
