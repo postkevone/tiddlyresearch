@@ -38,4 +38,4 @@ Do not update TiddlyWiki's core until a compatible version of Tiddly Research ge
 
 ## Credits
 
-[saqimtiaz](https://saqimtiaz.github.io/sq-tw/streams.html)/[sobjornstad](https://sobjornstad.github.io/TiddlyRemember/)/[akhater](https://akhater.github.io/drift/)/[crazko](https://github.com/crazko/krystal)/[tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins)/[linonetwo](https://onetwo.ren/wiki/#:Index)/[Nicolas Petton](https://nicolas.petton.fr/tw/project-manager.html)/[danielo515](http://contextplugin.tiddlyspot.com)
+[saqimtiaz](https://saqimtiaz.github.io/sq-tw/streams.html)/[sobjornstad](https://sobjornstad.github.io/TiddlyRemember/)/[akhater](https://akhater.github.io/drift/)/[crazko](https://github.com/crazko/krystal)/[Eric Shulman](http://tiddlytools.com/timer.html)/[tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins)/[linonetwo](https://onetwo.ren/wiki/#:Index)/[Nicolas Petton](https://nicolas.petton.fr/tw/project-manager.html)/[danielo515](http://contextplugin.tiddlyspot.com)
