@@ -24,7 +24,7 @@ Click [here](https://tiddlywiki.com/#GettingStarted) to read more about how you 
 Before downloading also make sure to try the [live version](https://kebifurai.github.io/TiddlyResearch)!
 
 ## About
-I built [Tiddly Research](https://kebifurai.github.io/TiddlyResearch) to help me create an organized database of all my knowledge, and to make study more efficient thanks to the [Anki](https://apps.ankiweb.net/) sync support.
+I built [Tiddly Research](https://kebifurai.github.io/TiddlyResearch) to help me create an organized database of all my knowledge, and to make studying more efficient thanks to the [Anki](https://apps.ankiweb.net/) sync support.
 
 Hopefully other students will benefit from this project.
 
