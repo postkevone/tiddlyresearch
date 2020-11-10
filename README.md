@@ -1,41 +1,33 @@
 # Tiddly Research
+[Tiddly Reasearch](https://kebifurai.github.io/TiddlyResearch) is a distribution of [TiddlyWiki5](https://tiddlywiki.com/) that includes the following plugins and tweaks:
 
-Tiddly Research is a free and local note-taking environment based on [TiddlyWiki](https://tiddlywiki.com/)
+* [Context Plugin](http://contextplugin.tiddlyspot.com): visual highlight for search results
+* [Krystal](https://github.com/crazko/krystal): horizontal view
+* [Notebook](https://nicolas.petton.fr/tw/project-manager.html): custom dark theme
+* [preview](http://tobibeer.github.io/tw5-plugins/#Plugins): tiddler preview when hovering internal links
+* [Project Manager](https://nicolas.petton.fr/tw/project-manager.html): project and todo management
+* [References](https://kebifurai.github.io/TiddlyResearch/#%24%3A%2Fplugins%2Fkebi%2Ftiddlyresearch-references): bidirectional note linking on multiple levels
+* [Relink](https://github.com/flibbles/tw5-relink): automatic re-linking and tiddler renaming
+* [Streams](https://saqimtiaz.github.io/sq-tw/streams.html): bullet point based hierarchical note taking structure
+* [Tiddlyremember](https://sobjornstad.github.io/TiddlyRemember/): [Anki](https://apps.ankiweb.net/) export and sync
 
-Try it [HERE](https://kebifurai.github.io/TiddlyResearch)
+## Disclaimers
+* Most of the plugins in the list above were modified in order to fix various incompatibilities between them.
+* Tiddly Research does modify some core javascript tiddlers of [TiddlyWiki](https://tiddlywiki.com/).
+* Current [TiddlyWiki](https://tiddlywiki.com/) compatibility: 5.1.22
 
-## Core Features
+## Installation
+You can run [Tiddly Reasearch](https://kebifurai.github.io/TiddlyResearch) the same way you would run a standard [TiddlyWiki5](https://tiddlywiki.com/) file.
 
-* Bidirectional note linking on multiple levels
+Click [here](https://tiddlywiki.com/#GettingStarted) to read more about how you can run [TiddlyWiki5](https://tiddlywiki.com/) files.
 
-* Bullet point based hierarchical note taking structure
+Before downloading also make sure to try the [live version](https://kebifurai.github.io/TiddlyResearch)!
 
-* Integration with the spaced repetition flashcards tool [Anki](https://apps.ankiweb.net/)
+## About
+I built Tiddly Research to help me create an organized database of all my knowledge, and to make study more efficient thanks to the [Anki](https://apps.ankiweb.net/) sync support.
 
-* Projects and TODO's
-
-## Design Goodies
-
-* Popup previews
-
-* Horizontal view
-
-* MacOS inspired black theme
-
-## Disclaimer
-
-Tiddly Research simulates some of the key features of [Roam Research](https://roamresearch.com/) and [RemNote](https://www.remnote.io/), but its main purpose is not to be a copy of those two great apps.
-
-Tiddly Research should be used to keep your Anki cards/notes always organized and accessible, that is why I think the current state of TiddlyResearch will fit most people with the same needs as mine.
-
-**also**
-
-Tiddly Research DOES modify some core javascript tiddlers of TiddlyWiki.
-
-Do not update TiddlyWiki's core until a compatible version of Tiddly Research gets released.
-
-**TiddlyWiki Compatibility: 5.1.22**
+Hopefully other students will benefit from this project.
 
 ## Credits
 
-[saqimtiaz](https://saqimtiaz.github.io/sq-tw/streams.html)/[sobjornstad](https://sobjornstad.github.io/TiddlyRemember/)/[akhater](https://akhater.github.io/drift/)/[crazko](https://github.com/crazko/krystal)/[Eric Shulman](http://tiddlytools.com/timer.html)/[tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins)/[linonetwo](https://onetwo.ren/wiki/#:Index)/[Nicolas Petton](https://nicolas.petton.fr/tw/project-manager.html)/[danielo515](http://contextplugin.tiddlyspot.com)
+[akhater](https://akhater.github.io/drift/), [crazko](https://github.com/crazko/krystal), [danielo515](http://contextplugin.tiddlyspot.com), [Eric Shulman](http://tiddlytools.com/timer.html), [flibbles](https://github.com/flibbles/tw5-relink), [linonetwo](https://onetwo.ren/wiki/#:Index), [Nicolas Petton](https://nicolas.petton.fr/tw/project-manager.html), [saqimtiaz](https://saqimtiaz.github.io/sq-tw/streams.html), [sobjornstad](https://sobjornstad.github.io/TiddlyRemember/), [tobibeer](http://tobibeer.github.io/tw5-plugins/#Plugins)
