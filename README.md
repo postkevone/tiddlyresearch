@@ -1,5 +1,5 @@
 # Tiddly Research
-[Tiddly Reasearch](https://kebifurai.github.io/TiddlyResearch) is a distribution of [TiddlyWiki5](https://tiddlywiki.com/) that includes the following plugins and tweaks:
+[Tiddly Research](https://kebifurai.github.io/TiddlyResearch) is a distribution of [TiddlyWiki5](https://tiddlywiki.com/) that includes the following plugins and tweaks:
 
 * [Context Plugin](http://contextplugin.tiddlyspot.com): visual highlight for search results
 * [Krystal](https://github.com/crazko/krystal): horizontal view
@@ -17,14 +17,14 @@
 * Current [TiddlyWiki](https://tiddlywiki.com/) compatibility: 5.1.22
 
 ## Installation
-You can run [Tiddly Reasearch](https://kebifurai.github.io/TiddlyResearch) the same way you would run a standard [TiddlyWiki5](https://tiddlywiki.com/) file.
+You can run [Tiddly Research](https://kebifurai.github.io/TiddlyResearch) the same way you would run a standard [TiddlyWiki5](https://tiddlywiki.com/) file.
 
 Click [here](https://tiddlywiki.com/#GettingStarted) to read more about how you can run [TiddlyWiki5](https://tiddlywiki.com/) files.
 
 Before downloading also make sure to try the [live version](https://kebifurai.github.io/TiddlyResearch)!
 
 ## About
-I built Tiddly Research to help me create an organized database of all my knowledge, and to make study more efficient thanks to the [Anki](https://apps.ankiweb.net/) sync support.
+I built [Tiddly Research](https://kebifurai.github.io/TiddlyResearch) to help me create an organized database of all my knowledge, and to make study more efficient thanks to the [Anki](https://apps.ankiweb.net/) sync support.
 
 Hopefully other students will benefit from this project.
 
