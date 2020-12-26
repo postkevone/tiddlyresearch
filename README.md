@@ -14,7 +14,7 @@
 ## Disclaimers
 * Most of the plugins in the list above were modified in order to fix various incompatibilities between them.
 * Tiddly Research does modify some core javascript tiddlers of [TiddlyWiki](https://tiddlywiki.com/).
-* Current [TiddlyWiki](https://tiddlywiki.com/) compatibility: 5.1.22
+* Current [TiddlyWiki](https://tiddlywiki.com/) compatibility: 5.1.23
 
 ## Installation
 You can run [Tiddly Research](https://kebifurai.github.io/TiddlyResearch) the same way you would run a standard [TiddlyWiki5](https://tiddlywiki.com/) file.
