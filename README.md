@@ -5,7 +5,7 @@
 * [Krystal](https://github.com/crazko/krystal): horizontal view
 * [Notebook](https://nicolas.petton.fr/tw/project-manager.html): custom dark theme
 * [preview](http://tobibeer.github.io/tw5-plugins/#Plugins): tiddler preview when hovering internal links
-* [Project Manager](https://nicolas.petton.fr/tw/project-manager.html): project and todo management
+* [Todos](https://kebifurai.github.io/TiddlyResearch/#%24%3A%2Fplugins%2Fkebi%2Ftiddlyresearch-todos): todos management
 * [References](https://kebifurai.github.io/TiddlyResearch/#%24%3A%2Fplugins%2Fkebi%2Ftiddlyresearch-references): bidirectional note linking on multiple levels
 * [Relink](https://github.com/flibbles/tw5-relink): automatic re-linking and tiddler renaming
 * [Streams](https://saqimtiaz.github.io/sq-tw/streams.html): bullet point based hierarchical note taking structure
