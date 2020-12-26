@@ -21,7 +21,7 @@ You can run [Tiddly Research](https://kebifurai.github.io/TiddlyResearch) the sa
 
 Click [here](https://tiddlywiki.com/#GettingStarted) to read more about how you can run [TiddlyWiki5](https://tiddlywiki.com/) files.
 
-Before downloading also make sure to try the [TUTORIAL](https://kebifurai.github.io/TiddlyResearch)!
+Before downloading also make sure to try the [tutorial](https://kebifurai.github.io/TiddlyResearch).
 
 ## About
 I built [Tiddly Research](https://kebifurai.github.io/TiddlyResearch) to help me create an organized database of all my knowledge, and to make studying more efficient thanks to the [Anki](https://apps.ankiweb.net/) sync support.
