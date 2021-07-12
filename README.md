@@ -1,4 +1,4 @@
-# For an updated version check [tiddlystudy](kebifurai.github.io/tiddlystudy)
+# For an updated version check [tiddlystudy](https://kebifurai.github.io/tiddlystudy)
 
 # Tiddly Research
 [Tiddly Research](https://kebifurai.github.io/TiddlyResearch) is a distribution of [TiddlyWiki5](https://tiddlywiki.com/) that includes the following plugins and tweaks:
