@@ -1,7 +1,7 @@
-# For an updated version check [tiddlystudy](https://kebifurai.github.io/tiddlystudy)
+# For an updated version check [tiddlystudy](https://postkevone.github.io/tiddlystudy)
 
 # Tiddly Research
-[Tiddly Research](https://kebifurai.github.io/TiddlyResearch) is a distribution of [TiddlyWiki5](https://tiddlywiki.com/) that includes the following plugins and tweaks:
+[Tiddly Research](https://postkevone.github.io/TiddlyResearch) is a distribution of [TiddlyWiki5](https://tiddlywiki.com/) that includes the following plugins and tweaks:
 
 * [Context Plugin](http://contextplugin.tiddlyspot.com): visual highlight for search results
 * [Krystal](https://github.com/crazko/krystal): horizontal view
